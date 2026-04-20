@@ -9,7 +9,8 @@ import {
 } from './engine.js';
 import { selectContent, selectAffirmation, contentLibrary } from './content.js';
 import { initAudio, playFrequency, stopFrequency, FREQUENCY_MAP, isPlaying, getCurrentFreq } from './audio.js';
-import { initVisualizer, startVisualPulse, stopVisualPulse } from './visuals.js';
+import { initVisualizer, startVisualPulse, stopVisualPulse, setVisualDensity } from './visuals.js';
+import { HOLISTIC_STAGES } from './stages.js';
 
 const $ = id => document.getElementById(id);
 let currentView = 'protocol';
@@ -48,6 +49,7 @@ function recalculate() {
     const category   = getCategory(mean);
     const sapStage   = classifySAPStage(nsdtVector);
     const decision   = getDecisionSignal(pressure, confidence, sapStage.stage);
+    setVisualDensity(sapStage.stage);
     stateManager.updateMetrics(category, pressure, confidence, decision, sapStage);
 }
 
@@ -70,6 +72,30 @@ function renderView(viewId) {
 }
 
 // ─── VIEWS ──────────────────────────────────────────────────────────────────
+
+function renderStageAnalysis(stageIdx, color) {
+    const data = HOLISTIC_STAGES[stageIdx];
+    if (!data) return '';
+    const isTrap = stageIdx === 8;
+    return `
+    <div style="background:rgba(20, 30, 48, 0.6); border: 1px solid ${color}40; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
+        <h3 style="color:${color}; font-size:1.1rem; margin-top:0; margin-bottom:8px;">Deep Sync Analysis</h3>
+        <div style="margin-bottom: 12px;">
+            <strong style="color:#8dafd3; font-size:0.85rem;">THE NARRATIVE</strong>
+            <p style="font-size:0.95rem; color:#d0e8ff; margin:4px 0 0 0; line-height:1.4;">${data.description}</p>
+        </div>
+        <div style="margin-bottom: 12px;">
+            <strong style="color:#8dafd3; font-size:0.85rem;">SYSTEMIC DIRECTIVE</strong>
+            <p style="font-size:0.95rem; color:#d0e8ff; margin:4px 0 0 0; line-height:1.4;">${data.directive}</p>
+        </div>
+        <div>
+            <strong style="color:${isTrap ? '#fcd34d' : '#ef4444'}; font-size:0.85rem;">RISK ALERT</strong>
+            <p style="font-size:0.95rem; color:${isTrap ? '#fcd34d' : '#fca5a5'}; margin:4px 0 0 0; line-height:1.4;">
+                ${isTrap ? '⚠ <strong>RIGIDITY RISK:</strong> ' : ''}${data.risk}
+            </p>
+        </div>
+    </div>`;
+}
 
 function protocol(state) {
     const { currentCategory, pressure, confidence, decision, sapStage, nsdtVector } = state;
@@ -99,7 +125,7 @@ function protocol(state) {
 
       ${sap.stage === 8 ? `
       <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.85rem;color:#fcd34d">
-        ⚡ <strong>ILLUSION OF PERMANENCE</strong> — Tension perception amplified: ${nsdtVector[3]}→${sap.illusionT}. ${st.description ? st.description : 'The suffering feels permanent. It is not.'}
+        ⚡ <strong>ILLUSION OF PERMANENCE</strong> — Tension perception amplified: ${nsdtVector[2]}→${sap.illusionT}. ${st.description ? st.description : 'The suffering feels permanent. It is not.'}
       </div>` : ''}
 
       ${sap.trap ? `
@@ -130,6 +156,8 @@ function protocol(state) {
         <p style="font-size:1.15rem;font-style:italic;color:#d0e8ff;line-height:1.65;margin:0">"${content?.text || 'Stay present in the stage you are in.'}"</p>
       </div>
 
+      ${renderStageAnalysis(sap.stage, st.color)}
+
       <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
         <span class="signal-badge ${signalClass}">⊕ ${decision.mode.toUpperCase()}</span>
         <span style="font-size:0.8rem;color:#5a8ab0">Pressure: ${(pressure*100).toFixed(0)}% · Confidence: ${(confidence*100).toFixed(0)}%</span>
@@ -138,7 +166,7 @@ function protocol(state) {
       <div id="nsdtPanel">
         <div style="font-size:0.75rem;color:#5a8ab0;letter-spacing:1px;margin-bottom:12px;font-weight:600">NSDT VECTOR — ADJUST TO YOUR STATE</div>
         ${[['N','Complexity',nsdtVector[0],'#f59e0b'],['S','Stability',nsdtVector[1],'#60a5fa'],
-           ['D','Adaptability',nsdtVector[2],'#10b981'],['T','Tension',nsdtVector[3],'#ef4444'],
+           ['T','Tension',nsdtVector[2],'#ef4444'],['D','Adaptability',nsdtVector[3],'#10b981'],
            ['C','Coherence',nsdtVector[4],'#a78bfa']].map((axis,i)=>`
         <div class="nsdt-input-row">
           <label style="color:${axis[3]};font-weight:700">${axis[0]} <span style="color:#5a8ab0;font-weight:400;font-size:0.75rem">${axis[1]}</span></label>

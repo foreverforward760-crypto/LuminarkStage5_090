@@ -82,7 +82,7 @@ export function getDecisionSignal(pressure, confidence, stage) {
 export function classifySAPStage(nsdt) {
     // ✅ AUDIT FIX 3: defensive array guard with safe defaults
     const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
-    const [N, S, D, T, C] = safe.map(v => (isFinite(v) ? Math.min(100, Math.max(0, v)) : 50));
+    const [N, S, T, D, C] = safe.map(v => (isFinite(v) ? Math.min(100, Math.max(0, v)) : 50));
 
     const P  = 0.5*S + 0.3*(100-T) + 0.2*N;
     const Cs = 0.4*C + 0.4*D + 0.2*(100-N);
