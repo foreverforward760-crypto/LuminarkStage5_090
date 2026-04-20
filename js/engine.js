@@ -62,10 +62,13 @@ export function getPressureLabel(pressure) {
     return 'High Conflict';
 }
 
-export function getDecisionSignal(pressure, confidence) {
+export function getDecisionSignal(pressure, confidence, stage) {
     // ✅ AUDIT FIX 2: guard against NaN inputs
     const p = isFinite(pressure)   ? pressure   : 0;
     const c = isFinite(confidence) ? confidence : 0;
+    if (stage === 8) {
+        return { mode: 'disrupt', urgency: 1.0, delay: false, warning: 'Illusion of Permanence' };
+    }
     if (p > 0.7) {
         return { mode: c > 0.5 ? 'delay' : 'reflect', urgency: c > 0.5 ? 0.7 : 0.9, delay: true };
     }
@@ -92,7 +95,7 @@ export function classifySAPStage(nsdt) {
     else if (C>72&&D>62&&T>42&&N>48)          stage = 7;
     else if (P>=60&&Cs>=60&&T<52) {
         stage = 6;
-        if (D < 30) { trap = true; trapMsg = 'FALSE HEAVEN: Adaptability below threshold while claiming harmony. Rigidity masking as stability.'; }
+        if (D < 30) { trap = true; trapMsg = 'ILLUSION OF PERMANENCE: Adaptability below threshold while claiming harmony. Rigidity masking as stability.'; }
     }
     else if (P>=70&&Cs<58&&S>T)    stage = 1;
     else if (P>=58&&Cs<58&&S<=T)   stage = 2;
@@ -113,10 +116,10 @@ export function classifySAPStage(nsdt) {
         };
     }
 
-    const falseHellT  = stage === 8 ? Math.min(100, Math.round(T * 1.45)) : null;
+    const illusionT  = stage === 8 ? Math.min(100, Math.round(T * 1.45)) : null;
     const dissolving  = stage === 9 && C >= 95 && D >= 80 && T <= 20;
 
-    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, falseHellT, dissolving };
+    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, illusionT, dissolving };
 }
 
 // Canonical SAP stage data — CONSTITUTIONAL · NEVER ALTER NAMES
@@ -129,6 +132,15 @@ export const SAP_STAGES = {
     5: { name:'DYNAMO OF WILL',             label:'The Dynamo',   color:'#8b5cf6', theme:'Crossroads & The Backward Doorway' },
     6: { name:'NEXUS OF HARMONY',           label:'The Nexus',    color:'#10b981', theme:'Peak Integration — All Systems Synchronized' },
     7: { name:'LENS OF DISTILLATION',       label:'The Lens',     color:'#06b6d4', theme:'Deep Refinement & Wisdom Integration' },
-    8: { name:'VESSEL OF GROUNDING',        label:'The Vessel',   color:'#f59e0b', theme:'Consolidation, Grounding & Duality Mastery' },
+    8: { 
+        name:'VESSEL OF GROUNDING — Illusion of Permanence',
+        label:'The Vessel',
+        color:'#f59e0b',
+        theme:'Consolidation, Grounding & Duality Mastery',
+        description:"The peak of systemic density. The system has reached a level of consolidation that mimics finality. This is the 'Trap State' where the current structure claims to be the end-state, creating an illusion that change is no longer necessary or possible.",
+        sensation:"Extreme weight, absolute conviction, or a paralyzing fear that the current situation is unchangeable.",
+        risk:"Rigidity Risk. The system becomes so 'grounded' it loses the ability to pivot, leading to catastrophic fracture instead of graceful transition.",
+        directive:"Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. Prepare for the transparency of Stage 9."
+    },
     9: { name:'TRANSPARENCY OF THE GUIDE',  label:'The Guide',    color:'#a78bfa', theme:'Completion, Transparency & Dissolution' },
 };

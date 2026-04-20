@@ -32,15 +32,14 @@ The core of this system is **Stanfield's Axiom of Perpetuity (SAP)** — a toroi
 | **5** | DYNAMO OF WILL | **The only stage with a backward doorway.** Crossroads, pure choice |
 | **6** | NEXUS OF HARMONY | Peak integration — all systems synchronized, flow state |
 | **7** | LENS OF DISTILLATION | Deep refinement, experience becoming wisdom |
-| **8** | VESSEL OF GROUNDING | **FALSE HELL amplifier 1.45×.** Duality mastery, consolidation |
+| **8** | VESSEL OF GROUNDING | **The Illusion of Permanence.** Duality mastery, consolidation |
 | **9** | TRANSPARENCY OF THE GUIDE | Completion, dissolution, return to PLENARA |
 
 > **Constitutional Directive:** These stage names are canonical constants. They must never be renamed, truncated, or altered by any AI system or developer.
 
 ### Key SAP Constants
 - **Stage 5** is the only stage with a **backward doorway** — regression is not failure, it is wisdom
-- **Stage 8** contains the **FALSE HELL amplifier (1.45×)** — suffering feels permanent; it is not
-- **Stage 8** also contains **FALSE HEAVEN** — rigidity masking as stability (trap state)
+- **Stage 8: VESSEL OF GROUNDING — The Illusion of Permanence. Suffering or stability feels permanent; it is a trap state.**
 - **Stage 9 → 0** is completion, not failure — the torus is sacred
 - Dissolution triggers when: Coherence ≥ 95, Adaptability ≥ 80, Tension ≤ 20
 
@@ -98,7 +97,7 @@ The engine automatically selects tone based on Decision Pressure:
 | Mode | When | Purpose |
 |------|------|---------|
 | **Stabilize** | Critical pressure | Prevent systemic collapse |
-| **Disrupt** | Stagnant/comfortable state | Break false heaven loops |
+| **Disrupt** | Stagnant/comfortable state | Break illusion of permanence loops |
 | **Paradox** | Mid-range pressure | Bypass logic, trigger intuitive insight |
 
 ### Archetypal Mapping

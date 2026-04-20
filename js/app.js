@@ -4,8 +4,8 @@
 import { stateManager } from './state.js';
 import {
     computePressureScore, computeConfidenceScore, getCategory,
-    getPressureLabel, getDecisionSignal, calculateMean,
-    classifySAPStage, SAP_STAGES
+    getDecisionSignal, calculateMean,
+    classifySAPStage, SAP_STAGES, getPressureLabel
 } from './engine.js';
 import { selectContent, selectAffirmation, contentLibrary } from './content.js';
 import { initAudio, playFrequency, stopFrequency, FREQUENCY_MAP, isPlaying, getCurrentFreq } from './audio.js';
@@ -46,8 +46,8 @@ function recalculate() {
     const confidence = computeConfidenceScore(nsdt);
     const mean       = calculateMean(nsdt);
     const category   = getCategory(mean);
-    const decision   = getDecisionSignal(pressure, confidence);
     const sapStage   = classifySAPStage(nsdtVector);
+    const decision   = getDecisionSignal(pressure, confidence, sapStage.stage);
     stateManager.updateMetrics(category, pressure, confidence, decision, sapStage);
 }
 
@@ -99,7 +99,7 @@ function protocol(state) {
 
       ${sap.stage === 8 ? `
       <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.85rem;color:#fcd34d">
-        ⚡ <strong>FALSE HELL AMPLIFIER 1.45×</strong> — Tension perception amplified: ${nsdtVector[3]}→${sap.falseHellT}. The suffering feels permanent. It is not. Gratitude is the release valve.
+        ⚡ <strong>ILLUSION OF PERMANENCE</strong> — Tension perception amplified: ${nsdtVector[3]}→${sap.illusionT}. ${st.description ? st.description : 'The suffering feels permanent. It is not.'}
       </div>` : ''}
 
       ${sap.trap ? `
