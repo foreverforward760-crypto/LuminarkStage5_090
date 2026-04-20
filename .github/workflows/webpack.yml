@@ -59,15 +59,21 @@ jobs:
       - name: Syntax check all JS modules
         run: |
           echo "Checking JS syntax..."
-          ok=true
+          all_ok=true
           for f in js/*.js; do
-            node --input-type=module < "$f" 2>/dev/null
+            # Use node --check for pure syntax validation only.
+            # node --input-type=module executes the file and throws ERR_MODULE_NOT_FOUND
+            # for cross-module ES imports in isolation — this is expected and NOT a syntax error.
+            # Running it bare under bash -eo pipefail causes a false-positive exit 1.
             if node --check "$f" 2>/dev/null; then
               echo "  ✅ $f"
             else
-              echo "  ⚠️  $f (ES module — syntax OK, import errors expected in isolation)"
+              echo "  ❌ Syntax error: $f"
+              node --check "$f"
+              all_ok=false
             fi
           done
+          if [ "$all_ok" = false ]; then exit 1; fi
           echo "Syntax check complete."
 
       - name: Verify SAP canonical stage names
@@ -106,7 +112,7 @@ jobs:
         run: |
           count=$(grep -c '"I have' js/maat.js 2>/dev/null || echo "0")
           echo "Ma'at confessions found: $count"
-          if [ "$count" -lt 40 ]; then echo "❌ Expected 42 confessions" && exit 1; fi
+          if [ "$count" -lt 40 ]; then echo "❌ Expected at least 40 confessions, found $count" && exit 1; fi
           echo "✅ Ma'at confessions verified ($count/42)"
 
       - name: Summary
