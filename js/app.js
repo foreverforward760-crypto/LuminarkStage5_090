@@ -5,12 +5,15 @@ import { stateManager } from './state.js';
 import {
     computePressureScore, computeConfidenceScore, getCategory,
     getDecisionSignal, calculateMean,
-    classifySAPStage, SAP_STAGES, getPressureLabel
+    classifySAPStage, SAP_STAGES, getPressureLabel,
+    getFinalStage
 } from './engine.js';
 import { selectContent, selectAffirmation, contentLibrary, pulseCheck } from './content.js';
 import { initAudio, playFrequency, stopFrequency, FREQUENCY_MAP, isPlaying, getCurrentFreq } from './audio.js';
 import { initVisualizer, startVisualPulse, stopVisualPulse, setVisualDensity } from './visuals.js';
 import { HOLISTIC_STAGES } from './stages.js';
+import { getRandomConfession } from './maat.js';
+import { setLexiconMode, getTerm, getCurrentMode } from './lexicon.js';
 
 window.handlePulseCheck = function(archetype, feedback) {
     pulseCheck(archetype, feedback);
@@ -238,9 +241,10 @@ function protocol(state) {
         </div>
         <div class="metric-bar-bg"><div class="metric-bar-fill" style="width:${axis[2]}%;background:${axis[3]}"></div></div>
         `).join('')}
-        <button class="btn btn-primary" id="applyNSDT" style="margin-top:4px">Apply NSDT Vector</button>
+        <button class="btn btn-primary" id="applyNSDT" style="margin-top:4px">Apply &amp; Run Shadow Probe</button>
       </div>
-    </div>`;
+    </div>
+    ${renderCulturalPanel(state)}`;
 }
 
 function frequencies(state) {
@@ -432,7 +436,30 @@ function attachListeners(viewId) {
             const nsdt5 = vals.map(v => v / 10);
             stateManager.updateNSDT(nsdt5);
             recalculate();
-            renderView('protocol');
+            // Run cultural correction then Shadow Probe
+            const { sapStage } = stateManager.state;
+            const stage = sapStage?.stage ?? 6;
+            const pressure = stateManager.state.pressure ?? 0.3;
+            renderView('protocol'); // refresh UI first
+            runShadowProbe(stage, pressure);
+        });
+
+        // Cultural Intelligence toggles
+        document.querySelectorAll('.cultural-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const key = btn.dataset.key;
+                const current = stateManager.state.culturalContext?.[key] ?? false;
+                stateManager.setCulturalContext({ [key]: !current });
+                renderView('protocol');
+            });
+        });
+
+        // Lexicon mode buttons
+        document.querySelectorAll('.lexicon-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                setLexiconMode(btn.dataset.lexicon);
+                document.querySelectorAll('.lexicon-btn').forEach(b => b.classList.toggle('active', b.dataset.lexicon === btn.dataset.lexicon));
+            });
         });
     }
 
@@ -514,6 +541,136 @@ function runBreathCycle(pattern, onCycle) {
         }, ph.dur);
     }
     doPhase();
+}
+
+// ─── SHADOW PROBE ────────────────────────────────────────────────────────────
+function runShadowProbe(dominantStage, trapEnergy) {
+    const overlay  = document.getElementById('shadowProbeOverlay');
+    const textEl   = document.getElementById('probeText');
+    const fill     = document.getElementById('probeLoaderFill');
+    if (!overlay || !textEl || !fill) return;
+
+    const probes = {
+        0: "You are currently holding a vast amount of internal space that others might mistake for emptiness. PLENARA recognizes this as primordial potential, not absence.",
+        1: "The engine detects a flicker of something new — a truth you have been protecting from your own skepticism. The Spark does not require certainty to be real.",
+        2: "Two forces are pulling at you simultaneously. The Forge does not ask you to resolve this polarity. It asks you to hold both until synthesis emerges.",
+        3: "Something wants to be expressed through you. The Engine of Expression recognizes the creative pressure building beneath the surface.",
+        4: "The crucible is active. Maximum pressure, maximum potential. Concentrate your force. Diffusion is the only enemy right now.",
+        5: "You are at a threshold where doing nothing is currently costing you more than doing the wrong thing would. The backward doorway is also a valid choice.",
+        6: "You are at peak integration. All systems are synchronized. Harvest this state — it will not last, and it is not meant to.",
+        7: "The brilliance of your current insight has created a wall. You are seen, even if you feel isolated by what you now understand.",
+        8: "There is significant tension here. You have mistaken the height of your current climb for the final destination. The FALSE HELL amplifier is active. The permanence is an illusion.",
+        9: "The engine senses completion. Something is ready to be released. The Guide leads by becoming transparent — not by holding on.",
+        default: "The engine is sensing a reservoir of potential you have been protecting — perhaps out of a necessity that no longer exists."
+    };
+
+    textEl.textContent = probes[dominantStage] || probes.default;
+    overlay.classList.remove('hidden');
+    overlay.style.display = 'flex';
+
+    // Trigger the progress bar animation
+    setTimeout(() => { fill.style.width = '100%'; }, 50);
+
+    // Cinnabar shift for high trap energy
+    if (trapEnergy > 0.7) document.body.classList.add('high-trap');
+
+    setTimeout(() => {
+        overlay.classList.add('hidden');
+        overlay.style.display = 'none';
+        document.body.classList.remove('high-trap');
+        fill.style.width = '0%';
+        fill.style.transition = 'none';
+        setTimeout(() => { fill.style.transition = 'width 4s linear'; }, 50);
+        injectMaatCard();
+    }, 4500);
+}
+
+// ─── MA'AT CARD ──────────────────────────────────────────────────────────────
+function injectMaatCard() {
+    const confession = getRandomConfession();
+    const container  = document.getElementById('viewContainer');
+    if (!container) return;
+
+    // Remove existing maat card if present
+    container.querySelector('.maat-card')?.remove();
+
+    const html = `
+    <div class="maat-card glass-card" style="margin-top:24px;border-left:5px solid #d4af37;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+        <span style="font-size:1.8rem;">⚖️</span>
+        <h3 style="margin:0;font-size:1.1rem;">Ma'at · Confession <span class="maat-num">${confession.index}</span>/42</h3>
+      </div>
+      <p class="maat-text" style="font-size:1.25rem;font-style:italic;line-height:1.65;margin:0 0 20px;">"${confession.text}"</p>
+      <div style="display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap;">
+        <button class="btn" id="reflectMaatBtn">Reflect</button>
+        <button class="btn btn-primary" id="nextMaatBtn">Another Confession →</button>
+      </div>
+      <p style="color:#8dafd3;font-size:0.85rem;margin-top:14px;line-height:1.5;">The heart is weighed against the feather of truth. 42 confessions. One chance to be honest.</p>
+    </div>`;
+
+    container.insertAdjacentHTML('beforeend', html);
+
+    document.getElementById('reflectMaatBtn')?.addEventListener('click', () => {
+        stateManager.addMaatInteraction(confession.index, 'reflected');
+        const btn = document.getElementById('reflectMaatBtn');
+        if (btn) { btn.textContent = '✓ Reflected'; btn.disabled = true; btn.style.opacity = '0.5'; }
+    });
+
+    document.getElementById('nextMaatBtn')?.addEventListener('click', () => {
+        const next = getRandomConfession();
+        const card = document.querySelector('.maat-card');
+        if (card) {
+            card.querySelector('.maat-text').textContent = `"${next.text}"`;
+            card.querySelector('.maat-num').textContent  = next.index;
+        }
+        stateManager.addMaatInteraction(next.index, 'viewed');
+    });
+}
+
+// ─── CULTURAL INTELLIGENCE PANEL ─────────────────────────────────────────────
+function renderCulturalPanel(state) {
+    const ctx = state.culturalContext || {};
+    const modes = [
+        { key:'codeSwitching',     label:'Code-Switching',      desc:'+2.0 stage correction' },
+        { key:'historicalTrauma',  label:'Historical Trauma',   desc:'+1.5 stage correction' },
+        { key:'systemicOppression',label:'Systemic Oppression', desc:'+0.75 stage correction' },
+        { key:'multilingual',      label:'Multilingual',        desc:'+0.5 stage correction' },
+        { key:'diaspora',          label:'Diaspora',            desc:'+0.5 stage correction' },
+    ];
+    return `
+    <div class="glass-card" style="margin-top:0">
+      <h2>Cultural Intelligence Filter</h2>
+      <p style="color:#8dafd3;font-size:0.85rem;margin-bottom:14px;line-height:1.55">Activate context flags to apply SAP stage corrections. These correct for known biases in standard assessment frameworks.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
+        ${modes.map(m=>`
+        <button class="cultural-toggle ${ctx[m.key]?'active':''}" data-key="${m.key}"
+          style="padding:8px 14px;border-radius:10px;border:1px solid ${ctx[m.key]?'rgba(167,139,250,0.5)':'rgba(255,255,255,0.08)'};
+                 background:${ctx[m.key]?'rgba(167,139,250,0.15)':'rgba(255,255,255,0.03)'};
+                 color:${ctx[m.key]?'#c4b5fd':'rgba(255,255,255,0.45)'};
+                 font-size:0.8rem;cursor:pointer;transition:all 0.15s;text-align:left;">
+          <div style="font-weight:700">${ctx[m.key]?'✓ ':''} ${m.label}</div>
+          <div style="font-size:0.7rem;opacity:0.6;margin-top:2px">${m.desc}</div>
+        </button>`).join('')}
+      </div>
+      ${Object.values(ctx).some(Boolean) ? `
+      <div class="cultural-panel">
+        <div style="font-size:0.75rem;color:#a78bfa;letter-spacing:1.5px;margin-bottom:8px;font-weight:700">ACTIVE CORRECTIONS</div>
+        ${modes.filter(m=>ctx[m.key]).map(m=>`
+        <span class="cultural-correction-badge">${m.label}</span>`).join('')}
+        <div style="font-size:0.8rem;color:#8dafd3;margin-top:10px;line-height:1.6">
+          These corrections separate externally-imposed performance suppression from internal capability. The adjusted stage reflects your actual systemic position.
+        </div>
+      </div>` : ''}
+
+      <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
+        <div style="font-size:0.75rem;color:#5a8ab0;letter-spacing:1px;margin-bottom:10px;font-weight:600">LEXICON MODE</div>
+        <div class="lexicon-selector">
+          ${['default','engineering','clinical','creative'].map(m=>`
+          <button class="lexicon-btn ${getCurrentMode()===m?'active':''}" data-lexicon="${m}">${m.charAt(0).toUpperCase()+m.slice(1)}</button>`).join('')}
+        </div>
+        <div style="font-size:0.8rem;color:#5a8ab0">Adapts SAP terminology for your professional context.</div>
+      </div>
+    </div>`;
 }
 
 // ─── START ──────────────────────────────────────────────────────────────────

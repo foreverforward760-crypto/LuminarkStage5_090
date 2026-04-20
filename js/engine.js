@@ -2,6 +2,8 @@
 // Stanfield's Axiom of Perpetuity · NSDT Vector · MAAT
 // Audit v1.1: hardened NaN/zero-entropy edge cases throughout
 
+import { CulturalIntelligenceFilter } from './cultural.js';
+
 export function calculateMean(arr) {
     if (!arr || !arr.length) return 0;
     return arr.reduce((a, b) => a + b, 0) / arr.length;
@@ -174,3 +176,20 @@ export const SAP_STAGES = {
     },
     9: { name:'TRANSPARENCY OF THE GUIDE',  label:'The Guide',    color:'#a78bfa', theme:'Completion, Transparency & Dissolution' },
 };
+
+// ─── Cultural Intelligence Integration ───────────────────────────────────────
+export function getFinalStage(nsdtArray, userText = '', culturalContext = {}) {
+    const baseMean  = calculateMean(nsdtArray);
+    const baseStr   = getCategory(baseMean);
+    const stageMap  = { 'void':0, 'crossroads':5, 'flow':6, 'heat':4, 'absolute':9 };
+    const numericStage = stageMap[baseStr] || 6;
+    const corrected = CulturalIntelligenceFilter.applyCorrections(numericStage, userText, culturalContext);
+    return {
+        baseStage:     numericStage,
+        adjustedStage: corrected.adjustedStage,
+        corrections:   corrected.corrections,
+        ptssDetected:  corrected.ptssDetected,
+        ekmanNote:     corrected.ekmanCorrection,
+        totalCorrection: corrected.totalCorrection
+    };
+}

@@ -27,6 +27,18 @@
             <button class="nav-tab" data-view="affirmations">Affirmations</button>
             <button class="nav-tab" data-view="journal">Journal</button>
         </nav>
+        <!-- Shadow Probe Overlay (Mentalism Bridge) -->
+        <div id="shadowProbeOverlay" class="hidden" style="position:fixed;inset:0;background:#0b0e14;z-index:100;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;backdrop-filter:blur(8px);">
+          <div style="max-width:500px;">
+            <div class="kairos-badge" style="margin-bottom:20px;">Sensing Neural Signature...</div>
+            <div id="probeText" style="font-size:1.5rem;color:#e9edf5;line-height:1.55;font-style:italic;"></div>
+            <div style="margin-top:32px;height:2px;background:rgba(255,255,255,0.08);width:120px;margin-left:auto;margin-right:auto;overflow:hidden;border-radius:1px;">
+              <div id="probeLoaderFill" style="height:100%;background:#3f6ea3;width:0%;transition:width 4s linear;border-radius:1px;"></div>
+            </div>
+            <div style="margin-top:16px;font-size:0.75rem;color:#5a8ab0;letter-spacing:2px;">KAIROS ENGINE ACTIVE</div>
+          </div>
+        </div>
+
         <main id="viewContainer" class="view-container"></main>
         <div id="audioStatus" class="audio-indicator"></div>
     </div>

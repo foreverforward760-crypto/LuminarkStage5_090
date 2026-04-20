@@ -14,6 +14,15 @@ class StateManager {
             decision: { mode: 'act', urgency: 0.2, delay: false },
             sapStage: null,
             journalEntries: [],
+            culturalContext: {
+                codeSwitching: false,
+                historicalTrauma: false,
+                systemicOppression: false,
+                multilingual: false,
+                diaspora: false
+            },
+            maatHistory: [],
+            predictions: [],
         };
         this.observers = [];
         this.loadFromStorage();
@@ -75,6 +84,31 @@ class StateManager {
         if (this.state.journalEntries.length > 100) {
             this.state.journalEntries = this.state.journalEntries.slice(0, 100);
         }
+        this.notify();
+    }
+
+    addMaatInteraction(confessionId, action) {
+        if (!this.state.maatHistory) this.state.maatHistory = [];
+        this.state.maatHistory.push({ confessionId, action, timestamp: Date.now() });
+        if (this.state.maatHistory.length > 100) {
+            this.state.maatHistory = this.state.maatHistory.slice(-100);
+        }
+        this.notify();
+    }
+
+    addPrediction(prediction) {
+        if (!this.state.predictions) this.state.predictions = [];
+        this.state.predictions.push({ ...prediction, timestamp: Date.now(), verified: null });
+        this.notify();
+    }
+
+    verifyPrediction(predictionId, wasAccurate) {
+        const pred = (this.state.predictions || []).find(p => p.id === predictionId);
+        if (pred) { pred.verified = wasAccurate; pred.verifiedAt = Date.now(); this.notify(); }
+    }
+
+    setCulturalContext(updates) {
+        this.state.culturalContext = { ...this.state.culturalContext, ...updates };
         this.notify();
     }
 
