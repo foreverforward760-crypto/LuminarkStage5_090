@@ -10,6 +10,16 @@
 </head>
 <body>
     <div id="app" class="kairos-app">
+        <!-- Shadow Probe Overlay (Mentalism Bridge) -->
+        <div id="shadowProbeOverlay" class="hidden" style="position:fixed; inset:0; background:var(--bg); z-index:100; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px;">
+          <div style="max-width:500px;">
+            <div class="kairos-badge" style="margin-bottom:20px; border-color:var(--accent-blue);">Sensing Neural Signature...</div>
+            <div id="probeText" class="wisdom-text" style="font-size:1.6rem; color:var(--text-bright); line-height:1.4;"></div>
+            <div id="probeLoader" style="margin-top:30px; height:2px; background:var(--border); width:100px; margin-left:auto; margin-right:auto; overflow:hidden;">
+              <div id="probeLoaderFill" style="height:100%; background:var(--accent-blue); width:0%; transition: width 4s linear;"></div>
+            </div>
+          </div>
+        </div>
         <header class="app-header glass">
             <div class="brand">
                 <h1>KAIROS</h1>
