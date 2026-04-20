@@ -14,6 +14,10 @@ import { initVisualizer, startVisualPulse, stopVisualPulse, setVisualDensity } f
 import { HOLISTIC_STAGES } from './stages.js';
 import { getRandomConfession } from './maat.js';
 import { setLexiconMode, getTerm, getCurrentMode } from './lexicon.js';
+import {
+    NSDT_QUESTIONS, scoreNSDTMatrix, hasCynicalLoopSignal,
+    AXIS_NAMES, AXIS_COLORS, AXIS_ABBREV
+} from './diagnostic.js';
 
 window.handlePulseCheck = function(archetype, feedback) {
     pulseCheck(archetype, feedback);
@@ -24,9 +28,11 @@ window.handlePulseCheck = function(archetype, feedback) {
 };
 
 const $ = id => document.getElementById(id);
-let currentView = 'protocol';
-let breathTimer = null;
-
+let currentView = 'diagnostic';
+// ─── DIAGNOSTIC STATE ────────────────────────────────────────────────────────
+let diagAnswers     = new Map();  // questionId → optionIndex
+let diagCurrentQ    = 0;          // 0-indexed into NSDT_QUESTIONS
+let diagComplete    = false;
 // ─── INIT ───────────────────────────────────────────────────────────────────
 function init() {
     initVisualizer();
@@ -36,7 +42,7 @@ function init() {
     );
     document.body.addEventListener('click', () => initAudio(), { once: true });
     recalculate();
-    navigate('protocol');
+    navigate('diagnostic');
 }
 
 // ─── STATE UPDATE ────────────────────────────────────────────────────────────
@@ -77,7 +83,7 @@ function renderView(viewId) {
     const vc = $('viewContainer');
     if (!vc) return;
     const state = stateManager.state;
-    const renders = { protocol, frequencies, breathwork, affirmations, journal };
+    const renders = { diagnostic, protocol, frequencies, breathwork, affirmations, journal };
     vc.innerHTML = renders[viewId] ? renders[viewId](state) : '<p>View not found</p>';
     attachListeners(viewId);
 }
@@ -418,6 +424,71 @@ function journal(state) {
 
 // ─── EVENT LISTENERS ────────────────────────────────────────────────────────
 function attachListeners(viewId) {
+    if (viewId === 'diagnostic') {
+        // Wire answer option clicks
+        document.querySelectorAll('.answer-option').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const qid = parseInt(btn.dataset.qid);
+                const opt = parseInt(btn.dataset.opt);
+                diagAnswers.set(qid, opt);
+                document.querySelectorAll('.answer-option').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                // Enable continue/submit buttons
+                const next = document.getElementById('diagNextBtn');
+                const sub  = document.getElementById('diagSubmitBtn');
+                if (next) next.disabled = false;
+                if (sub)  sub.disabled = diagAnswers.size < NSDT_QUESTIONS.length;
+            });
+        });
+
+        document.getElementById('diagPrevBtn')?.addEventListener('click', () => {
+            if (diagCurrentQ > 0) {
+                diagCurrentQ--;
+                renderView('diagnostic');
+            }
+        });
+
+        document.getElementById('diagNextBtn')?.addEventListener('click', () => {
+            const q = NSDT_QUESTIONS[diagCurrentQ];
+            if (!diagAnswers.has(q.id)) return;
+            diagCurrentQ++;
+            renderView('diagnostic');
+        });
+
+        document.getElementById('diagSubmitBtn')?.addEventListener('click', () => {
+            if (diagAnswers.size < NSDT_QUESTIONS.length) return;
+            diagComplete = true;
+            renderView('diagnostic');
+        });
+
+        document.getElementById('applyDiagnosticBtn')?.addEventListener('click', () => {
+            const result = scoreNSDTMatrix(diagAnswers);
+            const vector = result.vector || result;
+            const nsdt5  = vector.map(v => v / 10);
+
+            stateManager.updateNSDTVector(vector);
+            stateManager.updateNSDT(nsdt5);
+            recalculate();
+
+            const { sapStage } = stateManager.state;
+            const stage    = sapStage?.stage ?? 6;
+            const pressure = stateManager.state.pressure ?? 0.3;
+            const tension  = vector[3] / 100;
+            const trapE    = stage === 8 ? 0.85 : (pressure * 0.7 + tension * 0.3);
+
+            updateBodyTrapState(trapE);
+            navigate('protocol');
+            runShadowProbe(stage, trapE);
+        });
+
+        document.getElementById('resetDiagnosticBtn')?.addEventListener('click', () => {
+            diagAnswers.clear();
+            diagCurrentQ = 0;
+            diagComplete  = false;
+            renderView('diagnostic');
+        });
+    }
+
     if (viewId === 'protocol') {
         // NSDT sliders
         document.querySelectorAll('.nsdt-slider').forEach(sl => {
@@ -571,13 +642,16 @@ function runShadowProbe(dominantStage, trapEnergy) {
     // Trigger the progress bar animation
     setTimeout(() => { fill.style.width = '100%'; }, 50);
 
-    // Cinnabar shift for high trap energy
-    if (trapEnergy > 0.7) document.body.classList.add('high-trap');
+    // Cinnabar shift for high trap energy — state-heat (TCM Heat Signal)
+    if (trapEnergy > 0.7) {
+        document.body.classList.add('state-heat');
+        document.body.classList.remove('high-trap');
+    }
 
     setTimeout(() => {
         overlay.classList.add('hidden');
         overlay.style.display = 'none';
-        document.body.classList.remove('high-trap');
+        document.body.classList.remove('state-heat');
         fill.style.width = '0%';
         fill.style.transition = 'none';
         setTimeout(() => { fill.style.transition = 'width 4s linear'; }, 50);
@@ -675,3 +749,146 @@ function renderCulturalPanel(state) {
 
 // ─── START ──────────────────────────────────────────────────────────────────
 init();
+
+// ─── DIAGNOSTIC VIEW ─────────────────────────────────────────────────────────
+// KAIROS Cognitive OS — 15-Question NSDT State Diagnostic Engine
+
+function diagnostic() {
+    const totalQ = NSDT_QUESTIONS.length;
+    const answered = diagAnswers.size;
+    const pct = (answered / totalQ) * 100;
+
+    if (diagComplete) {
+        return renderDiagnosticResult();
+    }
+
+    const q = NSDT_QUESTIONS[diagCurrentQ];
+    if (!q) return '<p style="color:#5a8ab0">Diagnostic unavailable.</p>';
+
+    const hasAnswer = diagAnswers.has(q.id);
+
+    return `
+    <div class="diagnostic-container">
+      <div class="glass-card">
+        <div class="diagnostic-header">
+          <div class="diagnostic-title">KAIROS Cognitive OS<br>State Diagnostic Engine</div>
+          <div class="diagnostic-subtitle">NSDT Matrix · 15-Question Protocol · v8.1</div>
+          <div class="diagnostic-progress-bar">
+            <div class="diagnostic-progress-fill" style="width:${pct}%"></div>
+          </div>
+        </div>
+
+        <div class="question-category-tag">${q.category} · ${diagCurrentQ + 1} of ${totalQ}</div>
+        <div class="question-text">${q.text}</div>
+        ${q.note ? `<div class="question-note">◈ ${q.note}</div>` : ''}
+
+        <div class="answer-options" id="answerOptions">
+          ${q.options.map((opt, i) => {
+              const sel = diagAnswers.get(q.id) === i;
+              return `<button class="answer-option${sel ? ' selected' : ''}"
+                        data-qid="${q.id}" data-opt="${i}">${opt.text}</button>`;
+          }).join('')}
+        </div>
+
+        <div class="diagnostic-nav">
+          <button class="btn" id="diagPrevBtn" ${diagCurrentQ === 0 ? 'disabled style="opacity:0.3"' : ''}>← Back</button>
+          <span class="q-counter">${answered} of ${totalQ} answered</span>
+          ${diagCurrentQ < totalQ - 1
+            ? `<button class="btn btn-primary" id="diagNextBtn" ${!hasAnswer ? 'disabled style="opacity:0.5"' : ''}>Continue →</button>`
+            : `<button class="btn btn-primary" id="diagSubmitBtn" ${answered < totalQ ? 'disabled style="opacity:0.5"' : ''}>Run Diagnostic →</button>`
+          }
+        </div>
+      </div>
+
+      ${answered > 0 && answered < totalQ ? `
+      <div style="text-align:center; padding:4px 0 8px; font-size:0.75rem; color:#3f6ea3; letter-spacing:1px;">
+        Calibrating NSDT Centroids... ${Math.round(pct)}% complete
+      </div>` : ''}
+    </div>`;
+}
+
+function renderDiagnosticResult() {
+    const result = scoreNSDTMatrix(diagAnswers);
+    const vector = result.vector || result; // handle both return shapes
+    const cynicalLoop = result.cynicalLoopDetected;
+    const culturalCorrection = result.culturalCorrectionApplied;
+
+    const sap = classifySAPStage(vector);
+    const st  = SAP_STAGES[sap.stage];
+
+    // Compute pressure from the new vector
+    const nsdt5 = vector.map(v => v / 10);
+    const pressure = computePressureScore(nsdt5);
+    const trapEnergy = sap.trap ? 1.0 : (pressure * 0.8 + (vector[3] / 100) * 0.2);
+
+    // Detect cynical loop: stages 3,5,7,8 AND (tension > 0.7 OR cynical probe triggered)
+    const cynicalTrigger = cynicalLoop ||
+        ([3, 5, 7, 8].includes(sap.stage) && (vector[3] > 70 || pressure > 0.7));
+
+    return `
+    <div class="diagnostic-container">
+      <div class="glass-card">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px">
+          <div>
+            <div class="diagnostic-subtitle">Diagnostic Complete</div>
+            <div class="diagnostic-title" style="font-size:1.3rem">NSDT Analysis<br>Ready</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:2.2rem;font-weight:900;color:${st.color}">${sap.stage}</div>
+            <div style="font-size:0.6rem;color:#5a7a9a;letter-spacing:1px">${st.label.toUpperCase()}</div>
+          </div>
+        </div>
+
+        <div style="background:${st.color}14;border:1px solid ${st.color}30;border-radius:14px;padding:14px;margin-bottom:16px">
+          <div style="font-size:0.72rem;color:${st.color};letter-spacing:2px;font-weight:700;margin-bottom:4px">${st.name}</div>
+          <div style="font-size:0.88rem;color:#8dafd3;line-height:1.5">${st.theme}</div>
+        </div>
+
+        ${cynicalTrigger ? `
+        <div class="cynical-loop-warning">
+          <strong>⚡ CYNICAL LOOP SIGNAL DETECTED</strong>
+          Stage ${sap.stage} with elevated Tension axis (${vector[3]}) indicates a potential trap-state oscillation.
+          The system is recognizing the pattern but has not yet disengaged from it.
+          ${sap.stage === 8 ? ' The ILLUSION OF PERMANENCE amplifier is active.' : ''}
+          Directive: Apply the Ma'at Balance. What untruth is sustaining the loop?
+        </div>` : ''}
+
+        ${culturalCorrection ? `
+        <div style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.83rem;color:#c4b5fd">
+          <strong style="font-size:0.7rem;letter-spacing:1.5px;display:block;margin-bottom:4px">◈ SURVIVAL BRILLIANCE CORRECTION APPLIED</strong>
+          High code-switching capacity detected on Q7. Adaptability axis has been corrected +20% to separate adaptive intelligence from performance suppression.
+        </div>` : ''}
+
+        <div style="font-size:0.72rem;color:#5a8ab0;letter-spacing:1.5px;margin-bottom:10px;font-weight:700">NSDT 5-AXIS VECTOR</div>
+        <div class="nsdt-result-grid">
+          ${vector.map((v, i) => `
+          <div class="nsdt-axis-cell">
+            <div class="nsdt-axis-val" style="color:${AXIS_COLORS[i]}">${v}</div>
+            <div class="nsdt-axis-label">${AXIS_ABBREV[i]}</div>
+          </div>`).join('')}
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+          ${AXIS_NAMES.map((n, i) => `
+          <span style="font-size:0.7rem;color:${AXIS_COLORS[i]};opacity:0.8">${AXIS_ABBREV[i]}=${AXIS_NAMES[i]}</span>`).join(' · ')}
+        </div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn btn-primary" id="applyDiagnosticBtn">Apply to Protocol →</button>
+          <button class="btn" id="resetDiagnosticBtn">⟳ Re-run Diagnostic</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ─── CYNICAL LOOP / STATE-HEAT BODY CLASS ────────────────────────────────────
+function updateBodyTrapState(trapEnergy) {
+    // Spec: if trap energy > 0.7 → trigger class state-heat (Cinnabar Red / TCM Heat signal)
+    if (trapEnergy > 0.7) {
+        document.body.classList.add('state-heat');
+        document.body.classList.remove('high-trap'); // consolidate to state-heat
+    } else {
+        document.body.classList.remove('state-heat');
+        document.body.classList.remove('high-trap');
+    }
+}
+
