@@ -78,9 +78,20 @@ export function getDecisionSignal(pressure, confidence, stage) {
     return { mode: 'paradox', urgency: 0.5, delay: false };
 }
 
-// SAP Stage classifier — NSDT 5-vector [N,S,D,T,C] each 0-100
+const STAGE_CENTROIDS = {
+    0: [0, 0, 0, 0, 0],
+    1: [10, 80, 10, 10, 10],
+    2: [20, 70, 20, 20, 20],
+    3: [40, 70, 25, 30, 40],
+    4: [35, 65, 30, 35, 50],
+    5: [50, 40, 50, 50, 45],
+    6: [60, 55, 40, 60, 65],
+    7: [65, 30, 70, 70, 35],
+    8: [75, 70, 80, 20, 20],
+    9: [80, 20, 85, 15, 15],
+};
+
 export function classifySAPStage(nsdt) {
-    // ✅ AUDIT FIX 3: defensive array guard with safe defaults
     const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
     const [N, S, T, D, C] = safe.map(v => (isFinite(v) ? Math.min(100, Math.max(0, v)) : 50));
 
@@ -88,23 +99,42 @@ export function classifySAPStage(nsdt) {
     const Cs = 0.4*C + 0.4*D + 0.2*(100-N);
     const U  = Math.round(0.25*(S/100)*100 + 0.30*(D/100)*100 + 0.20*(T/100)*100 + 0.25*(C/100)*100);
 
-    let stage, trap = false, trapMsg = '';
-    if      (C >= 90 && D >= 80 && T <= 20)   stage = 9;
-    else if (N<15&&S<20&&T<25&&D<25&&C<25)    stage = 0;
-    else if (T > 68 && C > 50 && D < 45)      stage = 8;
-    else if (C>72&&D>62&&T>42&&N>48)          stage = 7;
-    else if (P>=60&&Cs>=60&&T<52) {
-        stage = 6;
-        if (D < 30) { trap = true; trapMsg = 'ILLUSION OF PERMANENCE: Adaptability below threshold while claiming harmony. Rigidity masking as stability.'; }
-    }
-    else if (P>=70&&Cs<58&&S>T)    stage = 1;
-    else if (P>=58&&Cs<58&&S<=T)   stage = 2;
-    else if (P<50&&Cs>=70&&N<42)   stage = 3;
-    else if (P<55&&Cs>=62&&N>=42)  stage = 4;
-    else                           stage = 5;
+    // Fuzzy Proximity Score
+    const distances = Object.entries(STAGE_CENTROIDS).map(([st, centroid]) => {
+        let sumSq = 0;
+        sumSq += Math.pow(centroid[0] - N, 2);
+        sumSq += Math.pow(centroid[1] - S, 2);
+        sumSq += Math.pow(centroid[2] - T, 2);
+        sumSq += Math.pow(centroid[3] - D, 2);
+        sumSq += Math.pow(centroid[4] - C, 2);
+        return { stage: parseInt(st), distance: Math.sqrt(sumSq) };
+    });
+    
+    // Convert to proximities
+    let invSum = 0;
+    const proximities = distances.map(d => {
+        const prox = 1 / (d.distance + 1);
+        invSum += prox;
+        return { stage: d.stage, prox };
+    });
+    
+    proximities.forEach(p => { p.score = (p.prox / invSum) * 100; });
+    proximities.sort((a,b) => b.score - a.score);
+    
+    const primary = proximities[0];
+    const shadow = proximities[1];
+    
+    let stage = primary.stage;
+    let trap = false, trapMsg = '';
+    
+    // Override absolute trap triggers (e.g. Stage 8 Illusion)
+    if (stage === 6 && D < 30) { trap = true; trapMsg = 'ILLUSION OF PERMANENCE: Adaptability below threshold while claiming harmony. Rigidity masking as stability.'; }
+
+    const shadowText = `${Math.round(primary.score)}% Stage ${primary.stage} / ${Math.round(shadow.score)}% Stage ${shadow.stage}`;
 
     let kairos = null;
     if (stage === 5) {
+        // Bifurcation Calculus: Weigh D vs T
         const a = Math.max(0.05, (D+C-T-30)/200);
         const r = Math.max(0.05, (T-D+60)/200);
         const c2 = T > 70 ? 0.22 : 0.08;
@@ -119,7 +149,7 @@ export function classifySAPStage(nsdt) {
     const illusionT  = stage === 8 ? Math.min(100, Math.round(T * 1.45)) : null;
     const dissolving  = stage === 9 && C >= 95 && D >= 80 && T <= 20;
 
-    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, illusionT, dissolving };
+    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, illusionT, dissolving, shadowText, primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage };
 }
 
 // Canonical SAP stage data — CONSTITUTIONAL · NEVER ALTER NAMES

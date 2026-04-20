@@ -7,10 +7,18 @@ import {
     getDecisionSignal, calculateMean,
     classifySAPStage, SAP_STAGES, getPressureLabel
 } from './engine.js';
-import { selectContent, selectAffirmation, contentLibrary } from './content.js';
+import { selectContent, selectAffirmation, contentLibrary, pulseCheck } from './content.js';
 import { initAudio, playFrequency, stopFrequency, FREQUENCY_MAP, isPlaying, getCurrentFreq } from './audio.js';
 import { initVisualizer, startVisualPulse, stopVisualPulse, setVisualDensity } from './visuals.js';
 import { HOLISTIC_STAGES } from './stages.js';
+
+window.handlePulseCheck = function(archetype, feedback) {
+    pulseCheck(archetype, feedback);
+    const btn = event.currentTarget;
+    btn.innerText = feedback === 'disrupt' ? 'Weight Increased' : 'Weight Lowered';
+    btn.style.opacity = '0.5';
+    btn.disabled = true;
+};
 
 const $ = id => document.getElementById(id);
 let currentView = 'protocol';
@@ -73,13 +81,48 @@ function renderView(viewId) {
 
 // ─── VIEWS ──────────────────────────────────────────────────────────────────
 
-function renderStageAnalysis(stageIdx, color) {
+function renderRadarChart(vector) {
+    const size = 180;
+    const center = size / 2;
+    const maxR = size * 0.35;
+    const labels = ['N', 'S', 'T', 'D', 'C'];
+    const angles = [0,1,2,3,4].map(i => -Math.PI / 2 + (Math.PI * 2 * i / 5));
+    
+    let svg = `<svg width="100%" height="${size}" viewBox="0 0 ${size} ${size}">`;
+    for(let i=0; i<4; i++){
+        const r = maxR * (i+1)/4;
+        const pts = angles.map(a => `${center + Math.cos(a)*r},${center + Math.sin(a)*r}`).join(' ');
+        svg += `<polygon points="${pts}" fill="none" stroke="rgba(255,255,255,0.05)"/>`;
+    }
+    angles.forEach((a, index) => {
+        const x = center + Math.cos(a)*maxR;
+        const y = center + Math.sin(a)*maxR;
+        svg += `<line x1="${center}" y1="${center}" x2="${x}" y2="${y}" stroke="rgba(255,255,255,0.1)"/>`;
+        svg += `<text x="${center + Math.cos(a)*(maxR+14)}" y="${center + Math.sin(a)*(maxR+14)}" fill="#5a8ab0" font-size="10" font-weight="bold" text-anchor="middle" dominant-baseline="middle">${labels[index]}</text>`;
+    });
+    const pts = vector.map((v, i) => {
+        const r = (v/100) * maxR;
+        return `${center + Math.cos(angles[i])*r},${center + Math.sin(angles[i])*r}`;
+    }).join(' ');
+    svg += `<polygon points="${pts}" fill="rgba(96, 165, 250, 0.2)" stroke="#60a5fa" stroke-width="2"/>`;
+    vector.forEach((v, i) => {
+        const r = (v/100) * maxR;
+        svg += `<circle cx="${center + Math.cos(angles[i])*r}" cy="${center + Math.sin(angles[i])*r}" r="3" fill="#60a5fa"/>`;
+    });
+    svg += `</svg>`;
+    return svg;
+}
+
+function renderStageAnalysis(stageIdx, color, shadowText) {
     const data = HOLISTIC_STAGES[stageIdx];
     if (!data) return '';
     const isTrap = stageIdx === 8;
     return `
     <div style="background:rgba(20, 30, 48, 0.6); border: 1px solid ${color}40; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
-        <h3 style="color:${color}; font-size:1.1rem; margin-top:0; margin-bottom:8px;">Deep Sync Analysis</h3>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+           <h3 style="color:${color}; font-size:1.1rem; margin:0;">Deep Sync Analysis</h3>
+           ${shadowText ? `<div style="font-size:0.75rem; color:#8dafd3; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; font-weight:600; letter-spacing:0.5px;">BLEED: ${shadowText}</div>` : ''}
+        </div>
         <div style="margin-bottom: 12px;">
             <strong style="color:#8dafd3; font-size:0.85rem;">THE NARRATIVE</strong>
             <p style="font-size:0.95rem; color:#d0e8ff; margin:4px 0 0 0; line-height:1.4;">${data.description}</p>
@@ -152,19 +195,39 @@ function protocol(state) {
       </div>` : ''}
 
       <div style="background:rgba(15,28,45,0.8);border-radius:20px;padding:20px;margin-bottom:16px;border-left:3px solid ${st.color}">
-        <div style="font-size:0.7rem;color:#5a8ab0;letter-spacing:1px;margin-bottom:8px">${content?.archetype?.toUpperCase() || 'KAIROS'} · ${content?.type?.toUpperCase() || 'WISDOM'}</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+          <div style="font-size:0.7rem;color:#5a8ab0;letter-spacing:1px">${content?.archetype?.toUpperCase() || 'KAIROS'} · ${content?.type?.toUpperCase() || 'WISDOM'}</div>
+          ${content?.archetype ? `
+          <div style="display:flex; gap:6px;">
+             <button onclick="handlePulseCheck('${content.archetype}', 'disrupt')" style="background:transparent;border:1px solid rgba(239,68,68,0.4);border-radius:8px;padding:2px 8px;font-size:0.65rem;color:#fca5a5;cursor:pointer;">Disrupted</button>
+             <button onclick="handlePulseCheck('${content.archetype}', 'resonant')" style="background:transparent;border:1px solid rgba(16,185,129,0.4);border-radius:8px;padding:2px 8px;font-size:0.65rem;color:#6ee7b7;cursor:pointer;">Resonant</button>
+          </div>` : ''}
+        </div>
         <p style="font-size:1.15rem;font-style:italic;color:#d0e8ff;line-height:1.65;margin:0">"${content?.text || 'Stay present in the stage you are in.'}"</p>
       </div>
 
-      ${renderStageAnalysis(sap.stage, st.color)}
+      ${renderStageAnalysis(sap.stage, st.color, sap.shadowText)}
 
-      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center">
-        <span class="signal-badge ${signalClass}">⊕ ${decision.mode.toUpperCase()}</span>
-        <span style="font-size:0.8rem;color:#5a8ab0">Pressure: ${(pressure*100).toFixed(0)}% · Confidence: ${(confidence*100).toFixed(0)}%</span>
+      <div style="background:rgba(20,30,48,0.6);border-radius:12px;padding:16px;margin-bottom:16px;border:1px solid rgba(255,255,255,0.05)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <div style="font-size:0.75rem;color:#5a8ab0;letter-spacing:1px;font-weight:600">SYSTEM ENTROPY</div>
+          <span class="signal-badge ${signalClass}">⊕ ${decision.mode.toUpperCase()}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#d0e8ff;margin-bottom:4px">
+          <span>Pressure</span><span>${Math.round(pressure*100)}%</span>
+        </div>
+        <div style="height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;position:relative;">
+          <div style="width:${Math.round(pressure*100)}%;height:100%;border-radius:3px;background:${decision.mode==='act'?'#ef4444':decision.mode==='paradox'?'#f59e0b':'#3b82f6'};"></div>
+        </div>
       </div>
 
       <div id="nsdtPanel">
         <div style="font-size:0.75rem;color:#5a8ab0;letter-spacing:1px;margin-bottom:12px;font-weight:600">NSDT VECTOR — ADJUST TO YOUR STATE</div>
+        
+        <div style="margin-bottom: 16px; background:rgba(0,0,0,0.2); border-radius: 12px; padding: 12px;">
+            ${renderRadarChart(nsdtVector)}
+        </div>
+        
         ${[['N','Complexity',nsdtVector[0],'#f59e0b'],['S','Stability',nsdtVector[1],'#60a5fa'],
            ['T','Tension',nsdtVector[2],'#ef4444'],['D','Adaptability',nsdtVector[3],'#10b981'],
            ['C','Coherence',nsdtVector[4],'#a78bfa']].map((axis,i)=>`

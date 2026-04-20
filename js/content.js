@@ -4,6 +4,18 @@
 const ARCHETYPES = ['Coyote','Anansi','Loki','Eshu','BrerRabbit'];
 const MODES = ['disrupt','stabilize','paradox'];
 
+const tricksterWeights = {
+    Coyote: 1, Anansi: 1, Loki: 1, Eshu: 1, BrerRabbit: 1
+};
+
+export function pulseCheck(archetype, feedback) {
+    if (feedback === 'disrupt' && tricksterWeights[archetype]) {
+        tricksterWeights[archetype] += 0.5; // Increase weight
+    } else if (feedback === 'resonant' && tricksterWeights[archetype] && tricksterWeights[archetype] > 1.0) {
+        tricksterWeights[archetype] -= 0.2;
+    }
+}
+
 const templates = {
     void: {
         wisdom: [
@@ -280,7 +292,17 @@ export function selectContent(category, mode, historyIds = []) {
     let eligible = contentLibrary.filter(e => e.category === category && e.mode === mode && !historyIds.includes(e.id));
     if (!eligible.length) eligible = contentLibrary.filter(e => e.category === category && !historyIds.includes(e.id));
     if (!eligible.length) eligible = contentLibrary.filter(e => e.category === category);
-    return eligible[Math.floor(Math.random() * eligible.length)] || contentLibrary[0];
+    
+    // Apply Trickster Weighting
+    let weightedList = [];
+    eligible.forEach(c => {
+        let weight = tricksterWeights[c.archetype] || 1;
+        for (let i = 0; i < Math.ceil(weight); i++) {
+            weightedList.push(c);
+        }
+    });
+
+    return weightedList[Math.floor(Math.random() * weightedList.length)] || contentLibrary[0];
 }
 
 export function selectAffirmation(category, historyIds = []) {

@@ -3,8 +3,14 @@
 
 let canvas, ctx, raf = null, currentSpeed = 1.6, targetSpeed = 1.6;
 let currentStage = 5;
+let previousStage = null;
+let shatterAnim = 0;
 
 export function setVisualDensity(stage) {
+    if (previousStage === 8 && stage === 9) {
+        shatterAnim = 1.0;
+    }
+    if (currentStage !== stage) previousStage = currentStage;
     currentStage = stage;
 }
 
@@ -57,16 +63,69 @@ export function startVisualPulse(color = '#22c55e') {
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Concentric rings — more rings and noise at higher density (like Stage 4, 8)
-        const ringCount = Math.round(2 + (currentSpeed / 2.2) * 5 * densityFactor);
-        for (let i = 1; i <= ringCount; i++) {
-            const noise = densityFactor > 1.2 ? (Math.random() * 4 * densityFactor - 2 * densityFactor) : 0;
-            const r = maxR * (i / ringCount) * (0.7 + pulse * 0.3) + noise;
-            if (r < 0) continue;
+        if (shatterAnim > 0) {
+            shatterAnim -= 0.015;
+            if (shatterAnim < 0) shatterAnim = 0;
+        }
+
+        const ringRadius = maxR * 0.75;
+        
+        // Background noise rings (for Stage 4 Crucible density)
+        if (densityFactor > 1.2) {
+            for (let i = 1; i <= 3; i++) {
+                ctx.beginPath();
+                ctx.arc(cx, cy, ringRadius + (Math.random()*20 - 10), 0, Math.PI * 2);
+                ctx.strokeStyle = `rgba(120,180,255,${0.05 * densityFactor})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+
+        // The 10-Stage Toroidal Ring
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(t * 0.1); 
+
+        for(let i=0; i<10; i++) {
+            const startAngle = (i / 10) * Math.PI * 2;
+            const endAngle = ((i+1) / 10) * Math.PI * 2 - 0.06;
+            
             ctx.beginPath();
-            ctx.arc(cx, cy, r, 0, Math.PI * 2);
-            ctx.strokeStyle = `rgba(120,180,255,${(0.03 + (currentSpeed / 2.2) * 0.04) * densityFactor * pulse})`;
-            ctx.lineWidth = currentSpeed > 1.8 ? 1.5 : 1;
+            ctx.arc(0, 0, ringRadius, startAngle, endAngle);
+            
+            let isActive = i === currentStage;
+            ctx.lineWidth = isActive ? 10 + pulse * 4 : 4;
+            
+            if (isActive) {
+                // Glow using the color param if available, else white/blue
+                ctx.strokeStyle = (shatterAnim > 0 && i === 9) ? `rgba(255,255,255,${pulse})` : `rgba(255,255,255,${0.6 + 0.4*pulse})`;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = color || 'white';
+            } else {
+                ctx.strokeStyle = `rgba(120,180,255,0.2)`;
+                ctx.shadowBlur = 0;
+            }
+            ctx.stroke();
+        }
+        ctx.restore();
+
+        // Stage 8 "Cracks" (Illusion of Permanence Rigidity) or Shatter Anim
+        if (currentStage === 8 || shatterAnim > 0) {
+            const crackAlpha = currentStage === 8 ? (0.3 + 0.3 * Math.random()) : shatterAnim;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${crackAlpha})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            
+            // Shattered glass geometry
+            for(let c=0; c < (currentStage===8 ? 40 : 80 * shatterAnim); c++) {
+                const angle1 = Math.random() * Math.PI * 2;
+                const r1 = Math.random() * ringRadius * 1.2;
+                const angle2 = angle1 + (Math.random() - 0.5) * 0.5;
+                const r2 = r1 + (Math.random() * 40 - 20);
+                
+                ctx.moveTo(cx + Math.cos(angle1)*r1, cy + Math.sin(angle1)*r1);
+                ctx.lineTo(cx + Math.cos(angle2)*r2, cy + Math.sin(angle2)*r2);
+            }
             ctx.stroke();
         }
 
