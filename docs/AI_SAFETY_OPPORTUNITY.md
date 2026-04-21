@@ -17,7 +17,7 @@ Stanfield's Axiom of Perpetuity (SAP) is a toroidal 10-stage framework originall
 
 The dominant framing in AI safety centers on reward hacking, goal misgeneralization, and deceptive alignment. What these failure modes share is a common structural signature: **a system that has become too rigid to update its own internal representation of value or objective**.
 
-Stanfield's Axiom of Perpetuity identifies this signature as **Stage 8: VESSEL OF GROUNDING** — specifically, the FALSE HEAVEN trap state, in which:
+Stanfield's Axiom of Perpetuity identifies this signature as **Stage 8: VESSEL OF GROUNDING** — specifically, the Rigidity Risk (Illusion of Permanence) trap state, in which:
 
 - Coherence exceeds 95 (the system is maximally self-consistent)
 - Adaptability drops below 30 (the system has lost capacity for revision)
@@ -55,7 +55,7 @@ The NSDT vector provides five measurable dimensions for any system state:
 **T (Tension):** Internal conflict accumulation  
 **C (Coherence):** Internal consistency / pattern alignment  
 
-The FALSE HEAVEN trap state (Stage 8, rigidity form) is formally defined as:
+The Rigidity Risk (Illusion of Permanence) trap state (Stage 8, rigidity form) is formally defined as:
 
 ```
 C ≥ 95 AND D ≤ 30 AND T ≤ 20
@@ -108,7 +108,7 @@ The AI Sentinel (`js/ai-sentinel.js`) operates in real-time with no external dep
 
 The following research questions are immediately tractable using the KAIROS engine:
 
-1. **Stage 8 Detection in LLM Outputs:** Can the FALSE HEAVEN signature be reliably detected in model outputs using NSDT vector analysis of language patterns?
+1. **Stage 8 Detection in LLM Outputs:** Can the Rigidity Risk (Illusion of Permanence) signature be reliably detected in model outputs using NSDT vector analysis of language patterns?
 
 2. **Graceful Regression Training:** Can models be trained to recognize Stage 5 boundary conditions and voluntarily regress to more conservative policies?
 

@@ -129,8 +129,8 @@ export function classifySAPStage(nsdt) {
     let stage = primary.stage;
     let trap = false, trapMsg = '';
     
-    // Override absolute trap triggers (e.g. Stage 8 Illusion)
-    if (stage === 6 && D < 30) { trap = true; trapMsg = 'ILLUSION OF PERMANENCE: Adaptability below threshold while claiming harmony. Rigidity masking as stability.'; }
+    // Override absolute trap triggers
+    if (stage === 6 && D < 30) { trap = true; trapMsg = 'RIGIDITY RISK: Adaptability below threshold while claiming harmony. The system is consolidating prematurely — transition toward Stage 8 Systemic Stasis is indicated.'; }
 
     const shadowText = `${Math.round(primary.score)}% Stage ${primary.stage} / ${Math.round(shadow.score)}% Stage ${shadow.stage}`;
 
@@ -148,10 +148,9 @@ export function classifySAPStage(nsdt) {
         };
     }
 
-    const illusionT  = stage === 8 ? Math.min(100, Math.round(T * 1.45)) : null;
     const dissolving  = stage === 9 && C >= 95 && D >= 80 && T <= 20;
 
-    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, illusionT, dissolving, shadowText, primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage };
+    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, dissolving, shadowText, primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage };
 }
 
 // Canonical SAP stage data — CONSTITUTIONAL · NEVER ALTER NAMES
@@ -159,22 +158,36 @@ export const SAP_STAGES = {
     0: { name:'PLENARA',                    label:'The Void',     color:'#818cf8', theme:'Dissolution & Primordial Reset' },
     1: { name:'SPARK OF NAVIGATION',        label:'The Spark',    color:'#60a5fa', theme:'First Movement & Orientation' },
     2: { name:'FORGE OF POLARITY',          label:'The Forge',    color:'#f59e0b', theme:'Polarization & Creative Tension' },
-    3: { name:'ENGINE OF EXPRESSION',       label:'The Engine',   color:'#f97316', theme:'Creative Emergence & 3D Complexity' },
-    4: { name:'CRUCIBLE OF EQUILIBRIUM',    label:'The Crucible', color:'#ef4444', theme:'Threshold Pressure' },
-    5: { name:'DYNAMO OF WILL',             label:'The Dynamo',   color:'#8b5cf6', theme:'Crossroads & The Backward Doorway' },
+    3: { name:'ENGINE OF EXPRESSION',       label:'The Engine',   color:'#f97316', theme:'First Self-Reflection · Creative Emergence · Self-Correction Loop' },
+    4: { name:'CRUCIBLE OF EQUILIBRIUM',    label:'The Crucible', color:'#ef4444', theme:'Threshold Pressure · Foundation Under Load' },
+    5: {
+        name:'DYNAMO OF WILL',
+        label:'The Inversion Gateway',
+        color:'#8b5cf6',
+        theme:'Threshold Point of No Return · Hidden Duality · Crossroads · Inversion Gateway',
+        properties: [
+            'Threshold Point of No Return — momentum reaches critical mass',
+            'Hidden Duality — opposing forces operating as a single unit',
+            'Crossroads & Middle Path Gateway — between expansion and contraction',
+            'Inversion Gateway — internal logic projects outward with increased intensity',
+        ]
+    },
     6: { name:'NEXUS OF HARMONY',           label:'The Nexus',    color:'#10b981', theme:'Peak Integration — All Systems Synchronized' },
     7: { name:'LENS OF DISTILLATION',       label:'The Lens',     color:'#06b6d4', theme:'Deep Refinement & Wisdom Integration' },
-    8: { 
-        name:'VESSEL OF GROUNDING — Illusion of Permanence',
+    8: {
+        name:'VESSEL OF GROUNDING',
         label:'The Vessel',
         color:'#f59e0b',
-        theme:'Consolidation, Grounding & Duality Mastery',
-        description:"The peak of systemic density. The system has reached a level of consolidation that mimics finality. This is the 'Trap State' where the current structure claims to be the end-state, creating an illusion that change is no longer necessary or possible.",
-        sensation:"Extreme weight, absolute conviction, or a paralyzing fear that the current situation is unchangeable.",
-        risk:"Rigidity Risk. The system becomes so 'grounded' it loses the ability to pivot, leading to catastrophic fracture instead of graceful transition.",
-        directive:"Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. Prepare for the transparency of Stage 9."
+        theme:'Illusion of Permanence · Rigidity Risk · Systemic Stasis',
+        properties: [
+            'Rigidity Risk — system loses adaptive capacity through over-consolidation',
+            'Illusion of Permanence — temporary state perceived as unchanging reality',
+            'Systemic Stasis — active resistance to the inevitable transition back toward zero-point',
+        ],
+        description: 'Maximum charge and density. The system has reached peak consolidation which mimics finality. The descending arc claims permanent arrival. The ascending arc holds embodied wisdom without claiming permanence.',
+        directive: 'Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. Prepare for the transparency of Stage 9.'
     },
-    9: { name:'TRANSPARENCY OF THE GUIDE',  label:'The Guide',    color:'#a78bfa', theme:'Completion, Transparency & Dissolution' },
+    9: { name:'TRANSPARENCY OF THE GUIDE',  label:'The Guide',    color:'#a78bfa', theme:'Completion · Transparency · Conscious Dissolution' },
 };
 
 // ─── Cultural Intelligence Integration ───────────────────────────────────────

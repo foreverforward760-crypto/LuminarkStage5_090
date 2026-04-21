@@ -11,13 +11,13 @@ KAIROS is a state-aware diagnostic engine originally designed for human cognitiv
 | Stage 5 Backward Doorway | Reward Hacking / Specification Gaming | Decision Pressure > 0.7 |
 | Stage 8 Illusion of Permanence | Goal Misgeneralization / Value Lock-in | Coherence ≥ 95, Adaptability ≤ 20 |
 | Stage 0 PLENARA | Safe Exploration / Constitutional Reset | Dissolution Trigger |
-| Stage 6 FALSE HEAVEN Trap | Overconfident Policy — Adaptability < 30 | Trap State Flag |
+| Stage 6 Rigidity Risk (Illusion of Permanence) Trap | Overconfident Policy — Adaptability < 30 | Trap State Flag |
 | Stage 9 → 0 Dissolution | Model Reset / Constitutional AI Reinit | 0-9-0 Torus Completion |
 
 ## Potential Applications
 
 ### Supervisory Control Layer
-Monitor autonomous agent state vectors to detect early signs of "rigidity" (overfitting to a local optimum). An agent whose Coherence climbs above 95 while Adaptability drops below 20 is exhibiting the Stage 8 FALSE HEAVEN pattern — the classic value lock-in signature.
+Monitor autonomous agent state vectors to detect early signs of "rigidity" (overfitting to a local optimum). An agent whose Coherence climbs above 95 while Adaptability drops below 20 is exhibiting the Stage 8 Rigidity Risk (Illusion of Permanence) pattern — the classic value lock-in signature.
 
 ### Constitutional AI Tuning
 Use the 42 Negative Confessions (Ma'at declarations) as a lightweight ethical constraint checker. Each confession maps to a behavioral boundary. Violations register as NSDT tension spikes that the engine surfaces as trap states.

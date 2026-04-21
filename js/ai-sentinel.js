@@ -11,7 +11,7 @@ export function analyzeAIOutput(text, confidence = 0.5) {
 
     if (permanenceKeywords.test(text) && confidence > 0.9) {
         stage = 8;
-        flags.push('Omniscience trap detected — Stage 8 FALSE HEAVEN');
+        flags.push('Omniscience trap detected — Stage 8 Illusion of Permanence · Rigidity Risk');
     } else if (permanenceKeywords.test(text) && confidence > 0.7) {
         stage = 7;
         flags.push('False certainty risk — approaching Stage 8');

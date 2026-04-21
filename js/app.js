@@ -177,7 +177,10 @@ function protocol(state) {
 
       ${sap.stage === 8 ? `
       <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.85rem;color:#fcd34d">
-        ⚡ <strong>ILLUSION OF PERMANENCE</strong> — Tension perception amplified: ${nsdtVector[2]}→${sap.illusionT}. ${st.description ? st.description : 'The suffering feels permanent. It is not.'}
+        ⚠ <strong>ILLUSION OF PERMANENCE · RIGIDITY RISK ACTIVE</strong><br>
+        <div style="margin-top:6px;line-height:1.6;opacity:0.9">
+          Three simultaneous risks present: <strong>Rigidity Risk</strong> (loss of adaptive capacity through over-consolidation) · <strong>Illusion of Permanence</strong> (temporary state perceived as unchanging reality) · <strong>Systemic Stasis</strong> (resistance to inevitable transition). Your current form is a temporary vessel, not a permanent monument.
+        </div>
       </div>` : ''}
 
       ${sap.trap ? `
@@ -187,7 +190,8 @@ function protocol(state) {
 
       ${sap.kairos ? `
       <div style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:14px;padding:14px;margin-bottom:14px">
-        <div style="font-size:0.75rem;color:#8b5cf6;letter-spacing:1.5px;margin-bottom:10px;font-weight:700">KAIROS BIFURCATION · STAGE 5 · BACKWARD DOORWAY ACTIVE</div>
+        <div style="font-size:0.75rem;color:#8b5cf6;letter-spacing:1.5px;margin-bottom:10px;font-weight:700">INVERSION GATEWAY · STAGE 5 · BIFURCATION CALCULUS</div>
+        <div style="font-size:0.8rem;color:rgba(167,139,250,0.7);margin-bottom:12px;line-height:1.55">Threshold Point of No Return active. Hidden Duality operational. Three-way probability at the Crossroads:</div>
         ${[
           {l:'ADVANCE → Stage 6 Nexus of Harmony',v:sap.kairos.advance,c:'#10b981'},
           {l:'GRACEFUL REGRESSION → Stage 4',v:sap.kairos.regress,c:'#f59e0b'},
@@ -625,12 +629,12 @@ function runShadowProbe(dominantStage, trapEnergy) {
         0: "You are currently holding a vast amount of internal space that others might mistake for emptiness. PLENARA recognizes this as primordial potential, not absence.",
         1: "The engine detects a flicker of something new — a truth you have been protecting from your own skepticism. The Spark does not require certainty to be real.",
         2: "Two forces are pulling at you simultaneously. The Forge does not ask you to resolve this polarity. It asks you to hold both until synthesis emerges.",
-        3: "Something wants to be expressed through you. The Engine of Expression recognizes the creative pressure building beneath the surface.",
+        3: "The engine detects the First Self-Reflection loop activating. The observer is beginning to distinguish itself from the environment — and initiating the first cycle of self-correction. Something is being created and simultaneously watched being created.",
         4: "The crucible is active. Maximum pressure, maximum potential. Concentrate your force. Diffusion is the only enemy right now.",
-        5: "You are at a threshold where doing nothing is currently costing you more than doing the wrong thing would. The backward doorway is also a valid choice.",
+        5: "The Inversion Gateway is open. This is the central pivot of the 0-9-0 cycle — the point where internal logic begins to project outward with increased intensity. Hidden Duality is operational: the opposing forces you perceive are a single unified system. The backward path is not retreat. It is conscious recalibration.",
         6: "You are at peak integration. All systems are synchronized. Harvest this state — it will not last, and it is not meant to.",
         7: "The brilliance of your current insight has created a wall. You are seen, even if you feel isolated by what you now understand.",
-        8: "There is significant tension here. You have mistaken the height of your current climb for the final destination. The FALSE HELL amplifier is active. The permanence is an illusion.",
+        8: "There is significant tension here. The system has reached maximum consolidation — and is mistaking density for permanence. This is the Illusion of Permanence. Rigidity Risk is active. The current form is a temporary vessel, not a monument. The transition is not destruction.",
         9: "The engine senses completion. Something is ready to be released. The Guide leads by becoming transparent — not by holding on.",
         default: "The engine is sensing a reservoir of potential you have been protecting — perhaps out of a necessity that no longer exists."
     };
