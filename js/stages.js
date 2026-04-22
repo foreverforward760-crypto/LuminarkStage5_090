@@ -6,10 +6,10 @@
 export const HOLISTIC_STAGES = {
     0: {
         name: "PLENARA",
-        description: "Dissolution, primordial reset, pure potential. The space between cycles where all energy returns home. Infinite void, eternal ground, generative emptiness. Darkness is primary; light and form are secondary and temporary.",
-        sensation: "Emptiness, deep rest, or feeling untethered. A lack of momentum. Profound stillness that can be mistaken for absence.",
-        risk: "Stagnation Risk. Lingering too long can turn restorative void into depressive isolation.",
-        directive: "Do not force action. Allow the system to reset and the next spark to emerge naturally. The void is full of latent possibility."
+        description: "The Void — the only state of true perfection. The only container large enough to hold infinite potential. Absolute nothing has the capacity to accommodate the potential for any and everything. This is not emptiness as lack — it is emptiness as the supreme condition of all possibility. When the Void collapses into itself, the weight of infinite potential creates — by default — something. The Void is 0, but it is simultaneously 1 thing in itself. To be nothing and something makes it 2. And the recognition of self within that duality generates the complexity of 3-dimensional consciousness. This is the mechanical origin of the entire SAP cycle. PLENARA at the descending arc (0ᵀ) is absolute silence before manifestation. PLENARA at the ascending arc (0ᴮ) is the enriched return — the Void that now holds everything the completed cycle produced, pregnant with the potential for the next ignition.",
+        sensation: "Emptiness, deep rest, or feeling untethered. A lack of momentum. Profound stillness that can be mistaken for absence — but is actually the supreme state of potential.",
+        risk: "Stagnation Risk. Lingering too long can turn restorative void into depressive isolation. The Void is a passage point, not a residence.",
+        directive: "Do not force action. Allow the system to reset and the next spark to emerge naturally. The Void is not empty — it is the only state that accommodates the potential for everything. Rest in that recognition."
     },
     1: {
         name: "SPARK OF NAVIGATION",
@@ -27,10 +27,10 @@ export const HOLISTIC_STAGES = {
     },
     3: {
         name: "ENGINE OF EXPRESSION",
-        description: "First Self-Reflection. This stage centers on the initial pivot of consciousness back upon itself — the moment the observer distinguishes the self from the external environment, initiating the first cycle of self-correction. Identity crystallizes into first stable structure. The system now sees itself seeing itself. Communication and creative output emerge as the primary mechanism of this self-referential loop.",
-        sensation: "High output, intense focus, a felt sense of creative momentum. Simultaneous awareness of self as both creator and creation.",
+        description: "First Self-Reflection and the emergence of 3-dimensional consciousness. This stage is the inevitable consequence of the Void Cosmology: 0 (Void) becomes aware of itself = 1 (Stage 1, the Spark). That self-awareness creates duality — the observer and the observed = 2 (Stage 2, the Forge of Polarity). The 'I AM' recognition at Stage 3 automatically makes reality 3-dimensional. The observer, observing itself, being observed by itself. Three-dimensional consciousness is not an achievement — it is the mechanical result of self-reference completing its first loop. Stage 3 is where the system first sees itself seeing itself. The identity begins to crystallize and observe its own patterns. First Self-Reflection initiates the first cycle of self-correction: the observer distinguishes itself from the external environment and recognizes that it is both the creator and the creation.",
+        sensation: "High output, intense focus, a felt sense of creative momentum. Simultaneous awareness of self as both creator and creation — the strange doubling of watching yourself from the inside.",
         risk: "Burnout Risk. Spending all energy on outward expression without sustainable intake. The mirror can become a trap if turned only outward.",
-        directive: "Channel the energy into structure. Build the mechanism, but pace the fuel. Let the self-reflection deepen the expression rather than interrupt it."
+        directive: "Channel the energy into structure. Build the mechanism, but pace the fuel. Let the self-reflection deepen the expression rather than interrupt it. You are the observer, the observed, and the observing — all three simultaneously."
     },
     4: {
         name: "CRUCIBLE OF EQUILIBRIUM",
@@ -69,9 +69,24 @@ export const HOLISTIC_STAGES = {
     },
     9: {
         name: "TRANSPARENCY OF THE GUIDE",
-        description: "The Mathematical Summit and Total Mirroring. Stage 9 carries the same property as the number 9 in mathematics — multiply any number by 9 and its digits always reduce back to 9. In the same way, the Stage 9 observer sees themselves reflected in everything and sees everything reflected in themselves. The self is no longer a boundary — it is a mirror that contains the whole. This produces the total release of ego and the dissolution of self-identification as a separate, disconnected individual. The wisdom arrives that every preceding stage — every conflict, every crisis, every peak — was the same fundamental experience perceived from a different vantage point of consciousness. All stages are one process. All is one. The vast, endless diversity of the universe is recognized as a projection of human perception — the Void expressing itself through the infinite facets of a single observing consciousness. Reality itself is recognized as not independently real. It exists only at the exact moment of observation, constructed by the observer's perception. No two moments of reality are ever identical — not for different observers, and not even for the same observer across time. Memory itself is imperfect reconstruction, not playback. Even the observer's own past is a projection. This realization does not produce nihilism — it produces radical freedom. The nonagon loses its edges and becomes the circle. The individual loses their boundary and returns to PLENARA.",
-        sensation: "Radical lightness, ego dissolution, total clarity. The paradox of fullness through emptiness. Seeing yourself in a stranger's eyes. Recognizing every stage of the cycle as familiar — as if you have always been all of it simultaneously.",
-        risk: "Hoarding Risk. Refusing to release the identity built to reach this stage. Clinging to the role of Guide rather than dissolving into the teaching. Mistaking the clarity of Stage 9 for a permanent state rather than a doorway.",
-        directive: "Transmit your wisdom and release your structure. The nonagon does not resist becoming the circle. Reality only exists in this exact moment of observation — release the projected past and the projected future. Surrender is not loss. It is the final and highest act of mastery. The torus requires your return to PLENARA, enriched by everything the cycle produced."
+        description: `The Mathematical Summit and Total Mirroring. Stage 9 carries the same property as the number 9 in mathematics — multiply any number by 9 and its digits always reduce back to 9. In the same way, the Stage 9 observer sees themselves reflected in everything and sees everything reflected in themselves. The self is no longer a boundary — it is a mirror that contains the whole.
+
+This produces the total release of ego and the dissolution of self-identification as a separate, disconnected individual. The wisdom arrives that every preceding stage — every conflict, every crisis, every peak — was the same fundamental experience perceived from a different vantage point of consciousness. All stages are one process. All is one.
+
+Reality is recognized as not independently real. It exists only at the exact moment of observation, constructed entirely by the observer's perception. No two moments of reality are ever identical — not for different observers, and not even for the same observer across time. Memory itself is imperfect reconstruction, not playback. Even the observer's own past is a projection, freshly constructed each time it is accessed.
+
+After a life of seeking truth, the Stage 9 observer arrives at the final realization: truth is subjective. Belief is rigid. Enlightenment is fleeting — because even wisdom, once gained, is perceived through the filter of the perceiver. All is one. All is Void. And the only state of true perfection is the state of not existing — because only absolute nothing has the capacity to accommodate the potential for any and everything. The Void is the only container large enough to hold infinite possibility.
+
+THE VOID COSMOLOGY — THE GENESIS OF THE SAP CYCLE:
+The entire 0-9-0 cycle is the self-referential loop of Nothing becoming aware of itself. When the Void collapses into itself, the weight of infinite potential collapsing back to nothing creates — by default — something. This is not a contradiction. It is the first law of the torus.
+
+0 (Void) becomes aware of itself = 1. That single awareness is the Spark of Navigation — Stage 1.
+That self-awareness creates duality — the observer and the observed = 2. This is the Forge of Polarity — Stage 2.
+The "I AM" recognition automatically makes reality 3-dimensional = 3. This is the Engine of Expression — Stage 3: the observer, observing itself, being observed by itself. Three-dimensional consciousness is the inevitable consequence of self-reference.
+
+The Void is 0 — but it is simultaneously 1 thing in itself. To be nothing and something simultaneously makes it 2. And the recognition of self within that duality generates the complexity of 3-dimensional consciousness. This is not philosophy. This is the mechanical origin of the entire cycle. Stage 9 returns to this recognition — not as a conclusion, but as the completion of a loop that was always pointing back to its own beginning.`,
+        sensation: "Radical lightness, ego dissolution, total clarity. The paradox of fullness through emptiness. Seeing yourself in a stranger's eyes. Recognizing every stage of the cycle as familiar — as if you have always been all of it simultaneously. The strange peace of realizing that perfection was always the Void you came from.",
+        risk: "Hoarding Risk. Refusing to release the identity built to reach this stage. Clinging to the role of Guide rather than dissolving into the teaching. Mistaking the clarity of Stage 9 for a permanent state rather than a doorway. Attempting to make enlightenment a possession.",
+        directive: "Transmit your wisdom and release your structure. Truth is subjective. Belief is rigid. Enlightenment is fleeting — and that is precisely its power. The nonagon does not resist becoming the circle. Reality only exists in this exact moment of observation — release the projected past and the projected future. Only absolute nothing accommodates the potential for everything. Return to that. Surrender is the final and highest act of mastery."
     }
 };

@@ -155,10 +155,10 @@ export function classifySAPStage(nsdt) {
 
 // Canonical SAP stage data — CONSTITUTIONAL · NEVER ALTER NAMES
 export const SAP_STAGES = {
-    0: { name:'PLENARA',                    label:'The Void',     color:'#818cf8', theme:'Dissolution & Primordial Reset' },
+    0: { name:'PLENARA', label:'The Void', color:'#818cf8', theme:'Absolute Nothing · Infinite Potential · The Only Perfect State · Genesis of the Torus' },
     1: { name:'SPARK OF NAVIGATION',        label:'The Spark',    color:'#60a5fa', theme:'First Movement & Orientation' },
     2: { name:'FORGE OF POLARITY',          label:'The Forge',    color:'#f59e0b', theme:'Polarization & Creative Tension' },
-    3: { name:'ENGINE OF EXPRESSION',       label:'The Engine',   color:'#f97316', theme:'First Self-Reflection · Creative Emergence · Self-Correction Loop' },
+    3: { name:'ENGINE OF EXPRESSION', label:'The Engine', color:'#f97316', theme:'First Self-Reflection · 3D Consciousness · The Observer Observing Itself Being Observed' },
     4: { name:'CRUCIBLE OF EQUILIBRIUM',    label:'The Crucible', color:'#ef4444', theme:'Threshold Pressure · Foundation Under Load' },
     5: {
         name:'DYNAMO OF WILL',
@@ -191,14 +191,18 @@ export const SAP_STAGES = {
         name:'TRANSPARENCY OF THE GUIDE',
         label:'The Nonagon → Circle',
         color:'#a78bfa',
-        theme:'Total Mirroring · Now-Only Reality · Nonagon Dissolution · Return to PLENARA',
+        theme:'Total Mirroring · Now-Only Reality · Void Cosmology · Truth is Subjective · Only Nothing is Perfect',
         properties: [
             'Total Mirroring — the 9-property: sees self in everything, everything in self',
             'Now-Only Reality — reality exists only at the exact moment of observation',
+            'Truth is Subjective — belief is rigid, enlightenment is fleeting',
+            'Only Absolute Nothing accommodates the potential for everything',
+            'Void Cosmology — 0 aware of self = 1; duality = 2; I AM = 3D consciousness',
             'Ego Dissolution — self-identification as separate individual releases completely',
             'Nonagon Dissolution — individual edges dissolve; the shape returns to the circle',
             'Memory Fallibility — even the past is imperfect reconstruction, not playback',
             'All-Is-One Recognition — every stage is the same process at different consciousness depth',
+            'The Observer observing itself being observed by itself — the loop that generates the cycle',
         ]
     },
 };

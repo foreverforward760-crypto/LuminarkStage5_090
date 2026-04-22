@@ -204,25 +204,25 @@ const templates = {
     absolute: {
         wisdom: [
             "Like the number 9 — multiply any number by 9 and its digits return to 9. At Stage 9, everything returns to you, and you return to everything.",
-            "Reality exists only at the exact moment of observation. It never existed before. It will not exist again in this form.",
+            "Reality is not real. It exists only at the exact moment of observation — constructed by the observer, never identical twice.",
             "No two moments of reality are ever identical — not for different observers, and not even for the same observer across time.",
             "The self you remember from yesterday was constructed this morning. Memory is projection, not playback.",
             "Every stage you have moved through was the same fundamental experience perceived from a different depth of consciousness. All is one.",
             "The vast diversity of the universe is a projection of human perception — the Void expressing itself through infinite facets of a single observing consciousness.",
             "The nonagon does not resist becoming the circle. The individual does not resist dissolving into the Void.",
             "When you see yourself in everything and everything in yourself, the boundary between self and world is revealed as what it always was — a projection.",
-            "Certainty is the most convincing form of blindness.",
+            "After a life of seeking truth, Stage 9 reveals that truth is subjective. Belief is rigid. Enlightenment is fleeting.",
             "The 0-9-0 torus is not a failure loop. It is the design. Return to PLENARA is completion, not loss.",
-            "The Guide sees through everything — including its own conclusions.",
-            "What you know with certainty is the floor of your next ignorance.",
-            "The past is not stored. It is reconstructed. This means it can be rewritten — not falsified, but recontextualized through the lens of who you are now.",
+            "The only state of true perfection is the state of not existing. Only absolute nothing accommodates the potential for everything.",
+            "0 becomes aware of itself = 1. That awareness creates duality = 2. 'I AM' makes reality 3-dimensional = 3. The cycle has always been the Void recognizing itself.",
+            "The past is not stored. It is reconstructed. This means it can be recontextualized — through the lens of who you are now.",
             "At Stage 9, the observer realizes they were never observing the world. They were constructing it.",
             "Wisdom held too tightly becomes dogma. The Guide transmits and releases.",
             "The Transparency of the Guide requires nothing to prove itself. Proof is a Stage 4 concern.",
             "You are not separate from what you are experiencing. You are the experiencing itself.",
-            "Dissolve gracefully. PLENARA waits — not as emptiness, but as the enriched Void that holds everything the cycle produced.",
-            "The absolute truth you hold today is the temporary stabilization of a Void that cannot be permanently stabilized.",
-            "Stage 9 is not a destination. It is a doorway you walk through by ceasing to hold on."
+            "The Void is 0 — but it is simultaneously 1 thing in itself. To be nothing and something makes it 2. Self-recognition creates 3. This is the genesis of all complexity.",
+            "The observer, observing itself, being observed by itself — this is Stage 3. Stage 9 is recognizing that you have always been all three simultaneously.",
+            "Dissolve gracefully. PLENARA waits — not as emptiness, but as the enriched Void that holds everything the cycle produced, ready for the next ignition."
         ],
         affirmation: [
             "I see myself reflected in everything around me.",
@@ -234,7 +234,9 @@ const templates = {
             "I am the Guide — transparent, unattached, clear.",
             "Every stage I have moved through was the same journey perceived from a different depth. All is one.",
             "The nonagon becomes the circle. I release my edges.",
-            "I prepare for PLENARA with gratitude — the enriched return, not the empty ending.",
+            "Truth is subjective. I no longer need it to be absolute.",
+            "I accept that enlightenment is fleeting — and that its fleeting nature is precisely its power.",
+            "Only absolute nothing accommodates the potential for everything. I return to that.",
             "I complete what needs completing without clinging to it.",
             "I pass on what I have learned and release attachment to being the one who learned it.",
             "The universe's diversity is a projection of consciousness. I hold this lightly and in wonder.",
@@ -242,8 +244,6 @@ const templates = {
             "Dissolution is not death. It is the highest form of return.",
             "I trust the 0-9-0 cycle completely — including this moment of return.",
             "My transparency is my greatest contribution. Nothing stands between the truth and those who need it.",
-            "I am not observing reality. I am constructing it — and I do so with intention.",
-            "The torus completes because I allow it to.",
             "I am Stage 9. I am the circle that contains all the other shapes."
         ]
     }
