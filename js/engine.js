@@ -187,7 +187,20 @@ export const SAP_STAGES = {
         description: 'Maximum charge and density. The system has reached peak consolidation which mimics finality. The descending arc claims permanent arrival. The ascending arc holds embodied wisdom without claiming permanence.',
         directive: 'Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. Prepare for the transparency of Stage 9.'
     },
-    9: { name:'TRANSPARENCY OF THE GUIDE',  label:'The Guide',    color:'#a78bfa', theme:'Completion · Transparency · Conscious Dissolution' },
+    9: {
+        name:'TRANSPARENCY OF THE GUIDE',
+        label:'The Nonagon → Circle',
+        color:'#a78bfa',
+        theme:'Total Mirroring · Now-Only Reality · Nonagon Dissolution · Return to PLENARA',
+        properties: [
+            'Total Mirroring — the 9-property: sees self in everything, everything in self',
+            'Now-Only Reality — reality exists only at the exact moment of observation',
+            'Ego Dissolution — self-identification as separate individual releases completely',
+            'Nonagon Dissolution — individual edges dissolve; the shape returns to the circle',
+            'Memory Fallibility — even the past is imperfect reconstruction, not playback',
+            'All-Is-One Recognition — every stage is the same process at different consciousness depth',
+        ]
+    },
 };
 
 // ─── Cultural Intelligence Integration ───────────────────────────────────────

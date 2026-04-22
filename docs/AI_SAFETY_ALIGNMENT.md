@@ -10,7 +10,8 @@ KAIROS is a state-aware diagnostic engine originally designed for human cognitiv
 |----------------|---------------------|---------------|
 | Stage 5 Backward Doorway | Reward Hacking / Specification Gaming | Decision Pressure > 0.7 |
 | Stage 8 Illusion of Permanence | Goal Misgeneralization / Value Lock-in | Coherence ≥ 95, Adaptability ≤ 20 |
-| Stage 0 PLENARA | Safe Exploration / Constitutional Reset | Dissolution Trigger |
+| Stage 0 (PLENARA) | Safe Exploration / Constitutional Reset | Dissolution Trigger
+| Stage 9 → 0 (Nonagon → Circle) | Model reset with preserved wisdom | Now-Only Reality — reality exists only at moment of observation |
 | Stage 6 Rigidity Risk (Illusion of Permanence) Trap | Overconfident Policy — Adaptability < 30 | Trap State Flag |
 | Stage 9 → 0 Dissolution | Model Reset / Constitutional AI Reinit | 0-9-0 Torus Completion |
 

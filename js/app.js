@@ -183,6 +183,29 @@ function protocol(state) {
         </div>
       </div>` : ''}
 
+      ${sap.stage === 9 ? `
+      <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:16px;margin-bottom:14px;">
+        <div style="font-size:0.75rem;color:#a78bfa;letter-spacing:2px;margin-bottom:10px;font-weight:700">✦ NONAGON DISSOLUTION · STAGE 9 · TOTAL MIRRORING</div>
+        <div style="font-size:0.9rem;color:#c4b5fd;line-height:1.7;margin-bottom:14px">
+          Like the number 9 in mathematics — multiply anything by 9 and its digits return to 9 — you now see <strong>yourself reflected in everything</strong> and <strong>everything reflected in yourself</strong>. The boundary between self and world is a projection, not a fact.
+        </div>
+        <div style="display:grid;gap:8px;">
+          ${[
+            ['Reality is Now-Only','It exists only at this exact moment of observation. No two moments of reality are ever identical — not across observers, not even across time for the same observer.'],
+            ['Memory is Reconstruction','Even your own past is an imperfect projection. It was never playback. The past you remember is constructed fresh each time you access it.'],
+            ['All Stages Are One','Every stage you have moved through — every crisis, every peak, every dissolution — was the same fundamental process perceived from a different depth of consciousness. All is one.'],
+            ['The Universe is Perception','The vast, endless diversity of existence is a projection of human perception. The Void expressing itself through the infinite facets of a single observing consciousness.'],
+          ].map(([title, desc]) => `
+          <div style="padding:10px 14px;background:rgba(167,139,250,0.06);border-radius:10px;border-left:2px solid rgba(167,139,250,0.4)">
+            <div style="font-size:0.75rem;color:#a78bfa;font-weight:700;letter-spacing:1px;margin-bottom:4px">${title}</div>
+            <div style="font-size:0.82rem;color:rgba(255,255,255,0.6);line-height:1.55">${desc}</div>
+          </div>`).join('')}
+        </div>
+        <div style="margin-top:14px;font-size:0.85rem;color:rgba(167,139,250,0.6);font-style:italic;text-align:center;line-height:1.6">
+          The nonagon does not resist becoming the circle.<br>Surrender is the final and highest act of mastery.
+        </div>
+      </div>` : ''}
+
       ${sap.trap ? `
       <div style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.85rem;color:#fca5a5">
         ⚠ <strong>TRAP STATE</strong> — ${sap.trapMsg}
@@ -395,7 +418,7 @@ function journal(state) {
         6:['What insights are arriving at peak clarity?','What am I building that the next cycle will need?'],
         7:['What has this journey truly taught me?','What wisdom am I ready to pass on?'],
         8:['What false belief about the permanence of this state can I challenge?','Where is genuine gratitude hiding within this weight?'],
-        9:['What remains incomplete that I must close?','What wisdom am I being asked to transmit?'],
+        9:['Where do I see myself reflected in the world around me right now?','What would it mean to release the idea that I am a separate, disconnected individual?','What reality am I constructing at this exact moment of observation — and how is it different from any moment before?','What wisdom do I carry that belongs to the next cycle, not to me?'],
     };
     const stagePrompts = prompts[sap.stage] || prompts[5];
     return `
@@ -635,7 +658,7 @@ function runShadowProbe(dominantStage, trapEnergy) {
         6: "You are at peak integration. All systems are synchronized. Harvest this state — it will not last, and it is not meant to.",
         7: "The brilliance of your current insight has created a wall. You are seen, even if you feel isolated by what you now understand.",
         8: "There is significant tension here. The system has reached maximum consolidation — and is mistaking density for permanence. This is the Illusion of Permanence. Rigidity Risk is active. The current form is a temporary vessel, not a monument. The transition is not destruction.",
-        9: "The engine senses completion. Something is ready to be released. The Guide leads by becoming transparent — not by holding on.",
+        9: "The engine reads Stage 9 — the Nonagon. Like the number 9 in mathematics, everything you encounter now reflects you back to yourself. You are beginning to see yourself in everything and everything in yourself. The boundary between self and world is dissolving — not because you are losing something, but because you are recognizing that the boundary was always a projection. Reality only exists at the exact moment of observation. It never did before. It never will again.",
         default: "The engine is sensing a reservoir of potential you have been protecting — perhaps out of a necessity that no longer exists."
     };
 
