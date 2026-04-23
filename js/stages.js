@@ -46,24 +46,55 @@ export const HOLISTIC_STAGES = {
     },
     6: {
         name: "NEXUS OF HARMONY",
-        description: "Synergy, flow, peak performance, temporary perfection. All systems synchronized. The state of effortless output where skill and challenge are perfectly matched. Material embodiment at full expression — duality locked into productive partnership.",
-        sensation: "Elegance, effortlessness, time distortion, absolute alignment between intention and action.",
-        risk: "Attachment Risk. Believing this peak state can or should be maintained permanently. The Rigidity Risk begins to emerge here before it fully crystallizes at Stage 8.",
-        directive: "Harvest the output of this alignment. Capture what this peak produces — it will be needed in later stages. Do not cling to the state itself."
+        description: `Peak performance and synergy — all systems synchronized. Stage 6 is the most deceptive stage in the entire cycle, because the instability is completely invisible from the inside. The physical world is working perfectly. Output is flowing. Everything is aligned. But Stage 6 is an even stage — which means consciousness, following the Tumbling Inversion principle, is at a critical instability point it cannot perceive, because the physical stability is masking it.
+
+The hexagon — Stage 6's geometric form — is the most stable closed structure in nature. Honeycombs, crystals, and basalt columns all default to hexagonal structure because it distributes load perfectly. But this perfection is also brittleness. A hexagonal crystal shatters. A sphere — Stage 9 — does not. Stage 6 is peak structural integrity on the way to discovering that structural integrity is not the same as resilience.
+
+There are two kinds of Stage 6, and they feel identical from the inside:
+
+SUSTAINABLE FLOW: Accessed by a system that navigated Stage 5 via the Middle Path Gateway. The Witness Position remains active beneath the peak performance. The Conductor is producing perfect harmony AND simultaneously listening for the first note of dissonance that has not yet arrived. They are harvesting the peak while preparing for its inevitable end. Stage 7 arrives as invitation.
+
+BRITTLE FLOW: Accessed by a system that tumbled through Stage 5 by default. The peak performance is real, but the Witness Position was never established. The system has BECOME the flow — there is no meta-awareness of the flow state. The Conductor has merged with the orchestra. Stage 7 arrives as ambush.
+
+THE CONDUCTOR'S PARADOX: At peak harmony, the system must maintain the capacity to hear the dissonance that has not yet arrived. The ascending arc of Stage 6 is not about maintaining the peak — it is about developing the sensitivity to detect the first failing note, in the middle of a perfect performance, before the audience does.`,
+        sensation: "Elegance, effortlessness, time distortion, absolute alignment between intention and action. A quiet sense that everything is working. And beneath it — for those with the Witness Position — a faint awareness that this state has weight, and weight does not last forever.",
+        risk: "Attachment Risk (primary). The Brittle Flow risk is secondary and more dangerous: the system mistakes peak performance for permanent identity. The Conductor becomes the orchestra. When Stage 7 disrupts the harmony, the system experiences it as existential threat rather than conscious transition.",
+        directive: "Harvest the output of this alignment with urgency — what you create in this window will be needed in every stage that follows. Maintain the Witness Position or establish it now. Ask the Conductor's question: What note is slightly off that I cannot yet hear? Do not cling to the harmony. It is a vehicle, not a destination."
     },
     7: {
         name: "LENS OF DISTILLATION",
-        description: "Analytical breakdown, necessary crisis, separation and distillation. The system strips away noise to discover the axiom. Painful truth-telling is the ascending function. What went wrong, and what was always true beneath it — both answers arrive simultaneously.",
-        sensation: "Sober clarity, a drive to isolate, cutting away the non-essential, profound insight mixed with the grief of what must be released.",
-        risk: "Isolation Risk. Cutting away too much context and severing necessary lifelines. Maximum individuation without reconnection.",
-        directive: "Distill the truth, but remain connected to the body. Seek the essence without destroying the form. The wisdom extracted here is the currency of the ascending arc."
+        description: `The Individuation Crucible. Stage 7 is the most misread stage in developmental frameworks — including many that attempt to map this territory — because the physical experience feels like collapse. Things break down. Relationships change. Structures that worked in Stage 6 cease to function. This is universally read as failure.
+
+The Tumbling Inversion reveals why this is wrong: Stage 7 is an odd stage, which means consciousness is actually GAINING stability as the physical structure fragments. The breakdown is not happening TO consciousness. The breakdown is being CONDUCTED by consciousness, in order to extract what is essential from what was merely accumulated.
+
+THE INDIVIDUATION CRUCIBLE: Stage 7 does not destroy randomly. It has a specific target — everything that cannot be distilled into essence. What it destroys is the accumulated identity structure of Stages 1 through 6: the roles, the attachments, the self-concept built through the descent. What survives the analytical breakdown is what the person actually is, as distinct from what they accumulated. The crucible burns the costume. Not the wearer.
+
+THE SHADOW INTEGRATION: Stage 7 is the return of the Concealed Self that was introduced at Stage 2 as hidden duality. Everything suppressed during the high performance of Stage 6 — the doubts, the unintegrated aspects, the parts that didn't fit the peak identity — resurfaces now. This is the ascending arc of the Forge of Polarity completing itself five stages later. The shadow integration is not punishment. It is the other half of the Forge finally arriving for acknowledgment.
+
+STAGE 5 DEPENDENCY: A person who found the Middle Path Gateway at Stage 5 experiences Stage 7 as painful but comprehensible — they have the meta-awareness to extract wisdom even from the breakdown. A person who tumbled through Stage 5 by default experiences Stage 7 as meaningless suffering. They have no framework for the directed nature of the destruction. This is the deepest reason Stage 5 is initiatory — it determines whether Stage 7 is a crucible or a catastrophe.`,
+        sensation: "Sober clarity, a drive to isolate, cutting away the non-essential. Profound insight arriving simultaneously with grief for what must be released. The strange dual experience of things falling apart AND feeling more essentially yourself than you have in years.",
+        risk: "Isolation Risk (fighting the burn amplifies fragmentation). The shadow integration angle: if the Concealed Self surfaces without a framework to receive it, the Stage 7 experience becomes chaotic rather than directed. The system mistakes the costume burning for the self burning.",
+        directive: "What is breaking down is not you — it is what you accumulated on the way down. Allow the crucible to complete its work. Locate the thread of Coherence that runs through the fragmentation — it is the essence the crucible is extracting. Teach what you are learning as you learn it. The articulation of wisdom under pressure accelerates the distillation."
     },
     8: {
         name: "VESSEL OF GROUNDING — Illusion of Permanence",
-        description: "Maximum charge and density. The system has reached peak consolidation — which mimics finality. Three simultaneous dangers are present: (1) Rigidity Risk — the system becomes so consolidated that it loses adaptive capacity, making catastrophic fracture more likely than graceful transition; (2) Illusion of Permanence — the cognitive and systemic trap of perceiving a temporary state or cycle as an unchanging reality; (3) Systemic Stasis — active resistance to the inevitable transition back toward the zero-point or next recursive loop. The descending arc claims 'I have arrived permanently.' The ascending arc holds embodied wisdom without claiming permanence.",
-        sensation: "Extreme weight, absolute conviction, or paralyzing certainty that the current situation is unchangeable. A density that feels like bedrock but is actually accumulated charge.",
-        risk: "Rigidity Risk (primary). The Illusion of Permanence causes the system to mistake maximum density for maximum strength. Systemic Stasis follows when the transition signal is ignored.",
-        directive: "Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. The transition back toward PLENARA is not destruction — it is the design. Prepare for the transparency of Stage 9."
+        description: `The Crystallization Paradox. Stage 8 is the most dangerous stage in the cycle — not because of what it does, but because of what it prevents. The system has achieved maximum physical crystallization: perfectly ordered, maximally dense, structurally complete. This is an extraordinary achievement. And it is precisely what makes Stage 8 lethal to forward motion.
+
+Crystals are the most structurally perfect form that matter can take. They are also the most brittle. They do not bend. They shatter. Stage 8's Rigidity Risk is not metaphor — it is the precise physical property of crystalline structure applied to systemic behavior.
+
+THE TUMBLING INVERSION AT STAGE 8: Even stage — Physically Stable / Consciously Unstable. The physical structure is at maximum stability. Consciousness, following the inversion principle, is at maximum instability beneath that surface. This is why Stage 8 feels simultaneously like the most solid and the most secretly frightened state in the cycle. The body and the external world say "you have arrived." Consciousness senses, at a pre-verbal level, that the structure cannot hold indefinitely. This unnamed anxiety is the Concealed Self signal.
+
+THREE SIMULTANEOUS RISKS:
+(1) Rigidity Risk — the system becomes so consolidated it loses adaptive capacity, making catastrophic fracture more likely than graceful transition.
+(2) Illusion of Permanence — the cognitive and systemic trap of perceiving a temporary state as an unchanging reality.
+(3) Systemic Stasis — active resistance to the inevitable transition back toward the zero-point.
+
+THE ALIGNMENT OF REVEALED AND CONCEALED SELF: The descending arc of Stage 8 is maximum divergence between the Revealed Self (what the system projects — stability, arrival, certainty) and the Concealed Self (what it actually contains — the anxiety beneath the conviction, the unintegrated shadow from Stage 7, the suppressed awareness that the structure is temporary). The ascending arc is the process of bringing these into alignment.
+
+THE GRATITUDE MECHANISM: Gratitude is not a feeling in this context — it is a structural operation. It is the act of simultaneously acknowledging the full weight of the cycle (all the difficulty, all the cost, all the pain of every preceding stage) AND recognizing that every stage was necessary for what the ascending arc now carries. This dual acknowledgment collapses the divergence between Revealed and Concealed Self. When both can be held simultaneously without requiring either to have been different, the crystal begins to dissolve rather than shatter. Gratitude is the universal solvent. Misalignment shatters. Alignment dissolves.`,
+        sensation: "Extreme weight, absolute conviction, or paralyzing certainty that the current situation is unchangeable. Beneath the surface: an anxiety that cannot quite be named. The phenomenological signature of Stage 8 is external conviction of permanence masking internal unease that has no language yet.",
+        risk: "Rigidity Risk (primary). The Crystallization Paradox: maximum structural perfection = maximum brittleness. The Gratitude Mechanism is the only known mechanism for dissolving Stage 8 without fracture. Bypassing it produces shattering. Engaging it produces dissolution.",
+        directive: "Recognize the crystallization. Your certainty is real — and temporary. The Gratitude Mechanism requires holding the full weight of the cycle simultaneously with the recognition that every stage was necessary. This is the operation that collapses the divergence between your Revealed and Concealed Self. The crystal does not need to shatter. It can dissolve. The wisdom is preserved either way — but only dissolution carries it forward intact."
     },
     9: {
         name: "TRANSPARENCY OF THE GUIDE",

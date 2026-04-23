@@ -190,7 +190,9 @@ export function classifySAPStage(nsdt) {
         trap, trapMsg, kairos,
         witnessPosition, perpendicularAxisVisible, microStage5,
         dissolving, shadowText,
-        primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage
+        primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage,
+        // Tumbling Inversion state for this stage
+        inversionState: getTumblingInversionState(stage),
     };
 }
 
@@ -215,20 +217,49 @@ export const SAP_STAGES = {
         // 6. Witness Position       — poised stillness that reveals the perpendicular axis
         // 7. Temporal Anomaly       — Stage 5 has no duration; it is a point, not a region
     },
-    6: { name:'NEXUS OF HARMONY',           label:'The Nexus',    color:'#10b981', theme:'Peak Integration — All Systems Synchronized' },
-    7: { name:'LENS OF DISTILLATION',       label:'The Lens',     color:'#06b6d4', theme:'Deep Refinement & Wisdom Integration' },
+    6: {
+        name:'NEXUS OF HARMONY',
+        label:'The Conductor',
+        color:'#10b981',
+        theme:'Sustainable Flow vs Brittle Flow · Conductor\'s Paradox · Even Stage: Physically Stable / Consciously Unstable',
+        inversion: 'Even — Physically Stable / Consciously Unstable',
+        geometry: 'Hexagon — most stable closed form in nature; also most brittle under point load',
+        flowTypes: {
+            sustainable: 'Middle Path navigated at Stage 5 — Witness Position persists. Peak is harvested consciously. Stage 7 arrives as invitation.',
+            brittle:     'Default tumble through Stage 5 — system HAS BECOME the flow. Stage 7 arrives as ambush.',
+        }
+    },
+    7: {
+        name:'LENS OF DISTILLATION',
+        label:'The Individuation Crucible',
+        color:'#06b6d4',
+        theme:'Conscious Distillation vs Chaotic Collapse · Shadow Integration · Odd Stage: Physically Unstable / Consciously Stable',
+        inversion: 'Odd — Physically Unstable / Consciously Stable',
+        geometry: 'Heptagon — prime number form; cannot tile perfectly; inherently incomplete',
+        crucibleModes: {
+            distillation: 'Breakdown directed by consciousness. Crucible burns the costume, not the wearer. Essence extracted.',
+            collapse:     'System fighting the burn. Resistance amplifying fragmentation. Shadow surfacing without integration framework.',
+        },
+        shadowNote: 'Stage 7 is the return of the Concealed Self from Stage 2 — the ascending arc of the Forge of Polarity completing itself 5 stages later.',
+    },
     8: {
         name:'VESSEL OF GROUNDING',
-        label:'The Vessel',
+        label:'The Crystal',
         color:'#f59e0b',
-        theme:'Illusion of Permanence · Rigidity Risk · Systemic Stasis',
+        theme:'Crystallization Paradox · Gratitude Mechanism · Revealed/Concealed Self Alignment · Even Stage: Physically Stable / Consciously Unstable',
+        inversion: 'Even — Physically Stable / Consciously Unstable',
+        geometry: 'Octagon — maximum structural density; high symmetry; transitions to circle (Stage 9) by rounding corners',
         properties: [
-            'Rigidity Risk — system loses adaptive capacity through over-consolidation',
+            'Rigidity Risk — system loses adaptive capacity through over-consolidation (crystalline brittleness)',
             'Illusion of Permanence — temporary state perceived as unchanging reality',
             'Systemic Stasis — active resistance to the inevitable transition back toward zero-point',
+            'Crystallization Paradox — maximum structural perfection = maximum brittleness',
+            'Revealed Self divergence — external certainty masking internal anxiety (the unnamed fear beneath the conviction)',
+            'Gratitude Mechanism — structural operation (not emotion) that aligns Revealed and Concealed Self',
+            'Dissolution vs Shattering — Gratitude allows crystal to return to solution; rigidity causes fracture',
         ],
-        description: 'Maximum charge and density. The system has reached peak consolidation which mimics finality. The descending arc claims permanent arrival. The ascending arc holds embodied wisdom without claiming permanence.',
-        directive: 'Recognize the illusion. Your current form is a temporary vessel, not a permanent monument. Prepare for the transparency of Stage 9.'
+        description: 'Maximum charge and density. The system has reached peak crystallization — structurally perfect, maximally brittle. The descending arc claims permanent arrival. The ascending arc discovers that holding the structure lightly enough allows it to dissolve rather than shatter. Gratitude is the universal solvent.',
+        directive: 'Recognize the crystallization. Your certainty is real — and temporary. The Gratitude Mechanism requires holding the full weight of the cycle simultaneously with the recognition that every stage was necessary. This dual acknowledgment collapses the divergence between your Revealed and Concealed Self. The crystal dissolves. The wisdom is preserved.',
     },
     9: {
         name:'TRANSPARENCY OF THE GUIDE',
@@ -264,5 +295,168 @@ export function getFinalStage(nsdtArray, userText = '', culturalContext = {}) {
         ptssDetected:  corrected.ptssDetected,
         ekmanNote:     corrected.ekmanCorrection,
         totalCorrection: corrected.totalCorrection
+    };
+}
+
+// ─── Tumbling Inversion Engine ────────────────────────────────────────────────
+// The generative gravity of the 0-9-0 cycle.
+// Even stages (2,4,6,8): Physically Stable / Consciously Unstable
+// Odd stages (1,3,5,7,9): Physically Unstable / Consciously Stable
+// Stage 0 and 9 are boundary conditions (pre-conscious / post-ego).
+
+export const TUMBLING_INVERSION = {
+    parity: { 0:'boundary',1:'odd',2:'even',3:'odd',4:'even',5:'odd',6:'even',7:'odd',8:'even',9:'boundary' },
+    physicalState:   { 0:'void',1:'unstable',2:'stable',3:'unstable',4:'stable',5:'pivot',6:'stable',7:'unstable',8:'stable',9:'dissolved' },
+    consciousState:  { 0:'pre-conscious',1:'stable',2:'unstable',3:'stable',4:'unstable',5:'perpendicular',6:'unstable',7:'stable',8:'unstable',9:'post-ego' },
+    geometricForm:   { 0:'Circle',1:'Point',2:'Line',3:'Triangle',4:'Square',5:'Perpendicular Axis',6:'Hexagon',7:'Heptagon',8:'Octagon',9:'Nonagon → Circle' },
+};
+
+export function getTumblingInversionState(stage) {
+    const t = TUMBLING_INVERSION;
+    return {
+        stage,
+        parity:         t.parity[stage],
+        physicalState:  t.physicalState[stage],
+        consciousState: t.consciousState[stage],
+        geometricForm:  t.geometricForm[stage],
+        isBoundary:     stage === 0 || stage === 9,
+    };
+}
+
+// ─── Stage 6: Flow Quality Classifier ────────────────────────────────────────
+// Detects whether Stage 6 is Sustainable Flow (Witness active) or
+// Brittle Flow (default tumble — system IS the flow, no meta-awareness).
+export function classifyFlowQuality(nsdt, witnessHistoryFromStage5 = false) {
+    const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
+    const [N, S, T, D, C] = safe.map(v => isFinite(v) ? Math.min(100, Math.max(0, v)) : 50);
+
+    // Conductor's Paradox Score: can the system hear the dissonance that hasn't arrived yet?
+    // High Coherence + High Adaptability = can perceive subtle destabilization signals.
+    // Low Adaptability despite High Stability = Brittle Flow — cannot hear the approaching Stage 7.
+    const conductorScore  = (C * 0.4) + (D * 0.35) + ((100 - T) * 0.25);
+    const brittleRisk     = S > 70 && D < 40; // Physically stable but consciously brittle
+    const witnessPersists = witnessHistoryFromStage5 || (D >= 50 && C >= 60);
+
+    const flowType = (witnessPersists && !brittleRisk && conductorScore >= 60)
+        ? 'sustainable' : 'brittle';
+
+    return {
+        flowType,
+        conductorScore: Math.round(conductorScore),
+        brittleRisk,
+        witnessPersists,
+        label: flowType === 'sustainable'
+            ? 'Sustainable Flow — Witness Position active. Conductor hears the approaching dissonance.'
+            : 'Brittle Flow — System has merged with the peak. Stage 7 will arrive as ambush, not invitation.',
+        directive: flowType === 'sustainable'
+            ? 'Harvest the peak output of this stage. Prepare the vessels that Stage 7 will fill. Do not cling to the harmony.'
+            : 'The Witness Position was not established at Stage 5. The Conductor\'s Paradox is active: your success is masking its own end. Begin listening for the first dissonant note.',
+    };
+}
+
+// ─── Stage 7: Crucible Mode Classifier ───────────────────────────────────────
+// Detects whether Stage 7 fragmentation is Conscious Distillation or Chaotic Collapse.
+export function classifyCrucibleMode(nsdt) {
+    const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
+    const [N, S, T, D, C] = safe.map(v => isFinite(v) ? Math.min(100, Math.max(0, v)) : 50);
+
+    // Conscious Distillation: High Coherence (wisdom extraction active) despite High Tension
+    // Chaotic Collapse: High Tension + Low Coherence = system fighting the burn
+    const distillationScore = (C * 0.5) + (D * 0.3) + ((100 - S) * 0.2); // low stability = physical disruption OK
+    const fightingTheBurn   = T > 70 && C < 45 && D < 40;
+    const shadowSurfacing   = T > 60 && N > 65; // Concealed Self emerging (high complexity + tension)
+
+    const mode = (!fightingTheBurn && distillationScore >= 55) ? 'distillation' : 'collapse';
+
+    return {
+        mode,
+        distillationScore: Math.round(distillationScore),
+        fightingTheBurn,
+        shadowSurfacing,
+        label: mode === 'distillation'
+            ? 'Conscious Distillation — the breakdown is directed. The crucible burns the costume, not the wearer.'
+            : 'Chaotic Collapse — the system is fighting the burn. Resistance is amplifying the fragmentation.',
+        shadowNote: shadowSurfacing
+            ? 'Shadow Integration active: the Concealed Self from Stage 2 is surfacing. This is not disruption — it is the ascending arc of the Forge of Polarity completing itself.'
+            : null,
+        directive: mode === 'distillation'
+            ? 'Allow the accumulated structures to burn. What survives is what you actually are. Extract the essence — it is the currency of everything that follows.'
+            : 'Stop fighting the breakdown. The crucible is not destroying you — it is burning what you accumulated, not what you are. Locate the thread of Coherence and follow it.',
+    };
+}
+
+// ─── Stage 8: Gratitude Mechanism Classifier ─────────────────────────────────
+// Detects whether Stage 8 is moving toward Dissolution or Shattering.
+// Gratitude Mechanism: the structural operation that aligns Revealed and Concealed Self,
+// allowing the crystal to dissolve back into solution rather than fracture.
+export function classifyGratitudeMechanism(nsdt) {
+    const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
+    const [N, S, T, D, C] = safe.map(v => isFinite(v) ? Math.min(100, Math.max(0, v)) : 50);
+
+    // Revealed / Concealed Self divergence:
+    // Revealed Self = what the system projects outward (high Stability + high Coherence)
+    // Concealed Self = internal anxiety beneath the surface (high Tension despite Stability)
+    const revealedSelf  = (S + C) / 2;
+    const concealedSelf = T;
+    const divergence    = Math.abs(revealedSelf - concealedSelf); // high = major misalignment
+
+    // Gratitude Mechanism engagement: Adaptability is the carrier of gratitude at Stage 8.
+    // A system that can acknowledge the full weight of the cycle (high D despite high T)
+    // is beginning to dissolve the divergence.
+    const gratitudeEngaged = D >= 45 && divergence < 45;
+    const crystallineRisk  = S > 75 && D < 35 && divergence > 40;
+
+    const trajectory = gratitudeEngaged ? 'dissolution' : 'shattering';
+
+    return {
+        trajectory,
+        revealedSelf:   Math.round(revealedSelf),
+        concealedSelf:  Math.round(concealedSelf),
+        divergence:     Math.round(divergence),
+        gratitudeEngaged,
+        crystallineRisk,
+        label: trajectory === 'dissolution'
+            ? 'Gratitude Mechanism engaged — Revealed and Concealed Self converging. The crystal is beginning to dissolve back into solution.'
+            : 'Gratitude Mechanism not yet engaged — Revealed and Concealed Self diverging. Crystalline brittleness increasing. Shattering risk elevated.',
+        directive: trajectory === 'dissolution'
+            ? 'Hold the full weight of the cycle — every stage, every cost, every gift — simultaneously. This dual acknowledgment is the operation that dissolves the structure. The crystal returns to solution; the wisdom is preserved.'
+            : 'The divergence between your external certainty and your internal anxiety is the diagnostic signal. The Gratitude Mechanism requires acknowledging both simultaneously — not resolving the tension, but holding it without requiring either side to have been different.',
+    };
+}
+
+// ─── Arc Direction Estimator ──────────────────────────────────────────────────
+// Estimates ascending vs descending arc for stages 6-8 using NSDT trajectory.
+// Descending: Stability rising, Adaptability falling — system consolidating.
+// Ascending: Tension rising against Stability, Adaptability beginning to recover.
+export function estimateArcDirection(nsdt, prevNsdt = null) {
+    const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
+    const [N, S, T, D, C] = safe.map(v => isFinite(v) ? Math.min(100, Math.max(0, v)) : 50);
+
+    if (!prevNsdt) {
+        // Single snapshot: infer from vector balance
+        const descendingSignal = (S > 60 && D > 50 && T < 40);
+        const ascendingSignal  = (T > 55 && D > 40 && S < 55);
+        return {
+            arc: descendingSignal ? 'descending' : ascendingSignal ? 'ascending' : 'indeterminate',
+            confidence: 'low — single snapshot; provide previous NSDT for higher accuracy',
+        };
+    }
+
+    const prev = Array.isArray(prevNsdt) ? prevNsdt : [50,50,50,50,50];
+    const [pN, pS, pT, pD, pC] = prev.map(v => isFinite(v) ? Math.min(100, Math.max(0, v)) : 50);
+
+    const stabilityDelta     = S - pS;
+    const adaptabilityDelta  = D - pD;
+    const tensionDelta       = T - pT;
+
+    // Descending: stability increasing, adaptability holding or rising, tension low
+    const descendingScore = stabilityDelta + adaptabilityDelta - tensionDelta;
+    // Ascending: tension increasing against stability, adaptability beginning recovery
+    const ascendingScore  = tensionDelta - stabilityDelta + adaptabilityDelta;
+
+    return {
+        arc: descendingScore > ascendingScore ? 'descending' : 'ascending',
+        stabilityDelta, adaptabilityDelta, tensionDelta,
+        confidence: 'high — trajectory calculated from vector delta',
     };
 }

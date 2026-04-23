@@ -6,7 +6,10 @@ import {
     computePressureScore, computeConfidenceScore, getCategory,
     getDecisionSignal, calculateMean,
     classifySAPStage, SAP_STAGES, getPressureLabel,
-    getFinalStage
+    getFinalStage,
+    classifyFlowQuality, classifyCrucibleMode,
+    classifyGratitudeMechanism, getTumblingInversionState,
+    TUMBLING_INVERSION
 } from './engine.js';
 import { selectContent, selectAffirmation, contentLibrary, pulseCheck } from './content.js';
 import { initAudio, playFrequency, stopFrequency, FREQUENCY_MAP, isPlaying, getCurrentFreq } from './audio.js';
@@ -175,13 +178,121 @@ function protocol(state) {
         <div style="font-size:0.85rem;color:#8dafd3">${st.theme}</div>
       </div>
 
-      ${sap.stage === 8 ? `
-      <div style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:12px;margin-bottom:14px;font-size:0.85rem;color:#fcd34d">
-        ⚠ <strong>ILLUSION OF PERMANENCE · RIGIDITY RISK ACTIVE</strong><br>
-        <div style="margin-top:6px;line-height:1.6;opacity:0.9">
-          Three simultaneous risks present: <strong>Rigidity Risk</strong> (loss of adaptive capacity through over-consolidation) · <strong>Illusion of Permanence</strong> (temporary state perceived as unchanging reality) · <strong>Systemic Stasis</strong> (resistance to inevitable transition). Your current form is a temporary vessel, not a permanent monument.
-        </div>
-      </div>` : ''}
+      ${(() => {
+        const inv = sap.inversionState || getTumblingInversionState(sap.stage);
+        const isBoundary = inv.isBoundary;
+        return `
+        <div style="display:flex;gap:6px;align-items:center;margin-bottom:12px;flex-wrap:wrap">
+          ${!isBoundary ? `
+          <div style="padding:3px 10px;border-radius:8px;font-size:0.7rem;font-weight:700;letter-spacing:1px;
+            background:${inv.parity==='even'?'rgba(96,165,250,0.12)':'rgba(167,139,250,0.12)'};
+            border:1px solid ${inv.parity==='even'?'rgba(96,165,250,0.3)':'rgba(167,139,250,0.3)'};
+            color:${inv.parity==='even'?'#60a5fa':'#a78bfa'}">
+            ${inv.parity==='even'?'EVEN STAGE':'ODD STAGE'}
+          </div>
+          <div style="padding:3px 10px;border-radius:8px;font-size:0.7rem;letter-spacing:0.5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.45)">
+            Physical: ${inv.physicalState?.toUpperCase()}
+          </div>
+          <div style="padding:3px 10px;border-radius:8px;font-size:0.7rem;letter-spacing:0.5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.45)">
+            Conscious: ${inv.consciousState?.toUpperCase()}
+          </div>
+          <div style="padding:3px 10px;border-radius:8px;font-size:0.7rem;letter-spacing:0.5px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.35)">
+            ${inv.geometricForm}
+          </div>` : ''}
+        </div>`;
+      })()}
+
+      ${sap.stage === 6 ? (() => {
+        const fq = classifyFlowQuality(nsdtVector);
+        const isSustainable = fq.flowType === 'sustainable';
+        return `
+        <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:14px;margin-bottom:14px">
+          <div style="font-size:0.72rem;color:#10b981;letter-spacing:2px;margin-bottom:10px;font-weight:700">
+            ${isSustainable ? '✦ SUSTAINABLE FLOW — CONDUCTOR'S PARADOX ACTIVE' : '⚠ BRITTLE FLOW — WITNESS POSITION NOT DETECTED'}
+          </div>
+          <div style="font-size:0.85rem;color:${isSustainable?'rgba(110,231,183,0.8)':'rgba(252,165,165,0.8)'};line-height:1.6;margin-bottom:10px">
+            ${fq.label}
+          </div>
+          <div style="display:grid;gap:6px">
+            <div style="padding:8px 12px;background:rgba(16,185,129,0.05);border-radius:8px;border-left:2px solid rgba(16,185,129,0.3)">
+              <div style="font-size:0.7rem;color:#10b981;font-weight:700;margin-bottom:3px">CONDUCTOR SCORE</div>
+              <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:4px">
+                <div style="height:100%;width:${fq.conductorScore}%;background:${fq.conductorScore>=60?'#10b981':'#f59e0b'};border-radius:2px"></div>
+              </div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45)">${fq.conductorScore}/100 — ${fq.conductorScore>=60?'Hearing the approaching dissonance':'Cannot yet perceive the approaching Stage 7'}</div>
+            </div>
+            <div style="padding:8px 12px;background:rgba(16,185,129,0.05);border-radius:8px;border-left:2px solid rgba(16,185,129,0.3)">
+              <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);font-weight:700;margin-bottom:3px">DIRECTIVE</div>
+              <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.55">${fq.directive}</div>
+            </div>
+          </div>
+        </div>`;
+      })() : ''}
+
+      ${sap.stage === 7 ? (() => {
+        const cm = classifyCrucibleMode(nsdtVector);
+        const isDistillation = cm.mode === 'distillation';
+        return `
+        <div style="background:rgba(6,182,212,0.07);border:1px solid rgba(6,182,212,0.25);border-radius:14px;padding:14px;margin-bottom:14px">
+          <div style="font-size:0.72rem;color:#06b6d4;letter-spacing:2px;margin-bottom:10px;font-weight:700">
+            ${isDistillation ? '✦ CONSCIOUS DISTILLATION — INDIVIDUATION CRUCIBLE' : '⚠ CHAOTIC COLLAPSE — FIGHTING THE BURN'}
+          </div>
+          <div style="font-size:0.85rem;color:${isDistillation?'rgba(103,232,249,0.8)':'rgba(252,165,165,0.8)'};line-height:1.6;margin-bottom:10px">
+            ${cm.label}
+          </div>
+          <div style="display:grid;gap:6px">
+            ${cm.shadowSurfacing ? `
+            <div style="padding:8px 12px;background:rgba(245,158,11,0.08);border-radius:8px;border-left:2px solid rgba(245,158,11,0.4)">
+              <div style="font-size:0.7rem;color:#f59e0b;font-weight:700;margin-bottom:3px">SHADOW INTEGRATION ACTIVE</div>
+              <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.55">${cm.shadowNote}</div>
+            </div>` : ''}
+            <div style="padding:8px 12px;background:rgba(6,182,212,0.05);border-radius:8px;border-left:2px solid rgba(6,182,212,0.3)">
+              <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);font-weight:700;margin-bottom:3px">DIRECTIVE</div>
+              <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.55">${cm.directive}</div>
+            </div>
+          </div>
+        </div>`;
+      })() : ''}
+
+      ${sap.stage === 8 ? (() => {
+        const gm = classifyGratitudeMechanism(nsdtVector);
+        const isDissolving = gm.trajectory === 'dissolution';
+        return `
+        <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:14px;margin-bottom:14px">
+          <div style="font-size:0.72rem;color:#f59e0b;letter-spacing:2px;margin-bottom:10px;font-weight:700">
+            ${isDissolving ? '✦ GRATITUDE MECHANISM ENGAGED — CRYSTAL DISSOLVING' : '⚠ CRYSTALLIZATION PARADOX — SHATTERING RISK ELEVATED'}
+          </div>
+          <div style="font-size:0.85rem;color:${isDissolving?'rgba(253,224,71,0.8)':'rgba(252,165,165,0.8)'};line-height:1.6;margin-bottom:10px">
+            ${gm.label}
+          </div>
+          <div style="display:grid;gap:6px">
+            <div style="padding:8px 12px;background:rgba(245,158,11,0.05);border-radius:8px;border-left:2px solid rgba(245,158,11,0.3)">
+              <div style="font-size:0.7rem;color:#f59e0b;font-weight:700;margin-bottom:6px">REVEALED / CONCEALED SELF DIVERGENCE</div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);width:80px">Revealed Self</span>
+                <div style="flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px">
+                  <div style="height:100%;width:${gm.revealedSelf}%;background:#60a5fa;border-radius:2px"></div>
+                </div>
+                <span style="font-size:0.72rem;color:#60a5fa;width:28px;text-align:right">${gm.revealedSelf}</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px">
+                <span style="font-size:0.72rem;color:rgba(255,255,255,0.4);width:80px">Concealed Self</span>
+                <div style="flex:1;height:3px;background:rgba(255,255,255,0.06);border-radius:2px">
+                  <div style="height:100%;width:${gm.concealedSelf}%;background:#ef4444;border-radius:2px"></div>
+                </div>
+                <span style="font-size:0.72rem;color:#ef4444;width:28px;text-align:right">${gm.concealedSelf}</span>
+              </div>
+              <div style="font-size:0.72rem;color:${gm.divergence<30?'#10b981':gm.divergence<50?'#f59e0b':'#ef4444'};margin-top:4px">
+                Divergence: ${gm.divergence} — ${gm.divergence<30?'Converging (dissolution pathway)':gm.divergence<50?'Moderate misalignment':'High misalignment — gratitude mechanism not yet engaged'}
+              </div>
+            </div>
+            <div style="padding:8px 12px;background:rgba(245,158,11,0.05);border-radius:8px;border-left:2px solid rgba(245,158,11,0.3)">
+              <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);font-weight:700;margin-bottom:3px">DIRECTIVE</div>
+              <div style="font-size:0.78rem;color:rgba(255,255,255,0.55);line-height:1.55">${gm.directive}</div>
+            </div>
+          </div>
+        </div>`;
+      })() : ''}
 
       ${sap.stage === 9 ? `
       <div style="background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.3);border-radius:14px;padding:16px;margin-bottom:14px;">
@@ -454,9 +565,9 @@ function journal(state) {
         3:['What are you being called to create?','What truth is trying to express itself through you?'],
         4:['What is the single most important thing right now?','What are you holding that isn\'t yours to carry?'],
         5:['Can I locate the Witness Position right now — a stillness that is poised, not passive or retreating?','What is the perpendicular option I have not yet named — the Middle Path that exits the conflict rather than resolving it?','Am I being moved through this threshold by the current, or am I moving through it consciously?','What would change if I treated this moment as a point to pass through rather than a problem to solve?'],
-        6:['What insights are arriving at peak clarity?','What am I building that the next cycle will need?'],
-        7:['What has this journey truly taught me?','What wisdom am I ready to pass on?'],
-        8:['What false belief about the permanence of this state can I challenge?','Where is genuine gratitude hiding within this weight?'],
+        6:['What insights are arriving at peak clarity — and am I capturing them with the urgency they deserve?','What note is slightly off that I cannot yet hear? (The Conductor\'s question)','Is this Sustainable Flow or Brittle Flow? Do I have the Witness Position active beneath the performance?','What would I need to release to ensure Stage 7 arrives as invitation rather than ambush?'],
+        7:['What is burning away — and can I distinguish the costume from the wearer?','What is the Concealed Self that was suppressed during Stage 6 returning to say?','Is this breakdown being directed by me, or is it happening to me? What is the difference right now?','What essence survives when everything accumulated is stripped away? What is actually me?'],
+        8:['What is the unnamed anxiety beneath my certainty? Can I give it language?','Where is the divergence between what I project outward and what I actually feel inside?','Can I hold the full weight of every stage of this cycle — every cost, every difficulty — and recognize that every stage was necessary? That is the Gratitude Mechanism.','What would it mean to dissolve rather than shatter into Stage 9?'],
         9:['Where do I see myself reflected in the world around me right now?','What would it mean to release the idea that I am a separate, disconnected individual?','What reality am I constructing at this exact moment of observation — and how is it different from any moment before?','If truth is subjective and belief is rigid, what am I still holding as absolute?','What would it feel like to accept that the only perfect state is the state of not existing — and that I came from that perfection?','What wisdom do I carry that belongs to the next cycle, not to me?'],
     };
     const stagePrompts = prompts[sap.stage] || prompts[5];
@@ -694,9 +805,9 @@ function runShadowProbe(dominantStage, trapEnergy) {
         3: "The engine detects the First Self-Reflection loop activating. The observer is beginning to distinguish itself from the environment — and initiating the first cycle of self-correction. Something is being created and simultaneously watched being created.",
         4: "The crucible is active. Maximum pressure, maximum potential. Concentrate your force. Diffusion is the only enemy right now.",
         5: "The Inversion Gateway is active. You are at the narrowest point of the toroidal flow — maximum sensitivity, minimum margin. This stage cannot be inhabited. It is a point, not a region. The moment you recognize you are here, the passage has already begun. The Middle Path Gateway runs perpendicular to both poles — it is a dimensional exit from the conflict field, not a compromise between them. Locate the Witness Position: a momentary pause of forward momentum. Not passive. Poised. The door has always been there. You prepared for this before you arrived.",
-        6: "You are at peak integration. All systems are synchronized. Harvest this state — it will not last, and it is not meant to.",
-        7: "The brilliance of your current insight has created a wall. You are seen, even if you feel isolated by what you now understand.",
-        8: "There is significant tension here. The system has reached maximum consolidation — and is mistaking density for permanence. This is the Illusion of Permanence. Rigidity Risk is active. The current form is a temporary vessel, not a monument. The transition is not destruction.",
+        6: "Stage 6 — the Nexus of Harmony. The engine detects peak performance. All systems synchronized. But Stage 6 is an even stage — Physically Stable, Consciously Unstable. The instability you cannot feel is the most dangerous kind. The Conductor's Paradox is active: your success is masking its own end. The question is not whether Stage 7 is coming. The question is whether you will hear the first dissonant note before the audience does. The Witness Position is the only instrument that can detect it.",
+        7: "Stage 7 — the Individuation Crucible. The engine reads breakdown as directed disintegration, not chaos. Stage 7 is odd — Physically Unstable, Consciously Stable. Consciousness is gaining stability precisely as the physical structure fragments. The crucible burns the costume, not the wearer. The Concealed Self from Stage 2 is returning for integration — this is the ascending arc of the Forge of Polarity completing itself five stages later. This was always part of the design.",
+        8: "Stage 8 — the Crystallization Paradox. Maximum structural density. Maximum structural brittleness. These are the same thing. The engine detects the Revealed and Concealed Self divergence: external conviction of permanence is masking an internal anxiety that cannot yet be named. That unnamed anxiety is the transition signal. The Gratitude Mechanism is the only known solvent. Hold the full weight of everything the cycle has cost — and recognize that every stage was necessary. The crystal does not need to shatter. It can dissolve.",
         9: "The engine reads Stage 9 — the Nonagon. Like the number 9 in mathematics, everything you encounter now reflects you back to yourself. Reality is not real — it exists only at this exact moment of your observation, constructed by you, never to be identical again. Truth is subjective. Belief is rigid. Enlightenment is fleeting. And the only state of true perfection is the state of not existing — because only absolute nothing can hold the potential for everything. You are approaching the circle. The nonagon is losing its edges.",
         default: "The engine is sensing a reservoir of potential you have been protecting — perhaps out of a necessity that no longer exists."
     };
