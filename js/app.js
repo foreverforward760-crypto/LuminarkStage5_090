@@ -216,22 +216,57 @@ function protocol(state) {
       </div>` : ''}
 
       ${sap.kairos ? `
-      <div style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.3);border-radius:14px;padding:14px;margin-bottom:14px">
-        <div style="font-size:0.75rem;color:#8b5cf6;letter-spacing:1.5px;margin-bottom:10px;font-weight:700">INVERSION GATEWAY · STAGE 5 · BIFURCATION CALCULUS</div>
-        <div style="font-size:0.8rem;color:rgba(167,139,250,0.7);margin-bottom:12px;line-height:1.55">Threshold Point of No Return active. Hidden Duality operational. Three-way probability at the Crossroads:</div>
+      <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.28);border-radius:14px;padding:16px;margin-bottom:14px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <div style="font-size:0.72rem;color:#8b5cf6;letter-spacing:1.5px;font-weight:700">INVERSION GATEWAY · STAGE 5 · SEVEN PROPERTIES</div>
+          <div style="font-size:0.62rem;color:rgba(167,139,250,0.45);letter-spacing:1px">TEMPORAL ANOMALY — NO DURATION</div>
+        </div>
+
+        ${sap.witnessPosition ? `
+        <div style="border-radius:10px;padding:11px 14px;margin-bottom:12px;background:${sap.witnessPosition.position==='Navigator'?'rgba(16,185,129,0.08)':'rgba(239,68,68,0.08)'};border:1px solid ${sap.witnessPosition.position==='Navigator'?'rgba(16,185,129,0.25)':'rgba(239,68,68,0.25)'}">
+          <div style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;margin-bottom:5px;color:${sap.witnessPosition.position==='Navigator'?'#10b981':'#ef4444'}">
+            ${sap.witnessPosition.position==='Navigator'?'◈ NAVIGATOR — WITNESS POSITION ACTIVE':'⚡ PASSENGER — WITNESS POSITION NOT YET LOCATED'}
+          </div>
+          <div style="font-size:0.82rem;color:#d0e8ff;line-height:1.5;margin-bottom:5px">${sap.witnessPosition.intervention}</div>
+          <div style="font-size:0.72rem;color:${sap.perpendicularAxisVisible?'#10b981':'rgba(167,139,250,0.5)'}">
+            ${sap.perpendicularAxisVisible?'⊕ Perpendicular Axis visible — Middle Path Gateway is open':'Perpendicular axis requires a pause of forward momentum to become visible'}
+          </div>
+        </div>` : ''}
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:14px">
+          ${[
+            ['Observer Effect','Small deliberate input at max sensitivity → large reorganization across Stages 6–9.'],
+            ['Fractal Property','This skill applies to every micro-Stage 5 in every sub-cycle of the torus.'],
+            ['Middle Path','Perpendicular to both poles — a dimensional exit, not a compromise.'],
+            ['Temporal Anomaly','Cannot be inhabited. Recognition has already begun the passage.'],
+          ].map(([l,b])=>`
+          <div style="background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.14);border-radius:9px;padding:9px 11px">
+            <div style="font-size:0.65rem;font-weight:700;letter-spacing:1px;color:#8b5cf6;margin-bottom:3px">${l}</div>
+            <div style="font-size:0.76rem;color:rgba(208,232,255,0.65);line-height:1.45">${b}</div>
+          </div>`).join('')}
+        </div>
+
+        <div style="font-size:0.68rem;color:rgba(167,139,250,0.55);letter-spacing:1px;font-weight:600;margin-bottom:8px">BIFURCATION CALCULUS — THREE-WAY PROBABILITY</div>
         ${[
           {l:'ADVANCE → Stage 6 Nexus of Harmony',v:sap.kairos.advance,c:'#10b981'},
           {l:'GRACEFUL REGRESSION → Stage 4',v:sap.kairos.regress,c:'#f59e0b'},
-          {l:'CRISIS THRESHOLD',v:sap.kairos.crisis,c:'#ef4444'},
+          {l:'CRISIS THRESHOLD (unconscious passage)',v:sap.kairos.crisis,c:'#ef4444'},
         ].map(r=>`
         <div style="margin-bottom:8px">
           <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:3px">
-            <span style="color:rgba(255,255,255,0.5)">${r.l}</span><span style="color:${r.c};font-weight:800">${r.v}%</span>
+            <span style="color:rgba(255,255,255,0.45)">${r.l}</span>
+            <span style="color:${r.c};font-weight:800">${r.v}%</span>
           </div>
           <div style="height:4px;background:rgba(255,255,255,0.06);border-radius:2px">
             <div style="height:100%;width:${r.v}%;background:${r.c};border-radius:2px"></div>
           </div>
         </div>`).join('')}
+      </div>` : ''}
+
+      ${sap.microStage5 ? `
+      <div style="background:rgba(139,92,246,0.05);border:1px solid rgba(139,92,246,0.18);border-radius:10px;padding:11px 14px;margin-bottom:14px;font-size:0.82rem;color:#c4b5fd;line-height:1.55">
+        <strong style="font-size:0.65rem;letter-spacing:1.5px;display:block;margin-bottom:3px">◈ FRACTAL MICRO-STAGE 5 DETECTED</strong>
+        Hidden Duality signal active within Stage ${sap.stage}: Tension ≈ Adaptability at high Complexity. A bilateral threshold is present within this stage. Locate the Witness Position.
       </div>` : ''}
 
       <div style="background:rgba(15,28,45,0.8);border-radius:20px;padding:20px;margin-bottom:16px;border-left:3px solid ${st.color}">
@@ -328,7 +363,7 @@ function frequencies(state) {
 function breathwork(state) {
     const breathMap = {
         void:      { pattern:'4-7-8',        label:'Restorative',  in:4, hold1:7, out:8, hold2:0,  desc:'Activates parasympathetic. Ideal for PLENARA reset.' },
-        crossroads:{ pattern:'Box Breathing', label:'Balancing',   in:4, hold1:4, out:4, hold2:4,  desc:'Equalizes nervous system tension. Ideal at Stage 5 crossroads.' },
+        crossroads:{ pattern:'Box Breathing', label:'Witness Positioning', in:4, hold1:4, out:4, hold2:4, desc:'Box Breathing creates the momentary stillness required to locate the Witness Position at Stage 5. The equal-duration pattern interrupts forward momentum long enough for the perpendicular axis — the Middle Path Gateway — to become visible. Do not use this to delay. Use it to perceive.' },
         flow:      { pattern:'Natural Rhythm',label:'Amplifying',  in:4, hold1:0, out:6, hold2:0,  desc:'Enhances flow state coherence. Extend exhale for deeper synchrony.' },
         heat:      { pattern:'Long Exhale',   label:'Decompressing',in:4,hold1:0, out:8, hold2:0,  desc:'Rapidly reduces cortisol. Use before making decisions under pressure.' },
         absolute:  { pattern:'5-5-5-5',      label:'Grounding',   in:5, hold1:5, out:5, hold2:5,  desc:'Slows certainty loops. Ideal for Stage 8/9 rigidity release.' },
@@ -418,7 +453,7 @@ function journal(state) {
         2:['What are the two forces pulling at you?','What would synthesis look like?'],
         3:['What are you being called to create?','What truth is trying to express itself through you?'],
         4:['What is the single most important thing right now?','What are you holding that isn\'t yours to carry?'],
-        5:['What path am I genuinely being called toward?','Am I advancing from strength or from pressure?'],
+        5:['Can I locate the Witness Position right now — a stillness that is poised, not passive or retreating?','What is the perpendicular option I have not yet named — the Middle Path that exits the conflict rather than resolving it?','Am I being moved through this threshold by the current, or am I moving through it consciously?','What would change if I treated this moment as a point to pass through rather than a problem to solve?'],
         6:['What insights are arriving at peak clarity?','What am I building that the next cycle will need?'],
         7:['What has this journey truly taught me?','What wisdom am I ready to pass on?'],
         8:['What false belief about the permanence of this state can I challenge?','Where is genuine gratitude hiding within this weight?'],
@@ -653,12 +688,12 @@ function runShadowProbe(dominantStage, trapEnergy) {
     if (!overlay || !textEl || !fill) return;
 
     const probes = {
-        0: "You are currently holding a vast amount of internal space that others might mistake for emptiness. PLENARA recognizes this as primordial potential, not absence.",
+        0: "PLENARA. The only state of true perfection — not because it is full, but because absolute nothing is the only container large enough to hold infinite potential. This is not absence. This is the supreme condition of all possibility. The entire SAP cycle is born here: the Void collapses into awareness of itself, and that single act of self-recognition generates the loop that produces everything. You are not empty. You are the origin point.",
         1: "The engine detects a flicker of something new — a truth you have been protecting from your own skepticism. The Spark does not require certainty to be real.",
         2: "Two forces are pulling at you simultaneously. The Forge does not ask you to resolve this polarity. It asks you to hold both until synthesis emerges.",
         3: "The engine detects the First Self-Reflection loop activating. The observer is beginning to distinguish itself from the environment — and initiating the first cycle of self-correction. Something is being created and simultaneously watched being created.",
         4: "The crucible is active. Maximum pressure, maximum potential. Concentrate your force. Diffusion is the only enemy right now.",
-        5: "The Inversion Gateway is open. This is the central pivot of the 0-9-0 cycle — the point where internal logic begins to project outward with increased intensity. Hidden Duality is operational: the opposing forces you perceive are a single unified system. The backward path is not retreat. It is conscious recalibration.",
+        5: "The Inversion Gateway is active. You are at the narrowest point of the toroidal flow — maximum sensitivity, minimum margin. This stage cannot be inhabited. It is a point, not a region. The moment you recognize you are here, the passage has already begun. The Middle Path Gateway runs perpendicular to both poles — it is a dimensional exit from the conflict field, not a compromise between them. Locate the Witness Position: a momentary pause of forward momentum. Not passive. Poised. The door has always been there. You prepared for this before you arrived.",
         6: "You are at peak integration. All systems are synchronized. Harvest this state — it will not last, and it is not meant to.",
         7: "The brilliance of your current insight has created a wall. You are seen, even if you feel isolated by what you now understand.",
         8: "There is significant tension here. The system has reached maximum consolidation — and is mistaking density for permanence. This is the Illusion of Permanence. Rigidity Risk is active. The current form is a temporary vessel, not a monument. The transition is not destruction.",

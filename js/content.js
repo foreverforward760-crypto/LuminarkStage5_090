@@ -70,7 +70,7 @@ const templates = {
             "The crossroads is not a trap — it is a threshold.",
             "You cannot navigate forever by looking at the map.",
             "Every choice closes doors. That is the price of direction.",
-            "Stage 5 is the only stage with a backward doorway — and it is not a failure to use it.",
+            "Stage 5 is the Threshold — the Point of No Return where Hidden Duality is active. The Middle Path Gateway runs perpendicular to both poles. Neither direction is failure — both are conscious.",
             "The Dynamo of Will does not demand the right choice. It demands a choice.",
             "Standing still at the crossroads is also a decision.",
             "Fear of the wrong path has paralyzed more people than the wrong path ever has.",
@@ -83,7 +83,7 @@ const templates = {
             "At Stage 5, the regression path is not weakness — it is wisdom.",
             "You were not brought to this threshold to turn back. But you can.",
             "Urgency distorts the crossroads. Pressure creates false clarity.",
-            "The backward doorway is not failure. It is the system correcting itself.",
+            "Graceful Regression is not failure. It is the Witness recognizing, at the Inversion Gateway, that the current trajectory requires recalibration.",
             "The choice that scares you the most is usually the one that matters."
         ],
         affirmation: [
@@ -97,7 +97,7 @@ const templates = {
             "I move forward even when the path is unclear.",
             "My will is my navigation system.",
             "I commit to a direction and course-correct as I go.",
-            "I am brave enough to choose the backward doorway if wisdom demands it.",
+            "I am brave enough to pass through the Middle Path Gateway — the perpendicular axis — if wisdom locates it.",
             "I honor my instinct over my intellect at the crossroads.",
             "I am not lost. I am deciding.",
             "Momentum is my greatest ally right now.",
@@ -106,7 +106,7 @@ const templates = {
             "This decision does not define me. My response to it does.",
             "I am the Dynamo of Will. I am not a victim of circumstance.",
             "I choose my next chapter with courage.",
-            "The backward doorway is a valid and honored choice."
+            "Graceful Regression through the Inversion Gateway is a valid and honored choice."
         ]
     },
     flow: {

@@ -5,7 +5,7 @@
 export const LEXICON = {
     default: {
         stage0: "PLENARA — The Void",
-        stage5: "DYNAMO OF WILL — Inversion Gateway · Crossroads · Threshold Point of No Return",
+        stage5: "DYNAMO OF WILL — Inversion Gateway · Bilateral Threshold · Hidden Duality · Middle Path Gateway (Perpendicular Axis) · Observer Effect · Witness Position · Temporal Anomaly",
         stage8: "VESSEL OF GROUNDING — Illusion of Permanence · Rigidity Risk · Systemic Stasis",
         rigidity: "Rigidity Risk",
         entropy: "Entropy",
@@ -13,7 +13,7 @@ export const LEXICON = {
     },
     engineering: {
         stage0: "Ground State Reset (PLENARA)",
-        stage5: "Bifurcation Node — Inversion Gateway (DYNAMO OF WILL)",
+        stage5: "Bifurcation Node — Inversion Gateway (DYNAMO OF WILL) · Bilateral Threshold · Observer Effect · Witness Position Classifier",
         stage8: "Systemic Kinetic Stasis — Rigidity Risk · Entropy Ceiling",
         rigidity: "Structural Brittleness Index",
         entropy: "Noise Floor",
@@ -21,7 +21,7 @@ export const LEXICON = {
     },
     clinical: {
         stage0: "Baseline Restoration (PLENARA)",
-        stage5: "Decisional Inversion Gateway (DYNAMO OF WILL) — Threshold Point of No Return",
+        stage5: "Decisional Inversion Gateway (DYNAMO OF WILL) — Bilateral Threshold · Witness Position · Observer Effect · Perpendicular Axis (Third Option)",
         stage8: "Chronic Allostatic Load — Illusion of Permanence · Rigidity Risk",
         rigidity: "Cognitive Inflexibility Marker",
         entropy: "Behavioral Variance",
@@ -29,7 +29,7 @@ export const LEXICON = {
     },
     creative: {
         stage0: "The Fertile Void (PLENARA)",
-        stage5: "The Inversion Gateway (DYNAMO OF WILL) — Hidden Duality · Middle Path",
+        stage5: "The Inversion Gateway (DYNAMO OF WILL) — Hidden Duality · Middle Path (Perpendicular) · Witness Position · Temporal Anomaly",
         stage8: "The Illusion of Permanence — Rigidity Risk · Systemic Stasis",
         rigidity: "Rigidity Risk · Creative Stasis Index",
         entropy: "Divergent Potential",

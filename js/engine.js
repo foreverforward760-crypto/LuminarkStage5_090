@@ -148,9 +148,50 @@ export function classifySAPStage(nsdt) {
         };
     }
 
-    const dissolving  = stage === 9 && C >= 95 && D >= 80 && T <= 20;
+    const dissolving = stage === 9 && C >= 95 && D >= 80 && T <= 20;
 
-    return { stage, P: Math.round(P), Cs: Math.round(Cs), U, trap, trapMsg, kairos, dissolving, shadowText, primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage };
+    // ── Stage 5: Witness Position Classifier ─────────────────────────────────
+    // Detects Navigator (Witness) vs Passenger position at the Inversion Gateway.
+    // Witness requires: Adaptability + Coherence > Tension → perpendicular axis visible.
+    // Passenger: Tension overwhelming Adaptability → Crisis trajectory by default.
+    let witnessPosition = null;
+    let perpendicularAxisVisible = false;
+    let microStage5 = false;
+
+    if (stage === 5) {
+        const witnessScore = (D * 0.4) + (C * 0.35) + ((100 - Math.abs(T - 50)) * 0.25);
+        const isWitness      = witnessScore >= 55 && D >= 40 && T < (D + 30);
+        const passengerPressure = T > 65 && D < 45;
+        perpendicularAxisVisible = isWitness && !passengerPressure;
+        witnessPosition = {
+            position:  isWitness ? 'Navigator' : 'Passenger',
+            score:     Math.round(witnessScore),
+            passengerPressure,
+            perpendicularAxisVisible,
+            intervention: isWitness
+                ? 'Middle Path Gateway is accessible. Witness Position confirmed. The perpendicular axis is visible.'
+                : 'Witness Position not yet established. Reduce forward pressure. Locate the stillness at maximum tension.',
+        };
+        // Observer Effect: conscious Witness amplifies advance probability
+        if (kairos && isWitness && !passengerPressure) {
+            const boost    = Math.round(witnessScore * 0.08);
+            kairos.advance = Math.min(95, kairos.advance + boost);
+            kairos.crisis  = Math.max(2,  kairos.crisis  - boost);
+        }
+    }
+
+    // ── Fractal Micro-Stage 5 Detection ──────────────────────────────────────
+    // Any stage exhibits a hidden bilateral threshold when Tension ≈ Adaptability
+    // AND Complexity is high — the fractal duality signal present in every stage.
+    microStage5 = stage !== 5 && Math.abs(T - D) < 15 && N > 55;
+
+    return {
+        stage, P: Math.round(P), Cs: Math.round(Cs), U,
+        trap, trapMsg, kairos,
+        witnessPosition, perpendicularAxisVisible, microStage5,
+        dissolving, shadowText,
+        primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage
+    };
 }
 
 // Canonical SAP stage data — CONSTITUTIONAL · NEVER ALTER NAMES
@@ -164,13 +205,15 @@ export const SAP_STAGES = {
         name:'DYNAMO OF WILL',
         label:'The Inversion Gateway',
         color:'#8b5cf6',
-        theme:'Threshold Point of No Return · Hidden Duality · Crossroads · Inversion Gateway',
-        properties: [
-            'Threshold Point of No Return — momentum reaches critical mass',
-            'Hidden Duality — opposing forces operating as a single unit',
-            'Crossroads & Middle Path Gateway — between expansion and contraction',
-            'Inversion Gateway — internal logic projects outward with increased intensity',
-        ]
+        theme:'Bilateral Threshold · Hidden Duality · Middle Path Gateway (Perpendicular Axis) · Observer Effect · Fractal Property · Witness Position · Temporal Anomaly',
+        // Stage 5: Seven-Property Architecture
+        // 1. Bilateral Threshold    — narrowest point of torus, maximum sensitivity
+        // 2. Hidden Duality         — Revealed vs. Concealed Self as unified system
+        // 3. Middle Path Gateway    — perpendicular axis; dimensional exit, not compromise
+        // 4. Observer Effect        — conscious choice at max sensitivity → large reorganization
+        // 5. Fractal Property       — micro-Stage 5 exists within every stage
+        // 6. Witness Position       — poised stillness that reveals the perpendicular axis
+        // 7. Temporal Anomaly       — Stage 5 has no duration; it is a point, not a region
     },
     6: { name:'NEXUS OF HARMONY',           label:'The Nexus',    color:'#10b981', theme:'Peak Integration — All Systems Synchronized' },
     7: { name:'LENS OF DISTILLATION',       label:'The Lens',     color:'#06b6d4', theme:'Deep Refinement & Wisdom Integration' },
@@ -195,14 +238,14 @@ export const SAP_STAGES = {
         properties: [
             'Total Mirroring — the 9-property: sees self in everything, everything in self',
             'Now-Only Reality — reality exists only at the exact moment of observation',
-            'Truth is Subjective — belief is rigid, enlightenment is fleeting',
-            'Only Absolute Nothing accommodates the potential for everything',
-            'Void Cosmology — 0 aware of self = 1; duality = 2; I AM = 3D consciousness',
+            'Truth is Subjective — belief is rigid; enlightenment is fleeting',
+            'Only Absolute Nothing accommodates the potential for everything — the Void is perfection',
+            'Void Cosmology — 0 aware of self = 1 (Spark); duality = 2 (Forge); I AM = 3 (Engine)',
+            'Observer Loop Completion — Stage 3 first saw the observer observing itself; Stage 9 closes the loop',
             'Ego Dissolution — self-identification as separate individual releases completely',
             'Nonagon Dissolution — individual edges dissolve; the shape returns to the circle',
             'Memory Fallibility — even the past is imperfect reconstruction, not playback',
-            'All-Is-One Recognition — every stage is the same process at different consciousness depth',
-            'The Observer observing itself being observed by itself — the loop that generates the cycle',
+            'All-Is-One Recognition — every stage is the same process at a different depth of consciousness',
         ]
     },
 };
