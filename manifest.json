@@ -1,14 +1,51 @@
 {
   "name": "KAIROS · Cognitive OS",
   "short_name": "KAIROS",
-  "description": "State-aware cognitive operating system powered by Stanfield's Axiom of Perpetuity",
-  "start_url": ".",
+  "description": "State-aware cognitive operating system powered by Stanfield's Axiom of Perpetuity (SAP). Maps human systemic states across a 10-stage toroidal cycle for diagnosis, intervention, and developmental guidance.",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone"],
   "background_color": "#0b0e14",
-  "theme_color": "#0b0e14",
+  "theme_color": "#8b5cf6",
   "orientation": "portrait-primary",
+  "lang": "en-US",
+  "categories": ["health", "lifestyle", "productivity"],
   "icons": [
-    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Protocol",
+      "short_name": "Protocol",
+      "description": "Open the NSDT diagnostic protocol",
+      "url": "./index.html#protocol",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Journal",
+      "short_name": "Journal",
+      "description": "Open the stage-aware reflection journal",
+      "url": "./index.html#journal",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
   ]
 }

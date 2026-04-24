@@ -1,7 +1,7 @@
 // sw.js - KAIROS Service Worker v1.1
 // Audit fix: robust cache strategy, works on GitHub Pages, Render, and custom domains
 
-const CACHE_NAME = 'kairos-v8';
+const CACHE_NAME = 'kairos-v9';
 const STATIC_ASSETS = [
     './',
     './index.html',
@@ -17,6 +17,9 @@ const STATIC_ASSETS = [
     './js/cultural.js',
     './js/ai-sentinel.js',
     './manifest.json',
+    './icon-192.png',
+    './icon-512.png',
+    './apple-touch-icon.png',
 ];
 
 // Install: pre-cache all static assets
