@@ -35,7 +35,7 @@ The core of this system is **Stanfield's Axiom of Perpetuity (SAP)** — a toroi
 | **8** | VESSEL OF GROUNDING | **The Illusion of Permanence.** Duality mastery, consolidation |
 | **9** | TRANSPARENCY OF THE GUIDE | Completion, dissolution, return to PLENARA |
 
-> **Constitutional Directive:** These stage names are canonical constants. They must never be renamed, truncated, or altered by any AI system or developer.
+> **Constitutional Directive:** These stage names are canonical constants. They must never be renamed, truncated, or altered by any AI system or developer, unless given direct instructions to do so .
 
 ### Key SAP Constants
 - **Stage 5** is the only stage with a **backward doorway** — regression is not failure, it is wisdom
