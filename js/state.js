@@ -1,4 +1,5 @@
 // state.js - KAIROS State Manager (Pub/Sub + localStorage)
+// Audit v1.2: Debounced localStorage writes to eliminate jank on rapid state changes
 
 class StateManager {
     constructor() {
@@ -25,6 +26,7 @@ class StateManager {
             predictions: [],
         };
         this.observers = [];
+        this.pendingStorage = null; // ✅ OPTIMIZATION: debounce token
         this.loadFromStorage();
         this.applyDecay();
     }
@@ -39,15 +41,23 @@ class StateManager {
         } catch(e) {}
     }
 
-    saveToStorage() {
-        try { localStorage.setItem('kairos_state_v2', JSON.stringify(this.state)); } catch(e) {}
+    // ✅ OPTIMIZATION: Debounced storage writer (300ms buffer)
+    // Prevents jank from synchronous I/O on every slider/diagnostic change
+    debouncedSaveToStorage() {
+        if (this.pendingStorage) clearTimeout(this.pendingStorage);
+        this.pendingStorage = setTimeout(() => {
+            try { 
+                localStorage.setItem('kairos_state_v2', JSON.stringify(this.state)); 
+            } catch(e) {}
+            this.pendingStorage = null;
+        }, 300);
     }
 
     subscribe(fn) { this.observers.push(fn); }
 
     notify() {
         this.observers.forEach(fn => fn(this.state));
-        this.saveToStorage();
+        this.debouncedSaveToStorage(); // ✅ Use debounced version instead
     }
 
     updateNSDT(arr) {
