@@ -1,4 +1,6 @@
 // audio.js - KAIROS Frequency Engine with Envelopes
+// ✅ PERF FIX B: Import updatePulseSpeed to cache CSS variable reads
+import { updatePulseSpeed } from './visuals.js';
 
 export const FREQUENCY_MAP = {
     174: { speed: 0.5, color: '#1e3a8a', rgb: '30,58,138',   intensity: 0.3, label: 'Foundation', desc: 'Pain relief, grounding, security. The base of the torus.' },
@@ -36,6 +38,8 @@ export function playFrequency(freq) {
     playing = true;
     currentFreq = freq;
     const cfg = FREQUENCY_MAP[freq] || FREQUENCY_MAP[528];
+    // ✅ PERF FIX B: Update cached pulse speed instead of relying on CSS variable reads
+    updatePulseSpeed(cfg.speed);
     document.documentElement.style.setProperty('--pulse-speed', cfg.speed);
     document.documentElement.style.setProperty('--pulse-rgb', cfg.rgb);
     document.body.classList.add('pulse-active');

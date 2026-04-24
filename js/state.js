@@ -1,4 +1,5 @@
 // state.js - KAIROS State Manager (Pub/Sub + localStorage)
+// ✅ PERF FIX A: Debounced localStorage writes (300ms idle delay)
 
 class StateManager {
     constructor() {
@@ -25,6 +26,8 @@ class StateManager {
             predictions: [],
         };
         this.observers = [];
+        this.debounceTimer = null;
+        this.pendingSave = false;
         this.loadFromStorage();
         this.applyDecay();
     }
@@ -39,15 +42,28 @@ class StateManager {
         } catch(e) {}
     }
 
+    // ✅ PERF FIX A: Debounced save (300ms idle delay)
     saveToStorage() {
-        try { localStorage.setItem('kairos_state_v2', JSON.stringify(this.state)); } catch(e) {}
+        try {
+            localStorage.setItem('kairos_state_v2', JSON.stringify(this.state));
+        } catch(e) {}
+    }
+
+    // ✅ PERF FIX A: Debounce wrapper
+    debouncedSave() {
+        if (this.debounceTimer) clearTimeout(this.debounceTimer);
+        this.pendingSave = true;
+        this.debounceTimer = setTimeout(() => {
+            this.saveToStorage();
+            this.pendingSave = false;
+        }, 300);
     }
 
     subscribe(fn) { this.observers.push(fn); }
 
     notify() {
         this.observers.forEach(fn => fn(this.state));
-        this.saveToStorage();
+        this.debouncedSave(); // ✅ Use debounced save instead of direct
     }
 
     updateNSDT(arr) {
@@ -122,6 +138,17 @@ class StateManager {
         const limit = 36 * 60 * 60 * 1000;
         this.state.sessionHistory = this.state.sessionHistory.filter(e => now - e.timestamp < limit);
     }
+
+    // Flush pending saves on demand (e.g., before page unload)
+    flushSave() {
+        if (this.debounceTimer) clearTimeout(this.debounceTimer);
+        if (this.pendingSave) this.saveToStorage();
+    }
 }
 
 export const stateManager = new StateManager();
+
+// ✅ Flush on unload
+window.addEventListener('beforeunload', () => {
+    stateManager.flushSave();
+});

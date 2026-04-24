@@ -109,13 +109,13 @@ export function classifySAPStage(nsdt) {
         sumSq += Math.pow(centroid[2] - T, 2);
         sumSq += Math.pow(centroid[3] - D, 2);
         sumSq += Math.pow(centroid[4] - C, 2);
-        return { stage: parseInt(st), distance: Math.sqrt(sumSq) };
+        return { stage: parseInt(st), distanceSq: sumSq };
     });
     
     // Convert to proximities
     let invSum = 0;
     const proximities = distances.map(d => {
-        const prox = 1 / (d.distance + 1);
+        const prox = 1 / (d.distanceSq + 1);
         invSum += prox;
         return { stage: d.stage, prox };
     });

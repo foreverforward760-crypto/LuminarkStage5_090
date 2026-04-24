@@ -1,10 +1,39 @@
 // visuals.js - KAIROS Canvas Frequency Visualizer
-// Audit v1.1: smooth speed transitions between frequencies (174Hz→963Hz density shift)
+// ✅ PERF FIX B: Cache CSS variable reads
+// ✅ PERF FIX C: Pre-generate random pool
+// ✅ PERF FIX D: Throttle window resize
 
 let canvas, ctx, raf = null, currentSpeed = 1.6, targetSpeed = 1.6;
 let currentStage = 5;
 let previousStage = null;
 let shatterAnim = 0;
+
+// ✅ PERF FIX B: Cache pulse speed in module variable
+let currentPulseSpeed = 1.6;
+
+// ✅ PERF FIX C: Pre-generated random pool (200 values, refreshed every 30 frames)
+let randomPool = [];
+let randomPoolIndex = 0;
+let frameCounter = 0;
+
+function generateRandomPool() {
+    randomPool = [];
+    for (let i = 0; i < 200; i++) {
+        randomPool.push(Math.random());
+    }
+    randomPoolIndex = 0;
+}
+
+function getPooledRandom() {
+    if (randomPoolIndex >= randomPool.length) randomPoolIndex = 0;
+    return randomPool[randomPoolIndex++];
+}
+
+// ✅ PERF FIX B: Update pulse speed from external calls
+export function updatePulseSpeed(speed) {
+    currentPulseSpeed = speed;
+    targetSpeed = speed;
+}
 
 export function setVisualDensity(stage) {
     if (previousStage === 8 && stage === 9) {
@@ -18,11 +47,23 @@ export function initVisualizer() {
     canvas = document.getElementById('visualizerCanvas');
     if (!canvas) return;
     ctx = canvas.getContext('2d');
-    resize();
-    window.addEventListener('resize', resize);
+    generateRandomPool();
+    resizeCanvas();
+    // ✅ PERF FIX D: Throttled resize listener
+    window.addEventListener('resize', throttledResize);
 }
 
-function resize() {
+// ✅ PERF FIX D: Throttle resize (100ms)
+let lastResizeTime = 0;
+function throttledResize() {
+    const now = Date.now();
+    if (now - lastResizeTime > 100) {
+        lastResizeTime = now;
+        resizeCanvas();
+    }
+}
+
+function resizeCanvas() {
     if (!canvas) return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -36,11 +77,8 @@ export function startVisualPulse(color = '#22c55e') {
     function draw() {
         if (!ctx || !canvas) return;
 
-        // Lerp toward target speed for smooth density shift
-        const rawSpeed = parseFloat(
-            getComputedStyle(document.documentElement).getPropertyValue('--pulse-speed')
-        ) || 1.6;
-        targetSpeed = isFinite(rawSpeed) ? rawSpeed : 1.6;
+        // ✅ PERF FIX B: Use cached pulse speed directly (no getComputedStyle)
+        targetSpeed = currentPulseSpeed;
         currentSpeed += (targetSpeed - currentSpeed) * 0.04; // smooth lerp
 
         t += 0.016 * currentSpeed;
@@ -74,7 +112,8 @@ export function startVisualPulse(color = '#22c55e') {
         if (densityFactor > 1.2) {
             for (let i = 1; i <= 3; i++) {
                 ctx.beginPath();
-                ctx.arc(cx, cy, ringRadius + (Math.random()*20 - 10), 0, Math.PI * 2);
+                // ✅ PERF FIX C: Use pooled random instead of Math.random()
+                ctx.arc(cx, cy, ringRadius + (getPooledRandom()*20 - 10), 0, Math.PI * 2);
                 ctx.strokeStyle = `rgba(120,180,255,${0.05 * densityFactor})`;
                 ctx.lineWidth = 1;
                 ctx.stroke();
@@ -111,22 +150,29 @@ export function startVisualPulse(color = '#22c55e') {
 
         // Stage 8 "Cracks" (Illusion of Permanence Rigidity) or Shatter Anim
         if (currentStage === 8 || shatterAnim > 0) {
-            const crackAlpha = currentStage === 8 ? (0.3 + 0.3 * Math.random()) : shatterAnim;
+            const crackAlpha = currentStage === 8 ? (0.3 + 0.3 * getPooledRandom()) : shatterAnim;
             ctx.strokeStyle = `rgba(255, 255, 255, ${crackAlpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             
             // Shattered glass geometry
             for(let c=0; c < (currentStage===8 ? 40 : 80 * shatterAnim); c++) {
-                const angle1 = Math.random() * Math.PI * 2;
-                const r1 = Math.random() * ringRadius * 1.2;
-                const angle2 = angle1 + (Math.random() - 0.5) * 0.5;
-                const r2 = r1 + (Math.random() * 40 - 20);
+                const angle1 = getPooledRandom() * Math.PI * 2;
+                const r1 = getPooledRandom() * ringRadius * 1.2;
+                const angle2 = angle1 + (getPooledRandom() - 0.5) * 0.5;
+                const r2 = r1 + (getPooledRandom() * 40 - 20);
                 
                 ctx.moveTo(cx + Math.cos(angle1)*r1, cy + Math.sin(angle1)*r1);
                 ctx.lineTo(cx + Math.cos(angle2)*r2, cy + Math.sin(angle2)*r2);
             }
             ctx.stroke();
+        }
+
+        // ✅ PERF FIX C: Refresh random pool every 30 frames
+        frameCounter++;
+        if (frameCounter >= 30) {
+            generateRandomPool();
+            frameCounter = 0;
         }
 
         raf = requestAnimationFrame(draw);
@@ -136,6 +182,6 @@ export function startVisualPulse(color = '#22c55e') {
 
 export function stopVisualPulse() {
     if (raf) { cancelAnimationFrame(raf); raf = null; }
-    currentSpeed = 1.6; targetSpeed = 1.6;
+    currentSpeed = 1.6; targetSpeed = 1.6; currentPulseSpeed = 1.6;
     if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
