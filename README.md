@@ -113,6 +113,9 @@ Wisdom is delivered through universal archetypes:
 
 **30-day non-repetition buffer** ensures the Trickster perspective stays fresh across sessions.
 
+### Trickster Prime Library (v2.0)
+As of April 2026, KAIROS features a **curated "Prime" library of 50 hand-crafted Trickster interventions** grounded in Jungian archetypes (Coyote, Loki, Anansi, Eshu, BrerRabbit). These are stage-targeted, intensity-rated, and backed by Polyvagal and somatic cues. The original 500-entry library serves as dynamic variants for extended reach.
+
 ---
 
 ## 🧘 Somatic & Audio-Visual Integration
@@ -159,8 +162,11 @@ Visual and auditory oscillators map to SAP stages. Pulse speed and ring density 
 | **Reactivity** | Lightweight Pub/Sub Observer pattern (zero dependencies) |
 | **Audio** | Web Audio API · sine oscillators with attack/release envelopes |
 | **Visuals** | Canvas API · real-time frequency density visualization |
-| **Content** | 500-entry Trickster Library · 30-day non-repetition buffer |
+| **Content** | 50-entry Trickster Prime (curated) + 450 dynamic variants · 30-day non-repetition buffer |
 | **Math Guards** | Zero-entropy protection · NaN/Infinity guards throughout |
+| **Monitoring** | Anubis Spectral Module · FFT harmonic drift detection (Phase 2) |
+| **Validation** | Monte Carlo simulation (1,000 synthetic users) · Pressure Score correlation |
+| **Performance** | 5 critical optimizations (debounce, caching, pooling, throttle, distance) |
 
 ---
 
@@ -173,13 +179,27 @@ LuminarkStage5/
 │   └── styles.css          — Glassmorphism + frequency pulse animations
 ├── js/
 │   ├── engine.js           — SAP math engine (NSDT, stage classifier, Kairos)
-│   ├── content.js          — 500-entry Trickster Library
-│   ├── state.js            — Observer pattern + localStorage persistence
+│   ├── content.js          — Trickster Library (50 Prime + 450 Dynamic)
+│   ├── state.js            — Observer pattern + debounced localStorage persistence
 │   ├── audio.js            — Solfeggio frequency oscillator engine
-│   ├── visuals.js          — Canvas density visualizer
-│   └── app.js              — SPA controller (views, navigation, listeners)
+│   ├── visuals.js          — Canvas density visualizer with performance optimizations
+│   ├── app.js              — SPA controller (views, navigation, error handling)
+│   ├── simulation.js       — Monte Carlo validation engine
+│   ├── anubis.js           — Spectral anomaly detection (FFT, harmonic drift)
+│   ├── tricksterPrime.js   — 50 curated Trickster interventions
+│   ├── diagnostic.js       — NSDT question engine
+│   ├── stages.js           — SAP stage definitions (constitutional)
+│   ├── maat.js             — Ma'at ethical framework
+│   ├── cultural.js         — Cultural intelligence filter
+│   ├── lexicon.js          — Terminology system
+│   └── ai-sentinel.js      — Safety monitoring
 ├── manifest.json           — PWA manifest
-└── sw.js                   — Service Worker (cache-first, offline-ready)
+├── sw.js                   — Service Worker (cache-first, offline-ready, v4)
+├── LICENSE                 — Proprietary license
+├── .gitignore              — Git ignore rules
+└── docs/
+    ├── SCIENTIFIC_BRIDGE.md     — Citations: Polyvagal, Shannon, Cybernetics, Jung
+    └── RESPONSE_TO_AUDIT.md     — Formal audit response & production readiness
 ```
 
 ---
@@ -191,7 +211,7 @@ KAIROS is a fully static SPA — no server required.
 **GitHub Pages:**
 1. Go to repository Settings → Pages
 2. Set Source to `main` branch → `/ (root)`
-3. Access at `https://foreverforward760-crypto.github.io/LuminarkStage5`
+3. Access at `https://foreverforward760-crypto.github.io/LuminarkStage5_090`
 
 **Render / Netlify / Vercel:**
 Deploy as a static site pointing to repository root. No build step needed.
@@ -203,6 +223,7 @@ Deploy as a static site pointing to repository root. No build step needed.
 | Repository | Description |
 |-----------|-------------|
 | [090LuminarkHybridEngine090](https://github.com/foreverforward760-crypto/090LuminarkHybridEngine090) | Core SAP engine — dissolution, frequency adapter, NSDT builder |
+| [LuminarkStage5_090](https://github.com/foreverforward760-crypto/LuminarkStage5_090) | KAIROS Cognitive OS (this repository) |
 | [Anubis090](https://github.com/foreverforward760-crypto/Anubis090) | LUMINARK Portfolio Intelligence API (FastAPI wrapper) |
 | [LuminarkCodeWriter](https://github.com/foreverforward760-crypto/LuminarkCodeWriter) | LUMINARK Code Governance Engine |
 

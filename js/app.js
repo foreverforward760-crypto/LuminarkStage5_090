@@ -38,14 +38,22 @@ let diagCurrentQ    = 0;          // 0-indexed into NSDT_QUESTIONS
 let diagComplete    = false;
 // ─── INIT ───────────────────────────────────────────────────────────────────
 function init() {
-    initVisualizer();
-    stateManager.subscribe(onStateUpdate);
-    document.querySelectorAll('.nav-tab').forEach(tab =>
-        tab.addEventListener('click', () => navigate(tab.dataset.view))
-    );
-    document.body.addEventListener('click', () => initAudio(), { once: true });
-    recalculate();
-    navigate('diagnostic');
+    try {
+        initVisualizer();
+        stateManager.subscribe(onStateUpdate);
+        document.querySelectorAll('.nav-tab').forEach(tab =>
+            tab.addEventListener('click', () => navigate(tab.dataset.view))
+        );
+        document.body.addEventListener('click', () => {
+            try { initAudio(); } catch(e) { console.warn('Audio init failed:', e); }
+        }, { once: true });
+        recalculate();
+        navigate('diagnostic');
+    } catch (err) {
+        console.error('KAIROS initialization failed:', err);
+        const vc = $('viewContainer');
+        if (vc) vc.innerHTML = `<div style="padding:2rem;color:#ef4444;"><h2>Initialization Error</h2><p>${err.message}</p><p>Please refresh the page.</p></div>`;
+    }
 }
 
 // ─── STATE UPDATE ────────────────────────────────────────────────────────────

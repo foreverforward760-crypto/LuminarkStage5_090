@@ -1,7 +1,7 @@
 // sw.js - KAIROS Service Worker v1.1
 // Audit fix: robust cache strategy, works on GitHub Pages, Render, and custom domains
 
-const CACHE_NAME = 'kairos-v9';
+const CACHE_NAME = 'kairos-v4';
 const STATIC_ASSETS = [
     './',
     './index.html',
@@ -16,6 +16,11 @@ const STATIC_ASSETS = [
     './js/lexicon.js',
     './js/cultural.js',
     './js/ai-sentinel.js',
+    './js/diagnostic.js',
+    './js/stages.js',
+    './js/anubis.js',
+    './js/simulation.js',
+    './js/tricksterPrime.js',
     './manifest.json',
     './icon-192.png',
     './icon-512.png',
