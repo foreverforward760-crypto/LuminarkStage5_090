@@ -1,4 +1,5 @@
 // audio.js - KAIROS Frequency Engine with Envelopes
+// ✅ PERF: Coordinates with visuals.js cached pulse speed updates
 
 export const FREQUENCY_MAP = {
     174: { speed: 0.5, color: '#1e3a8a', rgb: '30,58,138',   intensity: 0.3, label: 'Foundation', desc: 'Pain relief, grounding, security. The base of the torus.' },
@@ -36,7 +37,17 @@ export function playFrequency(freq) {
     playing = true;
     currentFreq = freq;
     const cfg = FREQUENCY_MAP[freq] || FREQUENCY_MAP[528];
-    document.documentElement.style.setProperty('--pulse-speed', cfg.speed);
+    
+    // ✅ Update cached pulse speed in visuals module instead of CSS variable
+    // This avoids getComputedStyle calls in the animation loop
+    try {
+        const { updateCachedPulseSpeed } = await import('./visuals.js');
+        updateCachedPulseSpeed(cfg.speed);
+    } catch(e) {
+        // Fallback to CSS variables if import fails
+        document.documentElement.style.setProperty('--pulse-speed', cfg.speed);
+    }
+    
     document.documentElement.style.setProperty('--pulse-rgb', cfg.rgb);
     document.body.classList.add('pulse-active');
 }
