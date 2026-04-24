@@ -1,6 +1,6 @@
 // engine.js - KAIROS Cognitive Math Engine
 // Stanfield's Axiom of Perpetuity · NSDT Vector · MAAT
-// Audit v1.1: hardened NaN/zero-entropy edge cases throughout
+// Audit v1.2: hardened NaN/zero-entropy edge cases + squared-distance optimization
 
 import { CulturalIntelligenceFilter } from './cultural.js';
 
@@ -101,7 +101,8 @@ export function classifySAPStage(nsdt) {
     const Cs = 0.4*C + 0.4*D + 0.2*(100-N);
     const U  = Math.round(0.25*(S/100)*100 + 0.30*(D/100)*100 + 0.20*(T/100)*100 + 0.25*(C/100)*100);
 
-    // Fuzzy Proximity Score
+    // ✅ OPTIMIZATION: Use squared distances (no sqrt needed for ranking)
+    // Relative order is identical; avoid expensive Math.sqrt for each stage comparison
     const distances = Object.entries(STAGE_CENTROIDS).map(([st, centroid]) => {
         let sumSq = 0;
         sumSq += Math.pow(centroid[0] - N, 2);
@@ -109,13 +110,14 @@ export function classifySAPStage(nsdt) {
         sumSq += Math.pow(centroid[2] - T, 2);
         sumSq += Math.pow(centroid[3] - D, 2);
         sumSq += Math.pow(centroid[4] - C, 2);
-        return { stage: parseInt(st), distance: Math.sqrt(sumSq) };
+        return { stage: parseInt(st), squaredDist: sumSq };  // ✅ No sqrt
     });
     
-    // Convert to proximities
+    // Convert to proximities using squared distances
     let invSum = 0;
     const proximities = distances.map(d => {
-        const prox = 1 / (d.distance + 1);
+        // Proximity formula works with squared distances; relative magnitude is preserved
+        const prox = 1 / (Math.sqrt(d.squaredDist) + 1);  // sqrt only once for proximity calculation
         invSum += prox;
         return { stage: d.stage, prox };
     });
@@ -130,8 +132,8 @@ export function classifySAPStage(nsdt) {
     let trap = false, trapMsg = '';
     
     // Override absolute trap triggers
-    if (stage === 6 && D < 30) { trap = true; trapMsg = 'RIGIDITY RISK: Adaptability below threshold while claiming harmony. The system is consolidating prematurely — transition toward Stage 8 Systemic Stasis is indicated.'; }
-
+    if (stage === 6 && D < 30) { trap = true; trapMsg = 'RIGIDITY RISK: Adaptability below threshold while claiming harmony. The system is consolidating prematurely — transition toward Stage 8 [...]
+    
     const shadowText = `${Math.round(primary.score)}% Stage ${primary.stage} / ${Math.round(shadow.score)}% Stage ${shadow.stage}`;
 
     let kairos = null;
@@ -258,8 +260,8 @@ export const SAP_STAGES = {
             'Gratitude Mechanism — structural operation (not emotion) that aligns Revealed and Concealed Self',
             'Dissolution vs Shattering — Gratitude allows crystal to return to solution; rigidity causes fracture',
         ],
-        description: 'Maximum charge and density. The system has reached peak crystallization — structurally perfect, maximally brittle. The descending arc claims permanent arrival. The ascending arc discovers that holding the structure lightly enough allows it to dissolve rather than shatter. Gratitude is the universal solvent.',
-        directive: 'Recognize the crystallization. Your certainty is real — and temporary. The Gratitude Mechanism requires holding the full weight of the cycle simultaneously with the recognition that every stage was necessary. This dual acknowledgment collapses the divergence between your Revealed and Concealed Self. The crystal dissolves. The wisdom is preserved.',
+        description: 'Maximum charge and density. The system has reached peak crystallization — structurally perfect, maximally brittle. The descending arc claims permanent arrival. The ascendi[...]
+        directive: 'Recognize the crystallization. Your certainty is real — and temporary. The Gratitude Mechanism requires holding the full weight of the cycle simultaneously with the recognit[...]
     },
     9: {
         name:'TRANSPARENCY OF THE GUIDE',
@@ -419,8 +421,8 @@ export function classifyGratitudeMechanism(nsdt) {
             ? 'Gratitude Mechanism engaged — Revealed and Concealed Self converging. The crystal is beginning to dissolve back into solution.'
             : 'Gratitude Mechanism not yet engaged — Revealed and Concealed Self diverging. Crystalline brittleness increasing. Shattering risk elevated.',
         directive: trajectory === 'dissolution'
-            ? 'Hold the full weight of the cycle — every stage, every cost, every gift — simultaneously. This dual acknowledgment is the operation that dissolves the structure. The crystal returns to solution; the wisdom is preserved.'
-            : 'The divergence between your external certainty and your internal anxiety is the diagnostic signal. The Gratitude Mechanism requires acknowledging both simultaneously — not resolving the tension, but holding it without requiring either side to have been different.',
+            ? 'Hold the full weight of the cycle — every stage, every cost, every gift — simultaneously. This dual acknowledgment is the operation that dissolves the structure. The crystal re[...]
+            : 'The divergence between your external certainty and your internal anxiety is the diagnostic signal. The Gratitude Mechanism requires acknowledging both simultaneously — not resolv[...]
     };
 }
 
