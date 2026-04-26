@@ -21,6 +21,7 @@ import {
     NSDT_QUESTIONS, scoreNSDTMatrix, hasCynicalLoopSignal,
     AXIS_NAMES, AXIS_COLORS, AXIS_ABBREV
 } from './diagnostic.js';
+import { getTricksterPrimeInsight } from './tricksterPrime.js';
 
 window.handlePulseCheck = function(archetype, feedback) {
     pulseCheck(archetype, feedback);
