@@ -163,18 +163,56 @@ export function classifySAPStage(nsdt) {
         const isWitness      = witnessScore >= 55 && D >= 40 && T < (D + 30);
         const passengerPressure = T > 65 && D < 45;
         perpendicularAxisVisible = isWitness && !passengerPressure;
+        
+        // ─── FULL STAGE 5 MIDDLE PATH GATEWAY ARCHITECTURE ───────────────────
+        // 1. Bilateral Threshold: narrowest point of torus, maximum sensitivity
+        const bilateralThreshold = Math.abs(D - T) < 20 && N > 50; // Adaptability ≈ Tension
+        
+        // 2. Hidden Duality: Revealed vs. Concealed Self divergence
+        const revealedSelf = S; // What system projects (Stability)
+        const concealedSelf = C; // What system contains (Coherence)
+        const dualityDivergence = Math.abs(revealedSelf - concealedSelf);
+        
+        // 3. Middle Path Gateway: perpendicular axis as dimensional exit
+        const middlePathAccessible = perpendicularAxisVisible && dualityDivergence < 25;
+        
+        // 4. Observer Effect: conscious choice at max sensitivity → disproportionate reorganization
+        const observerEffectActive = isWitness && middlePathAccessible;
+        const observerEffectMultiplier = observerEffectActive ? 1.35 : 1.0; // 35% amplification
+        
+        // 5. Fractal Property: micro-Stage 5 exists within every stage
+        // (Detected separately below)
+        
+        // 6. Witness Position: poised stillness (Navigator vs. Passenger)
+        const witnessPositionMode = isWitness ? 'Navigator' : 'Passenger';
+        
+        // 7. Temporal Anomaly: Stage 5 has no natural duration — it is a point
+        const temporalAnomalyWarning = 'This threshold has no duration. The door must be known before arrival. Recognition has already begun the passage.';
+        
         witnessPosition = {
-            position:  isWitness ? 'Navigator' : 'Passenger',
+            position:  witnessPositionMode,
             score:     Math.round(witnessScore),
             passengerPressure,
             perpendicularAxisVisible,
-            intervention: isWitness
-                ? 'Middle Path Gateway is accessible. Witness Position confirmed. The perpendicular axis is visible.'
+            // Full Middle Path Gateway state
+            bilateralThreshold,
+            revealedSelf: Math.round(revealedSelf),
+            concealedSelf: Math.round(concealedSelf),
+            dualityDivergence: Math.round(dualityDivergence),
+            middlePathAccessible,
+            observerEffectActive,
+            observerEffectMultiplier,
+            temporalAnomalyWarning,
+            intervention: isWitness && middlePathAccessible
+                ? 'MIDDLE PATH GATEWAY OPEN. Witness Position confirmed. The perpendicular axis is visible. Observer Effect active: +35% reorganization bonus through Stages 6-9.'
+                : isWitness
+                ? 'Witness Position established but Middle Path not yet accessible. Reduce Revealed/Concealed divergence.'
                 : 'Witness Position not yet established. Reduce forward pressure. Locate the stillness at maximum tension.',
         };
+        
         // Observer Effect: conscious Witness amplifies advance probability
-        if (kairos && isWitness && !passengerPressure) {
-            const boost    = Math.round(witnessScore * 0.08);
+        if (kairos && observerEffectActive) {
+            const boost    = Math.round(witnessScore * 0.12); // Increased from 0.08 due to Observer Effect
             kairos.advance = Math.min(95, kairos.advance + boost);
             kairos.crisis  = Math.max(2,  kairos.crisis  - boost);
         }
@@ -185,6 +223,37 @@ export function classifySAPStage(nsdt) {
     // AND Complexity is high — the fractal duality signal present in every stage.
     microStage5 = stage !== 5 && Math.abs(T - D) < 15 && N > 55;
 
+    // Tumbling Inversion Principle: Even/Odd Stage Parity
+    const isEvenStage = [0, 2, 4, 6, 8].includes(stage);
+    const tumblingInversionState = isEvenStage
+        ? 'Physically Stable / Consciously Unstable'
+        : 'Physically Unstable / Consciously Stable';
+    
+    // Stage 6-8 Specific Context
+    let stageContext = {};
+    if (stage === 6) {
+        const conductorActive = witnessPosition && witnessPosition.observerEffectActive;
+        stageContext = {
+            conductorParadox: true,
+            flowQuality: conductorActive ? 'Sustainable Flow' : 'Brittle Flow',
+        };
+    }
+    if (stage === 7) {
+        const shadowActive = C > 40;
+        stageContext = {
+            individuationCrucible: true,
+            crucibleMode: shadowActive ? 'Conscious Distillation' : 'Chaotic Collapse',
+        };
+    }
+    if (stage === 8) {
+        const alignment = witnessPosition ? witnessPosition.dualityDivergence : Math.abs(S - C);
+        stageContext = {
+            crystallizationParadox: true,
+            gratitudeMechanismActive: alignment < 30,
+            outcome: alignment < 30 ? 'Dissolution' : 'Shattering Risk',
+        };
+    }
+    
     return {
         stage, P: Math.round(P), Cs: Math.round(Cs), U,
         trap, trapMsg, kairos,
@@ -193,6 +262,11 @@ export function classifySAPStage(nsdt) {
         primaryPct: primary.score, shadowPct: shadow.score, shadowStage: shadow.stage,
         // Tumbling Inversion state for this stage
         inversionState: getTumblingInversionState(stage),
+        // Tumbling Inversion Principle (even/odd parity)
+        tumblingInversionState,
+        isEvenStage,
+        // Stage-specific context
+        stageContext,
     };
 }
 
