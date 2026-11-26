@@ -1,3 +1,5 @@
+> **Concept demonstration deck — not a completed pilot.** This document presents proposed workflows and illustrative scenarios. It does not report verified customer deployments, measured pilot outcomes, predictive accuracy, clinical efficacy, or independent validation. Any figures or success criteria are proposed targets or synthetic examples unless explicitly supported by a cited independent source.
+
 # LUMINARK v8.2.0 — Pilot Demonstration Deck
 
 ## Slide 1: The Tumbling Inversion Principle
