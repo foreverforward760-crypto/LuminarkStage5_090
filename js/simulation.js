@@ -58,7 +58,7 @@ function simulateFullCycle(initialNSDT) {
     return {
         outcome: 'stable',
         pressureAtStage8: 0,
-        pressureAtStage5: pressureScores[Math.min(15, pressureScores.length - 1)] || 0,
+        pressureProxyBeforeStage8: pressureScores[Math.min(15, pressureScores.length - 1)] || 0,
         trajectory,
         pressureScores,
         finalNSDT: currentNSDT
@@ -114,40 +114,40 @@ export function runMonteCarlo(iterations = 1000) {
         
         if (simulation.outcome === 'shatter') {
             results.shatterCount++;
-            results.pressureAtStage5ByOutcome.shatter.push(simulation.pressureAtStage5);
+            results.pressureProxyBeforeStage8ByOutcome.shatter.push(simulation.pressureProxyBeforeStage8);
             results.pressureAtStage8ByOutcome.shatter.push(simulation.pressureAtStage8);
         } else if (simulation.outcome === 'dissolve') {
             results.dissolveCount++;
-            results.pressureAtStage5ByOutcome.dissolve.push(simulation.pressureAtStage5);
+            results.pressureProxyBeforeStage8ByOutcome.dissolve.push(simulation.pressureProxyBeforeStage8);
             results.pressureAtStage8ByOutcome.dissolve.push(simulation.pressureAtStage8);
         } else {
             results.stableCount++;
-            results.pressureAtStage5ByOutcome.stable.push(simulation.pressureAtStage5);
+            results.pressureProxyBeforeStage8ByOutcome.stable.push(simulation.pressureProxyBeforeStage8);
             results.pressureAtStage8ByOutcome.stable.push(simulation.pressureAtStage8);
         }
         
         results.trajectories.push({
             outcome: simulation.outcome,
-            pressureAtStage5: simulation.pressureAtStage5,
+            pressureProxyBeforeStage8: simulation.pressureProxyBeforeStage8,
             pressureAtStage8: simulation.pressureAtStage8
         });
     }
     
     // Calculate statistics
     const avgPressureProxy = {
-        shatter: results.pressureAtStage5ByOutcome.shatter.length > 0 
-            ? results.pressureAtStage5ByOutcome.shatter.reduce((a, b) => a + b, 0) / results.pressureAtStage5ByOutcome.shatter.length
+        shatter: results.pressureProxyBeforeStage8ByOutcome.shatter.length > 0 
+            ? results.pressureProxyBeforeStage8ByOutcome.shatter.reduce((a, b) => a + b, 0) / results.pressureProxyBeforeStage8ByOutcome.shatter.length
             : 0,
-        dissolve: results.pressureAtStage5ByOutcome.dissolve.length > 0
-            ? results.pressureAtStage5ByOutcome.dissolve.reduce((a, b) => a + b, 0) / results.pressureAtStage5ByOutcome.dissolve.length
+        dissolve: results.pressureProxyBeforeStage8ByOutcome.dissolve.length > 0
+            ? results.pressureProxyBeforeStage8ByOutcome.dissolve.reduce((a, b) => a + b, 0) / results.pressureProxyBeforeStage8ByOutcome.dissolve.length
             : 0,
-        stable: results.pressureAtStage5ByOutcome.stable.length > 0
-            ? results.pressureAtStage5ByOutcome.stable.reduce((a, b) => a + b, 0) / results.pressureAtStage5ByOutcome.stable.length
+        stable: results.pressureProxyBeforeStage8ByOutcome.stable.length > 0
+            ? results.pressureProxyBeforeStage8ByOutcome.stable.reduce((a, b) => a + b, 0) / results.pressureProxyBeforeStage8ByOutcome.stable.length
             : 0
     };
     
     // Calculate correlation between a 15-step lookback pressure proxy and a model-generated outcome; this is internal to the same rules
-    const pressureValues = results.trajectories.map(t => t.pressureAtStage5);
+    const pressureValues = results.trajectories.map(t => t.pressureProxyBeforeStage8);
     const outcomeValues = results.trajectories.map(t => 
         t.outcome === 'shatter' ? 2 : (t.outcome === 'dissolve' ? 1 : 0)
     );
@@ -161,7 +161,7 @@ export function runMonteCarlo(iterations = 1000) {
         shatterPct: Math.round((results.shatterCount / iterations) * 100),
         dissolvePct: Math.round((results.dissolveCount / iterations) * 100),
         stablePct: Math.round((results.stableCount / iterations) * 100),
-        averagePressureAtStage5ByOutcome: avgPressure5,
+        averagePressureProxyBeforeStage8ByOutcome: avgPressureProxy,
         correlationCoefficient: Math.round(correlationCoefficient * 1000) / 1000,
         timestamp: new Date().toISOString(),
         conclusion: correlationCoefficient > 0.6 
@@ -175,17 +175,17 @@ export function runMonteCarlo(iterations = 1000) {
  */
 export function getSimulationSummary(result) {
     return `
-Monte Carlo Synthetic Scenario Summary (${result.iterations} synthetic users):
+Monte Carlo Synthetic Scenario Summary (${result.iterations} synthetic vectors):
 
 Outcomes:
 - Shattering: ${result.shatterCount} (${result.shatterPct}%)
 - Dissolution: ${result.dissolveCount} (${result.dissolvePct}%)
 - Stable: ${result.stableCount} (${result.stablePct}%)
 
-Pressure Score at Stage 5 (Average):
-- Shattering trajectory: ${Math.round(result.averagePressureAtStage5ByOutcome.shatter * 1000) / 1000}
-- Dissolution trajectory: ${Math.round(result.averagePressureAtStage5ByOutcome.dissolve * 1000) / 1000}
-- Stable trajectory: ${Math.round(result.averagePressureAtStage5ByOutcome.stable * 1000) / 1000}
+15-step Lookback Pressure Proxy (Average):
+- Shattering trajectory: ${Math.round(result.averagePressureProxyBeforeStage8ByOutcome.shatter * 1000) / 1000}
+- Dissolution trajectory: ${Math.round(result.averagePressureProxyBeforeStage8ByOutcome.dissolve * 1000) / 1000}
+- Stable trajectory: ${Math.round(result.averagePressureProxyBeforeStage8ByOutcome.stable * 1000) / 1000}
 
 Correlation Coefficient: ${result.correlationCoefficient}
 Conclusion: ${result.conclusion}
