@@ -1,8 +1,10 @@
+> **Concept paper — not a validated AI-safety or alignment mechanism.** The repository's AI Sentinel is a keyword heuristic; it cannot verify factual accuracy, detect hallucinations reliably, or determine whether an output is safe. The document describes proposed alignment ideas, not demonstrated safety performance.
+
 # KAIROS for AI Safety & Alignment
 
 ## Overview
 
-KAIROS is a state-aware diagnostic engine originally designed for human cognitive regulation. Its underlying toroidal framework (Stanfield's Axiom of Perpetuity) maps directly to critical concerns in AI alignment: reward hacking, goal misgeneralization, and value lock-in.
+KAIROS is a state-aware self-reflection engine originally designed for human cognitive regulation. Its underlying toroidal framework (Stanfield's Axiom of Perpetuity) maps directly to critical concerns in AI alignment: reward hacking, goal misgeneralization, and value lock-in.
 
 ## Isomorphic Mappings
 
