@@ -218,7 +218,7 @@ function protocol(state) {
         return `
         <div style="background:rgba(16,185,129,0.07);border:1px solid rgba(16,185,129,0.25);border-radius:14px;padding:14px;margin-bottom:14px">
           <div style="font-size:0.72rem;color:#10b981;letter-spacing:2px;margin-bottom:10px;font-weight:700">
-            ${isSustainable ? '✦ SUSTAINABLE FLOW — CONDUCTOR'S PARADOX ACTIVE' : '⚠ BRITTLE FLOW — WITNESS POSITION NOT DETECTED'}
+            ${isSustainable ? "✦ SUSTAINABLE FLOW — CONDUCTOR'S PARADOX ACTIVE" : '⚠ BRITTLE FLOW — WITNESS POSITION NOT DETECTED'}
           </div>
           <div style="font-size:0.85rem;color:${isSustainable?'rgba(110,231,183,0.8)':'rgba(252,165,165,0.8)'};line-height:1.6;margin-bottom:10px">
             ${fq.label}
