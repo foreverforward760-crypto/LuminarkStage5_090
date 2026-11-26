@@ -63,7 +63,7 @@ The Rigidity Risk (Illusion of Permanence) trap state (Stage 8, rigidity form) i
 C ≥ 95 AND D ≤ 30 AND T ≤ 20
 ```
 
-An AI system exhibiting this signature is maximally self-consistent, minimally open to revision, and artificially low in internal conflict — the exact signature of deceptive alignment. The SAP engine detects this in O(1) time.
+The document hypothesizes that a particular score pattern could be compared with deceptive-alignment concerns. The current KAIROS engine cannot inspect an AI model's internal state, detect deceptive alignment, or establish that a score pattern is deceptive. No O(1) detection capability is implemented.
 
 ---
 
@@ -71,7 +71,7 @@ An AI system exhibiting this signature is maximally self-consistent, minimally o
 
 A critical gap in current alignment research is the treatment of cultural context as noise rather than signal. Stanfield's Axiom of Perpetuity, developed through 20+ years of research in developmental psychology and trauma recovery, treats cultural context as a first-class variable.
 
-The Cultural Intelligence Filter (`js/cultural.js`) corrects SAP stage assessments for:
+The Cultural Intelligence Filter (`js/cultural.js`) applies hand-authored adjustments based on selected context cues. It has not been validated as a debiasing method and does not establish fairness across cultures. Its current rules include:
 
 - **Code-switching:** Adaptive cognitive flexibility systematically misread as instability by monocultural training data
 - **Historical trauma load:** Intergenerational burden misread as individual deficit
@@ -86,13 +86,13 @@ This is not a social justice addendum. It is a technical correction for known tr
 
 The 42 Negative Confessions from the Egyptian Book of the Dead (Papyrus of Ani) provide one of the earliest documented ethical constraint systems. KAIROS implements these as a lightweight behavioral boundary checker — each confession maps to a behavioral category that, when violated, registers as an NSDT tension spike.
 
-This is functionally equivalent to Constitutional AI's principle list, with the advantage of being culturally validated across millennia rather than constructed ad hoc by a single research team.
+This is functionally equivalent to Constitutional AI's principle list, as a proposed alternative vocabulary. No independent cross-cultural validation or comparative performance study has been conducted.
 
 ---
 
 ## 6. Deployment Architecture
 
-KAIROS is production-ready as a supervisory overlay:
+KAIROS is not production-ready as an AI supervisory overlay. The current repository contains a local reflection PWA and a keyword heuristic; it has no secure AI-output integration or validated safety layer. A future research architecture might look like:
 
 ```
 [AI System Output] → [AI Sentinel: analyzeAIOutput()] → [SAP Stage Classification]
@@ -102,7 +102,7 @@ KAIROS is production-ready as a supervisory overlay:
                                               [Stage 5 detected] → [BIFURCATION check]
 ```
 
-The AI Sentinel (`js/ai-sentinel.js`) operates in real-time with no external dependencies. Full integration with any REST API requires approximately 40 lines of adapter code.
+The AI Sentinel (`js/ai-sentinel.js`) performs local keyword matching on supplied text. It cannot verify facts, reliably detect hallucinations, or assess safety. Any integration with an external AI system would require system-specific security, privacy, reliability, and independent evaluation work; the effort cannot be estimated from this prototype.
 
 ---
 
