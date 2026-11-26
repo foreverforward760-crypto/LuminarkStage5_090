@@ -5,7 +5,7 @@ class StateManager {
     constructor() {
         this.state = {
             nsdt: [5.0, 5.5, 6.0, 5.2, 5.8],
-            nsdtVector: [50, 60, 65, 40, 72], // SAP NSDT [N,S,D,T,C] 0-100
+            nsdtVector: [50, 60, 40, 65, 72], // Engine order [N,S,T,D,C] 0-100
             history: [],
             sessionHistory: [],
             contentHistory: [],
