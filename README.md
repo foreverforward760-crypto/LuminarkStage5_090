@@ -143,7 +143,7 @@ const arcDirection = (tensionTrend > 0 && adaptabilityTrend < 0)
 | Metric | Pre-v8.2.1 | v8.2.1 | Delta |
 |--------|-----------|--------|-------|
 | **Signal Retention** | 62% | 89% | +27% |
-| **Bifurcation Accuracy** | 74% | 96% | +22% |
+| **Bifurcation testing** | Internal test scenarios only | No independently measured real-world accuracy established |
 | **Observer Effect** | N/A | +35% Applied | Optimal |
 | **System Health** | Yellow (Unstable) | Green (Dynamic Stability) | ✅ Corrected |
 
@@ -307,7 +307,7 @@ Visual and auditory oscillators map to SAP stages. Pulse speed and ring density 
 | **Content** | 50-entry Trickster Prime (curated) + 450 dynamic variants · 30-day non-repetition buffer |
 | **Math Guards** | Zero-entropy protection · NaN/Infinity guards throughout |
 | **Monitoring** | Anubis Spectral Module · FFT harmonic drift detection (Phase 2) |
-| **Validation** | Monte Carlo simulation (1,000 synthetic users) · Pressure Score correlation |
+| **Validation** | Synthetic simulations and internal checks | Not evidence of real-world predictive or clinical validity |
 | **Performance** | 5 critical optimizations (debounce, caching, pooling, throttle, distance) |
 
 ---
