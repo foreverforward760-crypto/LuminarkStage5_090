@@ -66,7 +66,17 @@ These axis definitions and scoring rules are project-defined implementation conv
 
 ## Running locally
 
-No build system or package installation is required for the current static PWA. Serve the repository over localhost with any simple static HTTP server, then open `index.html`. Service-worker installation generally requires localhost or HTTPS.
+No runtime dependency installation is required for the current static PWA. Serve the repository over localhost with any simple static HTTP server, then open `index.html`. Service-worker installation generally requires localhost or HTTPS.
+
+## Regression tests
+
+The repository includes a minimal Node test runner configuration (no third-party test dependencies):
+
+```bash
+npm test
+```
+
+Tests cover the questionnaire-to-engine axis mapping, basic stage output, heuristic-only AI Sentinel behavior, and the synthetic-only Monte Carlo notice. They do not validate the framework or its predictions.
 
 ## Verification status
 
