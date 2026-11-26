@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#8b5cf6">
-    <meta name="description" content="KAIROS — State-aware cognitive operating system. Stanfield's Axiom of Perpetuity (SAP) maps human systemic states across a 10-stage toroidal cycle for diagnosis and developmental guidance.">
+    <meta name="description" content="KAIROS is an experimental self-reflection and journaling PWA using the author's 0-9-0 framework. Scores are internal interpretations, not diagnosis or validated psychological measurements.">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="KAIROS">
@@ -14,18 +14,18 @@
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
     <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
-    <title>KAIROS · Cognitive OS — SAP Diagnostic Engine</title>
+    <title>KAIROS · Reflection and Journaling Prototype</title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div id="app" class="kairos-app">
+    <div id="app" class="kairos-app">\n        <div role="note" style="margin:10px 14px;padding:10px 14px;border:1px solid rgba(245,158,11,.35);border-radius:8px;background:rgba(245,158,11,.08);color:#e7d7b4;font-size:11px;line-height:1.6;">\n          <strong>SELF-REFLECTION PROTOTYPE — NOT A DIAGNOSTIC OR TREATMENT TOOL.</strong> Scores are based on user-entered answers and project-defined rules; they are not validated measures of mental health, cognition, physiology, or risk. Journal and check-in content is stored in this browser localStorage and is not encrypted by this app. Audio frequencies are tones, not medical treatment.\n        </div>
 
-        <!-- Shadow Probe Overlay (Mentalism Bridge — 4.5s NSDT calibration) -->
+        <!-- Reflection introduction overlay; no clinical or physiological calibration is performed. -->
         <div id="shadowProbeOverlay" class="hidden" style="position:fixed;inset:0;background:rgba(11,14,20,0.97);z-index:200;display:flex;align-items:center;justify-content:center;text-align:center;padding:40px;backdrop-filter:blur(12px);">
           <div style="max-width:520px;">
-            <div class="kairos-badge" style="margin-bottom:24px;border-color:var(--accent-blue);">KAIROS ENGINE ACTIVE</div>
+            <div class="kairos-badge" style="margin-bottom:24px;border-color:var(--accent-blue);">KAIROS PROTOTYPE ACTIVE</div>
             <div id="probeText" style="font-size:1.45rem;color:#e9edf5;line-height:1.6;font-style:italic;margin-bottom:32px;"></div>
-            <div style="font-size:0.72rem;color:#3f6ea3;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;" id="probeSubtext">Calibrating NSDT Centroids... Aligning Ma'at Protocol...</div>
+            <div style="font-size:0.72rem;color:#3f6ea3;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;" id="probeSubtext">Loading the local reflection framework...</div>
             <div style="height:2px;background:rgba(255,255,255,0.08);width:200px;margin:0 auto;overflow:hidden;border-radius:1px;">
               <div id="probeLoaderFill" style="height:100%;background:linear-gradient(90deg,#3f6ea3,#8b5cf6);width:0%;transition:width 4.3s linear;border-radius:1px;"></div>
             </div>
@@ -44,7 +44,7 @@
         </header>
 
         <nav class="app-nav glass">
-            <button class="nav-tab active" data-view="diagnostic">Diagnostic</button>
+            <button class="nav-tab active" data-view="diagnostic">Reflection Check-In</button>
             <button class="nav-tab" data-view="protocol">Protocol</button>
             <button class="nav-tab" data-view="frequencies">Frequencies</button>
             <button class="nav-tab" data-view="breathwork">Breathwork</button>
