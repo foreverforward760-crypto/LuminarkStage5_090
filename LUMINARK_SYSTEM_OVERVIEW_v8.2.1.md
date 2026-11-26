@@ -9,9 +9,9 @@
 
 **LUMINARK** is a unified diagnostic and navigation system grounded in **Stanfield's Axiom of Perpetuity (SAP)** — a mathematical framework that models consciousness, system behavior, and organizational dynamics through a 10-stage phenomenological cycle. 
 
-The system transforms raw behavioral, operational, and financial data into **precise, actionable guidance** by recognizing patterns that conventional analytics miss: the inverse relationship between physical stability and conscious awareness, the critical bifurcation at Stage 5 where conscious choice reorganizes entire systems, and the specific mechanisms by which systems either dissolve gracefully or shatter catastrophically.
+The system transforms raw behavioral, operational, and financial data into **precise, actionable guidance** by recognizing patterns that conventional analytics miss: the inverse relationship between physical stability and conscious awareness, the critical bifurcation at Stage 5 where conscious choice is interpreted within the framework as a transition point; the model's descriptions of dissolution and shattering are conceptual outcomes, not established predictions.
 
-**Core Impact:** LUMINARK enables organizations, AI systems, and individuals to navigate complexity with unprecedented precision by making visible the hidden architectural principles that govern all cyclic processes.
+**Project hypothesis:** LUMINARK explores whether the author's 0-9-0 framework can provide a consistent vocabulary for reflecting on cyclic processes across different domains. It does not establish unprecedented precision or a universal law governing all systems.
 
 ---
 
@@ -19,7 +19,7 @@ The system transforms raw behavioral, operational, and financial data into **pre
 
 ### 1.1 The Stanfield Axiom of Perpetuity (SAP)
 
-**Definition:** SAP is a mathematical model of cyclic transformation that describes how all systems (biological, organizational, technological, psychological) move through 10 distinct stages of stability, consciousness, and structural reorganization.
+**Definition:** SAP is the author's conceptual and mathematical framework for interpreting cyclic transformation through ten stages of stability, awareness, and structural reorganization. Its applicability to biological, organizational, technological, and psychological systems is a framework proposition that requires domain-specific evidence.
 
 **Core Principle: The Tumbling Inversion**
 
