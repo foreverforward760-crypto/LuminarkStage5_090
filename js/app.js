@@ -19,7 +19,7 @@ import { getRandomConfession } from './maat.js';
 import { setLexiconMode, getTerm, getCurrentMode } from './lexicon.js';
 import {
     NSDT_QUESTIONS, scoreNSDTMatrix, hasCynicalLoopSignal,
-    AXIS_NAMES, AXIS_COLORS, AXIS_ABBREV
+    AXIS_NAMES, AXIS_COLORS, AXIS_ABBREV, toEngineVector
 } from './diagnostic.js';
 import { getTricksterPrimeInsight } from './tricksterPrime.js';
 
