@@ -1,16 +1,22 @@
 {
   "name": "KAIROS · Cognitive OS",
   "short_name": "KAIROS",
-  "description": "State-aware cognitive operating system powered by Stanfield's Axiom of Perpetuity (SAP). Maps human systemic states across a 10-stage toroidal cycle for diagnosis, intervention, and developmental guidance.",
+  "description": "Experimental self-reflection and journaling PWA using the author's 0-9-0 framework. Not a diagnostic, treatment, or validated assessment tool.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone"],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
   "background_color": "#0b0e14",
   "theme_color": "#8b5cf6",
   "orientation": "portrait-primary",
   "lang": "en-US",
-  "categories": ["health", "lifestyle", "productivity"],
+  "categories": [
+    "lifestyle",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
@@ -36,16 +42,26 @@
     {
       "name": "Protocol",
       "short_name": "Protocol",
-      "description": "Open the NSDT diagnostic protocol",
+      "description": "Open the NSDT reflection check-in",
       "url": "./index.html#protocol",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     },
     {
       "name": "Journal",
       "short_name": "Journal",
       "description": "Open the stage-aware reflection journal",
       "url": "./index.html#journal",
-      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
     }
   ]
 }
