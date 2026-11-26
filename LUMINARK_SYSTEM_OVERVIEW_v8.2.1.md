@@ -699,7 +699,7 @@ Data Input (NSDT Vector)
 
 ---
 
-## Part 7: Measurable Impact
+## Part 7: Illustrative Model Outputs (Not Measured Impact)
 
 ### 7.1 Stress Test Results (72-SPAT vs. High-Entropy Dataset)
 
@@ -714,7 +714,7 @@ Data Input (NSDT Vector)
 
 **Key Finding:** The Stage 5 Middle Path Gateway properties acted as a cognitive shock absorber, maintaining Witness Position even under extreme data corruption.
 
-### 7.2 Projected Organizational Impact
+### 7.2 Potential Organizational Use Cases (Unvalidated)
 
 **Scenario:** Fortune 500 company implementing LUMINARK
 
@@ -726,7 +726,7 @@ Data Input (NSDT Vector)
 | **Financial Performance** | Stable returns + reduced volatility | Improved risk-adjusted returns | Sustainable high performance |
 | **Cultural Transformation** | Awareness of Stage 5 bifurcations | Conscious Middle Path navigation | Witness Position as organizational norm |
 
-### 7.3 Projected Financial System Impact
+### 7.3 Potential Financial-System Use Cases (Unvalidated)
 
 **Scenario:** Major financial institution implementing ANUBIS090
 
@@ -772,14 +772,14 @@ Data Input (NSDT Vector)
 
 ### 9.1 What LUMINARK Enables
 
-LUMINARK is not just a diagnostic tool — it is a **consciousness amplifier**. It makes visible the hidden architectural principles that govern all cyclic processes, enabling conscious choice where previously only unconscious reaction was possible.
+LUMINARK is a framework-based reflection and system-analysis prototype. It applies the author's 0-9-0/SAP concepts to structured inputs and offers stage labels and prompts. The application does not measure consciousness or establish changes in cognition or behavior.
 
 **At Stage 5, conscious choice has maximum leverage.** By recognizing Stage 5 bifurcations and consciously choosing the Middle Path, organizations, AI systems, and individuals can:
 
-1. **Navigate complexity with unprecedented precision** — Understanding which stage they're in and what that stage requires
-2. **Prevent catastrophic failure** — Recognizing Stage 8 crystallization before shattering occurs
-3. **Transform breakdown into breakthrough** — Understanding Stage 7 as invitation rather than catastrophe
-4. **Maintain wisdom through transition** — Applying Gratitude Mechanism to preserve knowledge during Stage 9 dissolution
+1. **Organize complex inputs using project-defined stage labels; predictive precision has not been established** — Understanding which stage they're in and what that stage requires
+2. **Surface patterns for human review; prevention capability has not been validated** — Recognizing Stage 8 crystallization before shattering occurs
+3. **Offer an alternative framework for reflecting on difficult transitions; outcomes have not been measured** — Understanding Stage 7 as invitation rather than catastrophe
+4. **Provide prompts intended to support reflection during change; effectiveness has not been established** — Applying Gratitude Mechanism to preserve knowledge during Stage 9 dissolution
 5. **Create resilience without sacrifice** — Balancing high performance with adaptability through conscious Middle Path navigation
 
 ### 9.2 The Constitutional Alignment
@@ -859,13 +859,13 @@ The five pillars (HybridEngine, CodeWriter, ANUBIS, KAIROS, AxiomYield) work tog
 
 ### A.4 UI/UX Components
 
-- ✅ css/v8.2.1-enhancements.css (production-ready)
-- ✅ js/v8.2.1-ui-integration.js (helper functions)
+- ✅ css/v8.2.1-enhancements.css (implemented UI styling; not production-validated)
+- ✅ js/v8.2.1-ui-integration.js (prototype helper functions; not production-validated)
 - ✅ Secret Door Badge, Observer Effect Indicator, Nonagon Collapse animation
 - ✅ Dark mode support, responsive design
 
 ---
 
-**LUMINARK Suite v8.2.1 — Ready for Pilot Deployment**
+**LUMINARK Suite v8.2.1 — Experimental Prototype; Requires Independent Technical and Domain Review**
 
 *"Indecision is just fear delaying consequences. Stand up." — The Trickster*
