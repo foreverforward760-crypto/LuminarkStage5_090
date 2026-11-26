@@ -3,7 +3,8 @@
 // Stanfield's Axiom of Perpetuity v8.1 · MAAT · Meridian Axiom Alignment Technologies
 
 // ─── QUESTION BANK ───────────────────────────────────────────────────────────
-// Questionnaire vector order: [Complexity, Stability, Adaptability, Tension, Coherence].\n// app.js explicitly reorders this to the engine's [N, S, T, D, C] input order.
+// Questionnaire vector order: [Complexity, Stability, Adaptability, Tension, Coherence].
+// app.js explicitly reorders this to the engine's [N, S, T, D, C] input order.
 // Scoring: option index 0–n maps to axis values 0.0–1.0
 
 export const NSDT_QUESTIONS = [
