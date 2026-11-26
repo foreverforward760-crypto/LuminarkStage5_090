@@ -4,7 +4,7 @@
 import { classifySAPStage, computePressureScore, classifyGratitudeMechanism } from './engine.js';
 
 /**
- * Generate random NSDT vector within realistic bounds
+ * Generate a random NSDT vector in engine order [N, S, T, D, C].
  */
 function generateRandomNSDT() {
     const N = Math.random() * 100;  // Novelty: 0-100
@@ -18,14 +18,14 @@ function generateRandomNSDT() {
 /**
  * Generate a random NSDT trajectory with bounded perturbations. This does not force a 0→9→0 cycle.
  */
-function simulateFullCycle(initialNSDT) {
+function simulateRandomTrajectory(initialNSDT) {
     let currentNSDT = [...initialNSDT];
     const trajectory = [];
     const pressureScores = [];
     
     // Try up to five batches of 20 synthetic perturbations.
     for (let cycle = 0; cycle < 5; cycle++) {
-        // Traverse stages 0→9
+        // Continue the random trajectory; stage order is not forced.
         for (let step = 0; step < 20; step++) {
             // Apply small random perturbations
             currentNSDT = currentNSDT.map(v => {
@@ -110,7 +110,7 @@ export function runMonteCarlo(iterations = 1000) {
     
     for (let i = 0; i < iterations; i++) {
         const initialNSDT = generateRandomNSDT();
-        const simulation = simulateFullCycle(initialNSDT);
+        const simulation = simulateRandomTrajectory(initialNSDT);
         
         if (simulation.outcome === 'shatter') {
             results.shatterCount++;
