@@ -1,7 +1,7 @@
 > **Exploratory comparison document.** The relationships drawn between SAP/KAIROS stages and neuroscience, psychology, physiology, or other scientific frameworks are conceptual analogies and research hypotheses, not established scientific equivalences or clinical validation. The presence of a parallel does not demonstrate that the SAP/KAIROS model measures the same construct or produces the same outcome. Verify every external citation before relying on it.
 
-# KAIROS Scientific Bridge
-## Mapping Stanfield's Axiom of Perpetuity to Established Scientific Frameworks
+# KAIROS — Exploratory Scientific Comparisons
+## Comparing Stanfield's Axiom of Perpetuity with Selected Scientific Frameworks
 
 **Author:** Richard L. Stanfield  
 **Organization:** Meridian Axiom Alignment Technologies (MAAT)  
@@ -20,7 +20,7 @@ Stanfield's Axiom of Perpetuity (SAP) is a toroidal 10-stage framework for model
 
 ### 1.1 Polyvagal Foundation
 
-Dr. Stephen Porges' Polyvagal Theory (1994, 2011) describes the autonomic nervous system as a hierarchical three-state system governed by the vagus nerve:
+Dr. Stephen Porges' Polyvagal Theory proposes a model of autonomic state and social engagement. The following comparison is an exploratory analogy only; it is not a validated diagnostic map or a consensus clinical classification:
 
 | Polyvagal State | Physiological Profile | Behavioral Expression |
 |-----------------|----------------------|-----------------------|
@@ -28,7 +28,9 @@ Dr. Stephen Porges' Polyvagal Theory (1994, 2011) describes the autonomic nervou
 | **Sympathetic Activation** (Mobilization) | Low HRV, high cortisol, fight/flight | Defense, urgency, conflict, high output |
 | **Dorsal Vagal** (Immobilization) | Collapsed HRV, dissociation, freeze | Shutdown, withdrawal, void states |
 
-### 1.2 SAP Stage Mapping to Autonomic States
+### 1.2 Exploratory SAP-to-Polyvagal Analogy
+
+The stage correspondences below are proposed conceptual comparisons. KAIROS does not measure heart-rate variability, vagal tone, cortisol, autonomic activity, or trauma response, and no one-to-one physiological mapping has been demonstrated.
 
 The SAP torus is not a linear progression — it is a toroidal cycle whose stages map directly onto Polyvagal state transitions:
 
@@ -45,17 +47,13 @@ The SAP torus is not a linear progression — it is a toroidal cycle whose stage
 | **8 — VESSEL OF GROUNDING** | The Crystal | Dorsal/Sympathetic mixed | Freeze activation beneath apparent stability; concealed anxiety = dorsal vagal intrusion beneath sympathetic rigidity |
 | **9 — TRANSPARENCY OF THE GUIDE** | The Nonagon | Ventral Vagal (dissolving) | HRV normalizing; ego-regulatory circuits releasing; transition to dorsal reset |
 
-### 1.3 Key Clinical Correspondence
+### 1.3 Limits of the Comparison
 
-**The Witness Position (Stage 5)** maps precisely to what Polyvagal clinicians call *vagal tone recovery under activation* — the capacity to maintain parasympathetic access (Ventral Vagal tone) while the sympathetic system is engaged. This is measurable via Heart Rate Variability (HRV). Practitioners with high resting HRV demonstrate greater capacity to navigate bifurcation states without defaulting to fight/flight or freeze. The Witness Position is not metaphysical — it is a physiological state with a measurable autonomic signature.
+The Stage 5 Witness Position and Stage 8 Crystallization Paradox are framework concepts. They are not established physiological states and cannot be identified from this application. The current PWA collects self-report answers only; it does not measure HRV, vagal tone, cortisol, or other biomarkers. No claim is made that a stage predicts autonomic state or identifies an effective clinical intervention.
 
-**Stage 8's Crystallization Paradox** maps to the clinical pattern of *sympathetic freeze*: the body presenting as stable (low visible arousal) while the nervous system is in a hybrid dorsal-sympathetic state of concealed hyperactivation. This is the autonomic basis of the Revealed/Concealed Self divergence. The Gratitude Mechanism, understood through Polyvagal Theory, is the clinical practice of *neuroception shift* — deliberately activating the social engagement system (Ventral Vagal) to interrupt the freeze-rigidity loop.
+Any future research comparing these concepts with autonomic measures would require a preregistered protocol, appropriate instruments, qualified clinical oversight, and independent replication.
 
-**The 0-9-0 dissolution** maps to the complete autonomic reset cycle: Dorsal Vagal shutdown (PLENARA) → Ventral Vagal emergence (Stages 1-3) → Sympathetic activation (Stages 4-5) → Ventral Vagal peak (Stage 6) → Sympathetic re-engagement (Stage 7) → Mixed state (Stage 8) → Dissolution return to Dorsal (Stage 9 → 0).
-
----
-
-## 2. Information Theory: Shannon Entropy as Cognitive Load Measurement
+## 2. Information Theory: Shannon Entropy as a Mathematical Analogy
 
 ### 2.1 Shannon Entropy Foundation
 
@@ -71,9 +69,9 @@ Where:
 High entropy = high uncertainty = high information content = high cognitive load.  
 Low entropy = high predictability = low information content = cognitive efficiency or rigidity.
 
-### 2.2 The KAIROS NSDT Engine as Entropy-Based Diagnostic
+### 2.2 The KAIROS NSDT Engine as an Entropy-Inspired Scoring Heuristic
 
-The KAIROS engine's `computePressureScore()` function directly implements Shannon's entropy formula applied to the NSDT vector:
+The KAIROS engine's `computePressureScore()` function computes Shannon entropy after normalizing the supplied vector values. This is a mathematical operation on user-entered scores; it does not establish that the result measures cognitive load, psychological pressure, or physiological entropy:
 
 ```javascript
 export function calculateEntropy(arr) {
@@ -101,7 +99,7 @@ The NSDT vector `[N, S, D, T, C]` (Complexity, Stability, Adaptability, Tension,
 | **8 — VESSEL OF GROUNDING** | Low entropy (false low) | Apparent predictability masking suppressed variance; the statistical signature of rigid systems approaching failure |
 | **9 — TRANSPARENCY OF THE GUIDE** | Returning to minimum | Graceful information release; the system returning to baseline noise floor |
 
-### 2.4 The Pressure Score as Composite Entropic Index
+### 2.4 The Pressure Score as a Project-Defined Composite Heuristic
 
 The engine computes Decision Pressure as:
 
@@ -115,7 +113,7 @@ Where:
 
 This composite index operationalizes **cognitive load** in information-theoretic terms: high pressure = high uncertainty = high cognitive load = the system is processing more information than its current structure can efficiently channel. The ACT/REFLECT/DELAY/PARADOX decision signals are entropy-threshold triggers with precise numerical boundaries.
 
-### 2.5 The Stage 8 Low-Entropy Trap
+### 2.5 The Stage 8 Low-Entropy Hypothesis
 
 Shannon's entropy reveals a non-obvious property of Stage 8: **a system at maximum rigidity will display artificially low entropy despite being in a high-risk state**. A perfectly crystalline system is maximally ordered — and therefore maximally fragile at the first perturbation. This is the information-theoretic basis of the Crystallization Paradox. In communication systems, this is equivalent to a channel that has eliminated all redundancy — it achieves theoretical maximum efficiency, but a single bit error propagates as catastrophic failure. The biological analogue is the cardiac arrhythmia: a heart with zero HRV is technically "maximally regular" and clinically dangerous.
 
@@ -163,7 +161,7 @@ A system in which both the controlled variable and the controller are simultaneo
 
 ---
 
-## 4. Integration: The SAP Engine as Multi-Framework Instrument
+## 4. Integration: An Exploratory Cross-Framework Comparison
 
 | SAP Concept | Polyvagal Equivalent | Information Theory Equivalent | Second-Order Cybernetics Equivalent |
 |-------------|---------------------|------------------------------|--------------------------------------|
@@ -180,7 +178,7 @@ A system in which both the controlled variable and the controller are simultaneo
 
 ---
 
-## 5. Implications for Clinical and Institutional Application
+## 5. Potential Research Questions and Institutional Hypotheses
 
 ### 5.1 Measurability
 
@@ -189,17 +187,17 @@ Each SAP stage corresponds to measurable autonomic, informational, and cyberneti
 - **Decision latency and variability** provide behavioral entropy proxies
 - **Self-report consistency across sessions** provides second-order cybernetic coherence metrics
 
-### 5.2 Therapeutic Application
+### 5.2 Reflective and Therapeutic Research Questions
 
-The Polyvagal mapping makes KAIROS directly applicable in somatic therapy, trauma recovery, and developmental psychology contexts. Stage classification is not merely diagnostic — it indicates the specific **autonomic intervention** most likely to be effective at each stage (breathwork protocols, frequency therapy, and somatic practices are already implemented in the KAIROS engine, each mapped to the correct stage via the Polyvagal correlate).
+The framework may be explored as a vocabulary for reflection and journaling. The current application does not establish therapeutic efficacy, identify autonomic states, or recommend stage-specific treatment. Breathwork prompts and audio tones are optional user experiences; their presence in the software does not demonstrate a clinical effect. Any therapeutic application would require independent study and qualified clinical oversight.
 
 ### 5.3 Organizational Application
 
-The Information Theory mapping makes KAIROS applicable to organizational systems analysis. Team or system NSDT vectors can be aggregated to compute collective entropy and pressure scores. Stage 8 organizational crystallization (maximum process rigidity, loss of adaptive capacity) is a measurable Information Theory phenomenon — not just a metaphor.
+The Information Theory comparison suggests research questions for organizational analysis. The current application does not collect organizational data or validate aggregated NSDT vectors as measures of collective entropy, rigidity, or adaptive capacity. Stage 8 organizational crystallization remains a framework hypothesis.
 
 ### 5.4 AI Alignment Application
 
-The Second-Order Cybernetics mapping makes KAIROS applicable to AI safety research (see `docs/AI_SAFETY_OPPORTUNITY.md`). The distinction between first-order systems (respond to inputs) and second-order systems (respond to their response to inputs) is the formal basis for the Witness Position as an AI alignment primitive.
+The Second-Order Cybernetics mapping may motivate hypotheses for AI safety research (see `docs/AI_SAFETY_OPPORTUNITY.md`). The distinction between first-order systems (respond to inputs) and second-order systems (respond to their response to inputs) is the formal basis for the Witness Position as an AI alignment primitive.
 
 ---
 
