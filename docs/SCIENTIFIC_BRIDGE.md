@@ -1,3 +1,5 @@
+> **Exploratory comparison document.** The relationships drawn between SAP/KAIROS stages and neuroscience, psychology, physiology, or other scientific frameworks are conceptual analogies and research hypotheses, not established scientific equivalences or clinical validation. The presence of a parallel does not demonstrate that the SAP/KAIROS model measures the same construct or produces the same outcome. Verify every external citation before relying on it.
+
 # KAIROS Scientific Bridge
 ## Mapping Stanfield's Axiom of Perpetuity to Established Scientific Frameworks
 
