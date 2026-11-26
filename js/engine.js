@@ -93,7 +93,7 @@ const STAGE_CENTROIDS = {
     9: [80, 20, 85, 15, 15],
 };
 
-export function classifySAPStage(nsdt) {
+// Engine vector order is [N, S, T, D, C]: Novelty/Complexity, Stability, Tension, Dynamism/Adaptability, Coherence.\nexport function classifySAPStage(nsdt) {
     const safe = Array.isArray(nsdt) ? nsdt : [50,50,50,50,50];
     const [N, S, T, D, C] = safe.map(v => (isFinite(v) ? Math.min(100, Math.max(0, v)) : 50));
 
