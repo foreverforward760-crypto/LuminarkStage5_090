@@ -4,7 +4,7 @@ import { updatePulseSpeed } from './visuals.js';
 
 export const FREQUENCY_MAP = {
     174: { speed: 0.5, color: '#1e3a8a', rgb: '30,58,138',   intensity: 0.3, label: 'Foundation', desc: '174 Hz sine tone. The label is an aesthetic association; no specific health effect is established.' },
-    285: { speed: 0.7, color: '#2563eb', rgb: '37,99,235',   intensity: 0.4, label: 'Healing',    desc: '285 Hz sine tone. No cellular or medical effect is established by this application.' },
+    285: { speed: 0.7, color: '#2563eb', rgb: '37,99,235',   intensity: 0.4, label: 'Restoration (label only)',    desc: '285 Hz sine tone. No cellular or medical effect is established by this application.' },
     396: { speed: 0.9, color: '#7c3aed', rgb: '124,58,237',  intensity: 0.5, label: 'Liberation', desc: '396 Hz sine tone. No specific psychological effect is established.' },
     417: { speed: 1.1, color: '#9333ea', rgb: '147,51,234',  intensity: 0.6, label: 'Change',     desc: '417 Hz sine tone. No specific psychological effect is established.' },
     432: { speed: 1.2, color: '#06b6d4', rgb: '6,182,212',   intensity: 0.6, label: 'Natural',    desc: '432 Hz sine tone. No nervous-system effect is established.' },
