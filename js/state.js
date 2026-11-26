@@ -1,4 +1,4 @@
-// state.js - KAIROS State Manager (Pub/Sub + localStorage)
+// state.js - KAIROS State Manager (Pub/Sub + browser localStorage)\n// Journal and check-in content is stored locally in the browser and is not encrypted by this app.
 // ✅ PERF FIX A: Debounced localStorage writes (300ms idle delay)
 
 class StateManager {
