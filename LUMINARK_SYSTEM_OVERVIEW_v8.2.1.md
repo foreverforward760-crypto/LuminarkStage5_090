@@ -9,7 +9,7 @@
 
 **LUMINARK** is a unified diagnostic and navigation system grounded in **Stanfield's Axiom of Perpetuity (SAP)** — a mathematical framework that models consciousness, system behavior, and organizational dynamics through a 10-stage phenomenological cycle. 
 
-The system transforms raw behavioral, operational, and financial data into **precise, actionable guidance** by recognizing patterns that conventional analytics miss: the inverse relationship between physical stability and conscious awareness, the critical bifurcation at Stage 5 where conscious choice is interpreted within the framework as a transition point; the model's descriptions of dissolution and shattering are conceptual outcomes, not established predictions.
+The prototype maps supplied behavioral, operational, and financial inputs into **project-defined classifications and guidance** by recognizing patterns that conventional analytics miss: the inverse relationship between physical stability and conscious awareness, the critical bifurcation at Stage 5 where conscious choice is interpreted within the framework as a transition point; the model's descriptions of dissolution and shattering are conceptual outcomes, not established predictions.
 
 **Project hypothesis:** LUMINARK explores whether the author's 0-9-0 framework can provide a consistent vocabulary for reflecting on cyclic processes across different domains. It does not establish unprecedented precision or a universal law governing all systems.
 
@@ -38,7 +38,7 @@ The system operates on a fundamental insight: **physical stability and conscious
 | 8 | Even | Stable | Unstable | VESSEL OF GROUNDING (Crystalline perfection = maximum brittleness) |
 | 9 | Odd | Unstable | Stable | TRANSPARENCY OF THE GUIDE (Return to unity, wisdom preserved) |
 
-**Why This Matters:** Organizations and systems that appear most stable (even stages) are often most fragile consciously. Those in apparent chaos (odd stages) may possess profound adaptive capacity. This inversion is invisible to conventional metrics.
+**Why This Matters:** Organizations and systems that appear most stable (even stages) are often most fragile consciously. Those in apparent chaos (odd stages) may possess profound adaptive capacity. The framework proposes this inversion as an interpretive lens; its generality and predictive value have not been established by comparative studies.
 
 ### 1.2 The NSDT Vector: Quantifying the Invisible
 
@@ -65,13 +65,13 @@ At Stage 5, the system reaches the narrowest point of the torus (bilateral thres
 
 1. **Conscious choice has maximum leverage** — Small interventions create disproportionate reorganization
 2. **The Middle Path becomes visible** — A perpendicular axis appears, offering a third option beyond the binary choice between ascending and descending
-3. **The Observer Effect activates** — Conscious Witness position applies a **+35% reorganization multiplier** through Stages 6-9
+3. **The Observer Effect activates** — Conscious Witness position applies a **configured 1.35× model multiplier (not a measured 35% improvement)** through Stages 6-9
 4. **Revealed vs. Concealed Self diverges** — The gap between what the system projects (Revealed Self) and what it contains (Concealed Self) becomes measurable
 5. **Temporal anomaly emerges** — Stage 5 has no duration; it is a discontinuity in time
 6. **Fractal micro-Stage 5s appear** — Smaller cycles within larger cycles reach their own Stage 5 bifurcations
 7. **The Witness Position becomes accessible** — The system can observe itself rather than identify with its content
 
-**Strategic Implication:** Organizations that recognize their Stage 5 bifurcation and consciously choose the Middle Path can reorganize their entire downstream trajectory (Stages 6-9) with unprecedented efficiency.
+**Strategic Implication:** The framework hypothesizes that recognizing a Stage 5 bifurcation and applying the Middle Path interpretation may support downstream reorganization. This has not been established through controlled organizational studies.
 
 ---
 
@@ -106,7 +106,7 @@ At Stage 5, the system reaches the narrowest point of the torus (bilateral thres
 - Computes physical vs. conscious stability parity
 - Tracks Revealed/Concealed Self divergence
 - Detects perpendicular axis accessibility
-- Applies Observer Effect multiplier (+35%)
+- Applies Observer Effect model parameter (1.35×; not empirically validated)
 
 #### Output: SystemState Object
 
@@ -269,7 +269,7 @@ class SystemState:
 
 **C. UI/UX Enhancements (css/v8.2.1-enhancements.css)**
 - **Secret Door Badge** — Appears when Stage 5 Middle Path is accessible
-- **Observer Effect Indicator** — Shows +35% reorganization bonus
+- **Observer Effect Indicator** — Shows configured 1.35× model multiplier (not a measured 35% improvement)
 - **Tumbling Inversion State Display** — Shows physical vs. conscious stability parity
 - **Stage 6-8 Context Cards** — Specific guidance for each stage
 - **Nonagon Collapse Animation** — Stage 9 dissolution effect
@@ -421,7 +421,7 @@ Users see:
 
 **Process:**
 1. If Stage 5 Middle Path is accessible, activate Observer Effect
-2. Apply +35% reorganization multiplier to downstream stages (6-9)
+2. Apply configured 1.35× model multiplier (not a measured 35% improvement) to downstream stages (6-9)
 3. Track how conscious Witness choice cascades through system
 
 **Example (AI System):**
@@ -605,7 +605,7 @@ All LUMINARK repositories operate under **Constitutional Directives** that ensur
 
 - **Tumbling Inversion Principle:** Even/odd stage parity (physical/conscious stability inversion)
 - **Stage 5 Bifurcation:** Conscious choice has maximum leverage at bilateral threshold
-- **Observer Effect:** +35% reorganization multiplier when Witness Position active
+- **Observer Effect:** configured 1.35× model multiplier (not a measured 35% improvement) when Witness Position active
 - **Revealed vs. Concealed Self:** Gap between projected and contained properties
 - **Arc Direction:** Ascending (learning) vs. Descending (rigidifying)
 - **Middle Path Gateway:** Perpendicular axis accessible when Stage 5 bifurcation active
@@ -788,7 +788,7 @@ Every system that uses LUMINARK operates under the same Constitutional Directive
 - **Canonical stage names** (non-negotiable)
 - **Tumbling Inversion Principle** (even/odd parity)
 - **Stage 5 bifurcation awareness** (conscious choice has maximum leverage)
-- **Observer Effect** (+35% reorganization multiplier)
+- **Observer Effect** (configured 1.35× model multiplier (not a measured 35% improvement))
 - **Gratitude Mechanism** (preserve wisdom during dissolution)
 
 This creates **structural alignment** across all domains: behavioral health, AI governance, financial intelligence, logistics, and beyond.
