@@ -1,5 +1,5 @@
-// diagnostic.js — KAIROS Cognitive OS · State Diagnostic Engine
-// 15-Question NSDT Matrix with Trajectory Tracking & Cultural Intelligence Corrections
+// diagnostic.js — KAIROS self-reflection check-in
+// 15-question project-defined NSDT scoring matrix; not a validated psychometric or clinical assessment.
 // Stanfield's Axiom of Perpetuity v8.1 · MAAT · Meridian Axiom Alignment Technologies
 
 // ─── QUESTION BANK ───────────────────────────────────────────────────────────
