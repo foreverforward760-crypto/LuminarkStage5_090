@@ -1,5 +1,5 @@
-// simulation.js - Monte Carlo Synthetic Stress Test
-// Validates Pressure Score as leading indicator of systemic failure (Shatter vs Dissolve at Stage 8)
+// simulation.js - Monte Carlo synthetic scenario exploration
+// Random inputs and rule-generated outcomes are not empirical validation.
 
 import { classifySAPStage, computePressureScore, classifyGratitudeMechanism } from './engine.js';
 
@@ -16,14 +16,14 @@ function generateRandomNSDT() {
 }
 
 /**
- * Simulate one full SAP cycle (0→9→0) with trajectory tracking
+ * Generate a random NSDT trajectory with bounded perturbations. This does not force a 0→9→0 cycle.
  */
 function simulateFullCycle(initialNSDT) {
     let currentNSDT = [...initialNSDT];
     const trajectory = [];
     const pressureScores = [];
     
-    // Simulate 5 full cycles
+    // Try up to five batches of 20 synthetic perturbations.
     for (let cycle = 0; cycle < 5; cycle++) {
         // Traverse stages 0→9
         for (let step = 0; step < 20; step++) {
@@ -45,7 +45,7 @@ function simulateFullCycle(initialNSDT) {
                 return {
                     outcome: gratitude.trajectory === 'shattering' ? 'shatter' : 'dissolve',
                     pressureAtStage8: pressure,
-                    pressureAtStage5: pressureScores[Math.max(0, pressureScores.length - 15)] || 0,
+                    pressureProxyBeforeStage8: pressureScores[Math.max(0, pressureScores.length - 15)] || 0,
                     trajectory,
                     pressureScores,
                     finalNSDT: currentNSDT
@@ -88,14 +88,14 @@ function calculateCorrelation(x, y) {
 }
 
 /**
- * Run Monte Carlo simulation with N synthetic users
+ * Run Monte Carlo simulation with N synthetic vectors; no human/user data is involved.
  */
 export function runMonteCarlo(iterations = 1000) {
     const results = {
         shatterCount: 0,
         dissolveCount: 0,
         stableCount: 0,
-        pressureAtStage5ByOutcome: {
+        pressureProxyBeforeStage8ByOutcome: {
             shatter: [],
             dissolve: [],
             stable: []
@@ -134,7 +134,7 @@ export function runMonteCarlo(iterations = 1000) {
     }
     
     // Calculate statistics
-    const avgPressure5 = {
+    const avgPressureProxy = {
         shatter: results.pressureAtStage5ByOutcome.shatter.length > 0 
             ? results.pressureAtStage5ByOutcome.shatter.reduce((a, b) => a + b, 0) / results.pressureAtStage5ByOutcome.shatter.length
             : 0,
@@ -146,7 +146,7 @@ export function runMonteCarlo(iterations = 1000) {
             : 0
     };
     
-    // Calculate correlation between pressure at Stage 5 and eventual outcome
+    // Calculate correlation between a 15-step lookback pressure proxy and a model-generated outcome; this is internal to the same rules
     const pressureValues = results.trajectories.map(t => t.pressureAtStage5);
     const outcomeValues = results.trajectories.map(t => 
         t.outcome === 'shatter' ? 2 : (t.outcome === 'dissolve' ? 1 : 0)
@@ -165,8 +165,8 @@ export function runMonteCarlo(iterations = 1000) {
         correlationCoefficient: Math.round(correlationCoefficient * 1000) / 1000,
         timestamp: new Date().toISOString(),
         conclusion: correlationCoefficient > 0.6 
-            ? 'VALIDATED: Pressure Score is a strong leading indicator of systemic failure.'
-            : 'INCONCLUSIVE: Pressure Score shows moderate correlation with outcomes.'
+            ? 'SYNTHETIC ONLY: this correlation is produced by the same model rules that assign the outcomes. It is not evidence of prediction or real-world validity.'
+            : 'SYNTHETIC ONLY: no empirical outcome data was used. This result cannot establish predictive validity.'
     };
 }
 
@@ -175,7 +175,7 @@ export function runMonteCarlo(iterations = 1000) {
  */
 export function getSimulationSummary(result) {
     return `
-Monte Carlo Validation Results (${result.iterations} synthetic users):
+Monte Carlo Synthetic Scenario Summary (${result.iterations} synthetic users):
 
 Outcomes:
 - Shattering: ${result.shatterCount} (${result.shatterPct}%)
