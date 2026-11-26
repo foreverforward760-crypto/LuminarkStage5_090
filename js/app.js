@@ -23,9 +23,10 @@ import {
 } from './diagnostic.js';
 import { getTricksterPrimeInsight } from './tricksterPrime.js';
 
-window.handlePulseCheck = function(archetype, feedback) {
+window.handlePulseCheck = function(archetype, feedback, button = null) {
     pulseCheck(archetype, feedback);
-    const btn = event.currentTarget;
+    const btn = button || (document.activeElement instanceof HTMLButtonElement ? document.activeElement : null);
+    if (!btn) return;
     btn.innerText = feedback === 'disrupt' ? 'Weight Increased' : 'Weight Lowered';
     btn.style.opacity = '0.5';
     btn.disabled = true;
