@@ -9,10 +9,10 @@ import { classifySAPStage, computePressureScore, classifyGratitudeMechanism } fr
 function generateRandomNSDT() {
     const N = Math.random() * 100;  // Novelty: 0-100
     const S = Math.random() * 100;  // Stability: 0-100
-    const D = Math.random() * 100;  // Dynamism: 0-100
     const T = Math.random() * 100;  // Tension: 0-100
+    const D = Math.random() * 100;  // Dynamism/Adaptability: 0-100
     const C = Math.random() * 100;  // Coherence: 0-100
-    return [N, S, D, T, C];
+    return [N, S, T, D, C];
 }
 
 /**
