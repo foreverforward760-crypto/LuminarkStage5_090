@@ -1,3 +1,5 @@
+> **Status and evidence note:** This is a system-design overview, not a validation report. Stage scores, NSDT values, multipliers, simulations, and impact estimates are project-defined model outputs or hypotheses. No independent clinical, psychometric, physiological, predictive, or customer-outcome validation is established by this document. The project owner states that the core 0-9-0/SAP concepts originated with him; NSDT and the Container Rule were introduced by AI as supporting implementation mechanisms.
+
 # LUMINARK System Overview v8.2.1
 ## Comprehensive Architecture, Capabilities, and Systemic Impact
 
