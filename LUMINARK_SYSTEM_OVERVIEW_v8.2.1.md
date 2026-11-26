@@ -714,29 +714,28 @@ Data Input (NSDT Vector)
 
 **Key Finding:** The Stage 5 Middle Path Gateway properties acted as a cognitive shock absorber, maintaining Witness Position even under extreme data corruption.
 
-### 7.2 Potential Organizational Use Cases (Unvalidated)
+### 7.2 Potential Organizational Use Cases (Hypotheses Only)
 
-**Scenario:** Fortune 500 company implementing LUMINARK
+Possible areas for future investigation include decision-process reflection, operational handover, and review of organizational change. No Fortune 500 deployment, crisis prevention, decision-speed improvement, downtime reduction, or financial outcome has been measured or verified.
 
-| Dimension | Year 1 | Year 2 | Year 3 |
-|-----------|--------|--------|--------|
-| **Crisis Prevention** | 1 major crisis prevented | 2-3 crises prevented | Systemic resilience established |
-| **Strategic Clarity** | 40% improvement in decision speed | 60% improvement | Decisions made at Stage 5 bifurcations |
-| **Operational Resilience** | 25% reduction in unplanned downtime | 45% reduction | Supply chain disruptions managed proactively |
-| **Financial Performance** | Stable returns + reduced volatility | Improved risk-adjusted returns | Sustainable high performance |
-| **Cultural Transformation** | Awareness of Stage 5 bifurcations | Conscious Middle Path navigation | Witness Position as organizational norm |
+| Potential metric | Evidence currently available |
+|---|---|
+| Crisis prevention | Not measured |
+| Decision speed or clarity | Not measured |
+| Operational downtime | Not measured |
+| Financial performance | Not measured |
+| Organizational adoption | Not measured |
 
-### 7.3 Potential Financial-System Use Cases (Unvalidated)
+### 7.3 Potential Financial-System Use Cases (Hypotheses Only)
 
-**Scenario:** Major financial institution implementing ANUBIS090
+ANUBIS090 and related repositories explore financial-system applications of the framework. The following outcomes have not been measured. No portfolio volatility, drawdown, crisis lead-time, Sharpe ratio, or hidden-leverage detection result is claimed.
 
-| Metric | Current State | With ANUBIS | Improvement |
-|--------|---------------|------------|-------------|
-| **Portfolio Volatility** | 18% | 14% | -22% |
-| **Drawdown Duration** | 180 days average | 60 days average | -67% |
-| **Crisis Prediction Lead Time** | 0 days (post-hoc) | 60+ days advance | Actionable |
-| **Risk-Adjusted Returns** | 0.85 Sharpe | 1.15 Sharpe | +35% |
-| **Hidden Leverage Detection** | 40% accuracy | 96% accuracy | +140% |
+| Potential metric | Evidence currently available |
+|---|---|
+| Portfolio volatility or drawdown | No validated results |
+| Crisis prediction lead time | No validated results |
+| Risk-adjusted returns | No validated results |
+| Hidden leverage detection | No benchmark or accuracy result |
 
 ---
 
@@ -774,13 +773,13 @@ Data Input (NSDT Vector)
 
 LUMINARK is a framework-based reflection and system-analysis prototype. It applies the author's 0-9-0/SAP concepts to structured inputs and offers stage labels and prompts. The application does not measure consciousness or establish changes in cognition or behavior.
 
-**At Stage 5, conscious choice has maximum leverage.** By recognizing Stage 5 bifurcations and consciously choosing the Middle Path, organizations, AI systems, and individuals can:
+**Within the framework, Stage 5 is treated as a point of heightened choice.** The following are intended reflection or research directions, not demonstrated outcomes:
 
 1. **Organize complex inputs using project-defined stage labels; predictive precision has not been established** — Understanding which stage they're in and what that stage requires
 2. **Surface patterns for human review; prevention capability has not been validated** — Recognizing Stage 8 crystallization before shattering occurs
 3. **Offer an alternative framework for reflecting on difficult transitions; outcomes have not been measured** — Understanding Stage 7 as invitation rather than catastrophe
 4. **Provide prompts intended to support reflection during change; effectiveness has not been established** — Applying Gratitude Mechanism to preserve knowledge during Stage 9 dissolution
-5. **Create resilience without sacrifice** — Balancing high performance with adaptability through conscious Middle Path navigation
+5. **Explore resilience and adaptability** — Investigate whether the framework's Middle Path prompts are useful in specific contexts; no effect has been measured
 
 ### 9.2 The Constitutional Alignment
 
