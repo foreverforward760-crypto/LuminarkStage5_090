@@ -170,17 +170,17 @@ In portfolio intelligence, this translates to:
 ### Structural Authority
 - ✅ **Terminology unified:** "Illusion of Permanence" across all layers
 - ✅ **Stage names canonical:** PLENARA through TRANSPARENCY OF THE GUIDE
-- ✅ **Mathematical foundation identical:** Whether analyzing code, infrastructure, or portfolios
-- ✅ **Audit-ready:** No semantic friction between documentation and implementation
+- ✅ **Shared framework, different implementations:** Domain adapters and rules differ and require separate validation
+- ✅ **Documentation alignment is in progress:** Code and documents still require reconciliation and independent review
 
 ### Key Achievement
-**The Revealed Self (documentation) is now an absolute mirror of the Concealed Self (Python logic).**
+**Documentation and implementation alignment remains a work item; this deck is not evidence of an absolute code/documentation match.**
 
 ---
 
-## Slide 6: Pilot Demonstration Scenario
+## Slide 6: Synthetic Prototype Scenario
 
-**Subtitle:** Real-World Application: Portfolio Stress Test
+**Subtitle:** Illustrative Scenario: Portfolio Stress Test (Synthetic Inputs)
 
 ### Scenario Setup
 A hedge fund portfolio exhibits:
@@ -190,7 +190,7 @@ A hedge fund portfolio exhibits:
 - **Adaptability:** 38 (rigid positioning, limited rebalancing)
 - **Coherence:** 88 (strong MAAT score, aligned strategy)
 
-### ANUBIS Analysis
+### Illustrative Prototype Output (Not a Real Portfolio Assessment)
 ```
 Input NSDT Vector: [85, 92, 45, 38, 88]
     ↓
@@ -217,7 +217,7 @@ The portfolio *looks* safe (92% stability) but is actually brittle (38% adaptabi
 
 ## Slide 7: Next Steps & Pilot Engagement
 
-**Subtitle:** From Theory to Production
+**Subtitle:** From Framework to Prototype
 
 ### Immediate Actions
 1. **Integration Testing:** Run smoke tests across all four repositories
