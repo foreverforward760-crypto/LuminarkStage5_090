@@ -1,3 +1,5 @@
+> **Opportunity analysis — proposed research and product directions only.** It does not establish a working AI-safety product, validated detection performance, customer adoption, or measurable market outcomes. Any claims about alignment, bias reduction, hallucination detection, or risk mitigation require independent evaluation.
+
 # The AI Safety Opportunity: Stanfield's Axiom of Perpetuity as an Alignment Framework
 
 **Author:** Richard L. Stanfield  
