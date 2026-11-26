@@ -653,7 +653,7 @@ function attachListeners(viewId) {
             // Questionnaire order: [Complexity, Stability, Adaptability, Tension, Coherence].
             // Engine order: [Novelty/Complexity, Stability, Tension, Dynamism/Adaptability, Coherence].
             const vector = result.vector || result;
-            const engineVector = [vector[0], vector[1], vector[3], vector[2], vector[4]];
+            const engineVector = toEngineVector(vector);
             const nsdt5  = vector.map(v => v / 10);
 
             stateManager.updateNSDTVector(engineVector);
