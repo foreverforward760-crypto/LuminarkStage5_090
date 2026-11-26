@@ -483,11 +483,11 @@ function frequencies(state) {
 
 function breathwork(state) {
     const breathMap = {
-        void:      { pattern:'4-7-8',        label:'Restorative',  in:4, hold1:7, out:8, hold2:0,  desc:'Activates parasympathetic. Ideal for PLENARA reset.' },
-        crossroads:{ pattern:'Box Breathing', label:'Witness Positioning', in:4, hold1:4, out:4, hold2:4, desc:'Box Breathing creates the momentary stillness required to locate the Witness Position at Stage 5. The equal-duration pattern interrupts forward momentum long enough for the perpendicular axis — the Middle Path Gateway — to become visible. Do not use this to delay. Use it to perceive.' },
-        flow:      { pattern:'Natural Rhythm',label:'Amplifying',  in:4, hold1:0, out:6, hold2:0,  desc:'Enhances flow state coherence. Extend exhale for deeper synchrony.' },
-        heat:      { pattern:'Long Exhale',   label:'Decompressing',in:4,hold1:0, out:8, hold2:0,  desc:'Rapidly reduces cortisol. Use before making decisions under pressure.' },
-        absolute:  { pattern:'5-5-5-5',      label:'Grounding',   in:5, hold1:5, out:5, hold2:5,  desc:'Slows certainty loops. Ideal for Stage 8/9 rigidity release.' },
+        void:      { pattern:'4-7-8',        label:'Restorative',  in:4, hold1:7, out:8, hold2:0,  desc:'Paced 4-7-8 breathing prompt. This app does not measure autonomic activity or establish a parasympathetic effect.' },
+        crossroads:{ pattern:'Box Breathing', label:'Witness Positioning', in:4, hold1:4, out:4, hold2:4, desc:'Box breathing is offered as a paced-breathing pause. It does not measure or reveal a physiological Witness Position. Stop if uncomfortable or lightheaded.' },
+        flow:      { pattern:'Natural Rhythm',label:'Amplifying',  in:4, hold1:0, out:6, hold2:0,  desc:'Natural breathing pace prompt. This app does not establish an effect on flow, coherence, or physiology.' },
+        heat:      { pattern:'Long Exhale',   label:'Decompressing',in:4,hold1:0, out:8, hold2:0,  desc:'Long-exhale pacing prompt. No cortisol reduction has been measured or established by this app. Stop if dizzy or uncomfortable.' },
+        absolute:  { pattern:'5-5-5-5',      label:'Grounding',   in:5, hold1:5, out:5, hold2:5,  desc:'5-5-5-5 breathing prompt for a brief pause. No effect on certainty loops or rigidity has been established.' },
     };
     const b = breathMap[state.currentCategory] || breathMap.flow;
     const sap = state.sapStage || classifySAPStage(state.nsdtVector);
