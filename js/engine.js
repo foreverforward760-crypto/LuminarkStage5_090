@@ -179,7 +179,7 @@ export function classifySAPStage(nsdt) {
         
         // 4. Observer Effect: conscious choice at max sensitivity → disproportionate reorganization
         const observerEffectActive = isWitness && middlePathAccessible;
-        const observerEffectMultiplier = observerEffectActive ? 1.35 : 1.0; // 35% amplification
+        const observerEffectMultiplier = observerEffectActive ? 1.35 : 1.0; // Configured model parameter; not a measured 35% performance gain.
         
         // 5. Fractal Property: micro-Stage 5 exists within every stage
         // (Detected separately below)
@@ -205,7 +205,7 @@ export function classifySAPStage(nsdt) {
             observerEffectMultiplier,
             temporalAnomalyWarning,
             intervention: isWitness && middlePathAccessible
-                ? 'MIDDLE PATH GATEWAY OPEN. Witness Position confirmed. The perpendicular axis is visible. Observer Effect active: +35% reorganization bonus through Stages 6-9.'
+                ? 'MIDDLE PATH GATEWAY OPEN. Witness Position confirmed. The perpendicular axis is visible. The configured 1.35x Observer Effect model parameter is active; this is not a measured 35% reorganization improvement.'
                 : isWitness
                 ? 'Witness Position established but Middle Path not yet accessible. Reduce Revealed/Concealed divergence.'
                 : 'Witness Position not yet established. Reduce forward pressure. Locate the stillness at maximum tension.',
