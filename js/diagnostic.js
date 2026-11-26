@@ -295,3 +295,15 @@ export function hasCynicalLoopSignal(answers) {
 }
 
 export { AXIS_NAMES, AXIS_COLORS, AXIS_ABBREV };
+
+
+/**
+ * Convert questionnaire order [Complexity, Stability, Adaptability, Tension, Coherence]
+ * to engine order [N, S, T, D, C] = [Complexity/Novelty, Stability, Tension, Adaptability/Dynamism, Coherence].
+ */
+export function toEngineVector(questionnaireVector) {
+    if (!Array.isArray(questionnaireVector) || questionnaireVector.length !== 5) {
+        throw new TypeError('Expected a five-value questionnaire vector.');
+    }
+    return [questionnaireVector[0], questionnaireVector[1], questionnaireVector[3], questionnaireVector[2], questionnaireVector[4]];
+}
