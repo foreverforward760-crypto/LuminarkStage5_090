@@ -4,7 +4,7 @@
 
 ## Overview
 
-KAIROS is a state-aware self-reflection engine originally designed for human cognitive regulation. Its underlying toroidal framework (Stanfield's Axiom of Perpetuity) maps directly to critical concerns in AI alignment: reward hacking, goal misgeneralization, and value lock-in.
+KAIROS is an experimental self-reflection and journaling PWA. Its underlying toroidal framework (Stanfield's Axiom of Perpetuity) can be compared conceptually with AI-alignment concerns such as reward hacking, goal misgeneralization, and value lock-in. These comparisons are research hypotheses, not validated mappings or working AI-safety controls.
 
 ## Isomorphic Mappings
 
