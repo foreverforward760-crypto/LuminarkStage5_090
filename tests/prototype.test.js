@@ -36,3 +36,18 @@ test('Monte Carlo output is explicitly marked synthetic, not validated', () => {
   assert.match(result.conclusion, /^SYNTHETIC ONLY:/);
   assert.ok(Number.isFinite(result.correlationCoefficient));
 });
+
+
+import { escapeHtml } from '../js/security.js';
+
+test('HTML escaping prevents journal text from becoming executable markup', () => {
+  assert.equal(
+    escapeHtml('<img src=x onerror="alert(1)"> & \'quoted\''),
+    '&lt;img src=x onerror=&quot;alert(1)&quot;&gt; &amp; &#39;quoted&#39;'
+  );
+});
+
+test('HTML escaping handles nullish and non-string values safely', () => {
+  assert.equal(escapeHtml(null), '');
+  assert.equal(escapeHtml(42), '42');
+});
