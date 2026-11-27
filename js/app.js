@@ -142,15 +142,15 @@ function renderStageAnalysis(stageIdx, color, shadowText) {
     return `
     <div style="background:rgba(20, 30, 48, 0.6); border: 1px solid ${color}40; border-radius: 12px; padding: 16px; margin-bottom: 16px;">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-           <h3 style="color:${color}; font-size:1.1rem; margin:0;">Deep Sync Analysis</h3>
+           <h3 style="color:${color}; font-size:1.1rem; margin:0;">Framework Reflection</h3>
            ${shadowText ? `<div style="font-size:0.75rem; color:#8dafd3; background:rgba(255,255,255,0.05); padding:4px 8px; border-radius:4px; font-weight:600; letter-spacing:0.5px;">BLEED: ${shadowText}</div>` : ''}
         </div>
         <div style="margin-bottom: 12px;">
-            <strong style="color:#8dafd3; font-size:0.85rem;">THE NARRATIVE</strong>
+            <strong style="color:#8dafd3; font-size:0.85rem;">FRAMEWORK INTERPRETATION</strong>
             <p style="font-size:0.95rem; color:#d0e8ff; margin:4px 0 0 0; line-height:1.4;">${data.description}</p>
         </div>
         <div style="margin-bottom: 12px;">
-            <strong style="color:#8dafd3; font-size:0.85rem;">SYSTEMIC DIRECTIVE</strong>
+            <strong style="color:#8dafd3; font-size:0.85rem;">SUGGESTED REFLECTION</strong>
             <p style="font-size:0.95rem; color:#d0e8ff; margin:4px 0 0 0; line-height:1.4;">${data.directive}</p>
         </div>
         <div>
