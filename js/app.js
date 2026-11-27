@@ -929,7 +929,7 @@ function renderCulturalPanel(state) {
       <div style="margin-top:16px;border-top:1px solid rgba(255,255,255,0.06);padding-top:14px;">
         <div style="font-size:0.75rem;color:#5a8ab0;letter-spacing:1px;margin-bottom:10px;font-weight:600">LEXICON MODE</div>
         <div class="lexicon-selector">
-          ${['default','engineering','clinical','creative'].map(m=>`
+          ${['default','engineering','professional','creative'].map(m=>`
           <button class="lexicon-btn ${getCurrentMode()===m?'active':''}" data-lexicon="${m}">${m.charAt(0).toUpperCase()+m.slice(1)}</button>`).join('')}
         </div>
         <div style="font-size:0.8rem;color:#5a8ab0">Adapts SAP terminology for your professional context.</div>
