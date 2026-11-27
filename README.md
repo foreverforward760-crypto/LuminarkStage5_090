@@ -85,3 +85,7 @@ The repository contains no independent clinical, psychometric, physiological, or
 ## Commercial assessment
 
 The most defensible near-term positioning is a private, local-first reflection and journaling prototype. Before public or commercial release, review localStorage privacy, accessibility, source and prompt provenance, browser compatibility, audio claims, and the reliability of the scoring implementation. Do not market it as a cognitive diagnostic, therapeutic intervention, or clinically validated system.
+
+## License and rights status
+
+This repository has no standard open-source license. [PROPRIETARY_USE_NOTICE.md](PROPRIETARY_USE_NOTICE.md) records the project owner's attribution and current use position; it is not a standard license or a legal determination. No patent application has been filed. The legal status of AI-generated code and third-party materials requires review before commercial licensing or transfer.
