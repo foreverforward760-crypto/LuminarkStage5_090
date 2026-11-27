@@ -2,6 +2,7 @@
 // Stanfield's Axiom of Perpetuity · MAAT · LUMINARK v8.1
 
 import { stateManager } from './state.js';
+import { escapeHtml } from './security.js';
 import {
     computePressureScore, computeConfidenceScore, getCategory,
     getDecisionSignal, calculateMean,
@@ -54,7 +55,7 @@ function init() {
     } catch (err) {
         console.error('KAIROS initialization failed:', err);
         const vc = $('viewContainer');
-        if (vc) vc.innerHTML = `<div style="padding:2rem;color:#ef4444;"><h2>Initialization Error</h2><p>${err.message}</p><p>Please refresh the page.</p></div>`;
+        if (vc) vc.innerHTML = `<div style="padding:2rem;color:#ef4444;"><h2>Initialization Error</h2><p>${escapeHtml(err.message)}</p><p>Please refresh the page.</p></div>`;
     }
 }
 
@@ -602,8 +603,8 @@ function journal(state) {
         const sc = SAP_STAGES[classifySAPStage([50,60,65,40,72]).stage]; // fallback
         return `
         <div class="journal-entry">
-          <div class="date">${d.toLocaleDateString()} ${d.toLocaleTimeString()} · ${(e.category||'').toUpperCase()}</div>
-          <div class="text">${e.text}</div>
+          <div class="date">${d.toLocaleDateString()} ${d.toLocaleTimeString()} · ${escapeHtml((e.category||'').toUpperCase())}</div>
+          <div class="text">${escapeHtml(e.text)}</div>
         </div>`;
       }).join('')}
     </div>` : ''}`;
