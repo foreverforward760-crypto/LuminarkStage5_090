@@ -101,7 +101,7 @@ export const NSDT_QUESTIONS = [
         id: 7,
         category: "Cultural Intelligence & Resilience",
         text: "How quickly can you shift your tone or approach when your environment or the 'audience' around you changes?",
-        note: "High flexibility here applies a Survival Brilliance correction: Adaptability axis +20%.",
+        note: "This response option applies a project-defined +20% adjustment to the Adaptability score; it is not a validated correction.",
         primaryAxis: "adaptability",
         secondaryAxis: "complexity",
         culturalCorrection: true,  // Q7 triggers +20% adaptability for survival brilliance
@@ -146,7 +146,7 @@ export const NSDT_QUESTIONS = [
         id: 10,
         category: "Tension & Trap Energy",
         text: "When you encounter a recurring obstacle, is your response: Innovation, Indifference, or a sense of 'Here we go again'?",
-        note: "Cynical Loop Probe — repeated 'Here we go again' signals Stage 5/8 trap state activation.",
+        note: "This answer option triggers a project-defined loop-pattern flag in the reflection summary; it is not a clinical or psychological finding.",
         primaryAxis: "tension",
         secondaryAxis: "adaptability",
         cynicalLoopProbe: true,
