@@ -19,13 +19,13 @@ export const LEXICON = {
         entropy: "Noise Floor",
         coherence: "Signal Integrity"
     },
-    clinical: {
-        stage0: "Baseline Restoration (PLENARA)",
-        stage5: "Decisional Inversion Gateway (DYNAMO OF WILL) — Bilateral Threshold · Witness Position · Observer Effect · Perpendicular Axis (Third Option)",
-        stage8: "Chronic Allostatic Load — Illusion of Permanence · Rigidity Risk",
-        rigidity: "Cognitive Inflexibility Marker",
-        entropy: "Behavioral Variance",
-        coherence: "Autonomic Regulation"
+    professional: {
+        stage0: "Baseline Reset (PLENARA)",
+        stage5: "Decision Threshold (DYNAMO OF WILL) — Middle Path Reflection",
+        stage8: "Perceived Permanence — Rigidity Reflection",
+        rigidity: "Rigidity Prompt",
+        entropy: "Variation",
+        coherence: "Consistency"
     },
     creative: {
         stage0: "The Fertile Void (PLENARA)",
